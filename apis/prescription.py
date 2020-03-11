@@ -1,0 +1,48 @@
+from flask import Flask, jsonify, request
+from flask_sqlalchemy import SQLAlchemy
+from flask_cors import CORS
+import json
+app = Flask(__name__)
+
+
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root:root@localhost:8889/esd'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+ 
+db = SQLAlchemy(app)
+CORS(app)
+
+class Prescription(db.Model):
+    __tablename__ = 'prescription'
+    jobID = db.Column(db.Integer, primary_key=True)
+    doctorID = db.Column(db.Integer, primary_key=True)
+    customerID = db.Column(db.Integer, nullable=False)
+    prescription = db.Column(db.String(500), nullable=True)
+ 
+    def __init__(self, jobID, doctorID, customerID, prescription):
+        self.jobID = jobID
+        self.doctorID = doctorID
+        self.customerID = customerID
+        self.prescription = prescription
+ 
+    def json(self):
+        return {"jobID": self.jobID, "doctorID": self.doctorID, "customerID": self.customerID, "prescription": self.prescription}
+
+@app.route("/prescriptions")
+def get_all():
+    return jsonify({"prescriptions": [prescription.json() for prescription in Prescription.query.all()]}), 200
+
+@app.route("/prescriptions", methods=['POST'])
+def add_prescription():
+    data = request.get_json()
+    prescription = Prescription(**data)
+ 
+    try:
+        db.session.add(prescription)
+        db.session.commit()
+    except:
+        return jsonify({"message": "An error occurred creating the record."}), 500
+ 
+    return jsonify(prescription.json()), 200
+
+if __name__ == "__main__":
+    app.run(debug=True)
