@@ -44,5 +44,37 @@ def add_prescription():
  
     return jsonify(prescription.json()), 200
 
+
+@app.route("/delete-prescription", methods=['DELETE'])
+def delete_prescription():
+    data = request.get_json()
+    cid = data['customerID']
+    did = data['doctorID']
+    bid = data['bookingID']
+    prescription = Prescription.query.filter_by(bookingID=bid,customerID=cid,doctorID=did).first()
+
+    try:
+        db.session.delete(prescription)
+        db.session.commit()
+        return jsonify({"message": "Successfully deleted record."}), 200
+    except:
+        return jsonify({"message": "An error occurred while trying to delete record."}), 500
+
+
+@app.route("/update-prescription", methods=['PUT'])
+def update_prescription():
+    data = request.get_json()
+    print(data)
+    cid = data['customerID']
+    did = data['doctorID']
+    bid = data['bookingID']
+    prescription = Prescription.query.filter_by(bookingID=bid,customerID=cid,doctorID=did).first()
+    prescription.prescription = data['prescription']
+    try:
+        db.session.commit()
+        return jsonify({"message": "Successfully updated record."}), 200
+    except:
+        return jsonify({"message": "An error occurred while trying to update record."}), 500
+
 if __name__ == "__main__":
     app.run(debug=True)
