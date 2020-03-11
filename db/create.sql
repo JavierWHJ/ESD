@@ -14,9 +14,16 @@ create schema if not exists doctors;
 use doctors;
 create table doctors (
 	# doctor stuff
-    doctorID int auto_increment not null,
+   `doctorID` int(11) NOT NULL AUTO_INCREMENT,
+   `name` varchar(64) NOT NULL,
+   `price` decimal(10,2) NOT NULL,
+   `sex` varchar(10) NOT NULL,
+   `phone` varchar(20) NOT NULL,
+   `location` varchar(64) NOT NULL,
+   `services` varchar(64) NOT NULL,
     isadmin boolean not null default false,
-	PRIMARY KEY (doctorID)
+    PRIMARY KEY (`doctorID`)
+    
 );
 
 # incomplete pls finish, remove this line when done   
