@@ -13,19 +13,19 @@ CORS(app)
 
 class Prescription(db.Model):
     __tablename__ = 'prescription'
-    jobID = db.Column(db.Integer, primary_key=True)
+    bookingID = db.Column(db.Integer, primary_key=True)
     doctorID = db.Column(db.Integer, primary_key=True)
     customerID = db.Column(db.Integer, nullable=False)
     prescription = db.Column(db.String(500), nullable=True)
  
-    def __init__(self, jobID, doctorID, customerID, prescription):
-        self.jobID = jobID
+    def __init__(self, bookingID, doctorID, customerID, prescription):
+        self.bookingID = bookingID
         self.doctorID = doctorID
         self.customerID = customerID
         self.prescription = prescription
  
     def json(self):
-        return {"jobID": self.jobID, "doctorID": self.doctorID, "customerID": self.customerID, "prescription": self.prescription}
+        return {"bookingID": self.bookingID, "doctorID": self.doctorID, "customerID": self.customerID, "prescription": self.prescription}
 
 @app.route("/prescriptions")
 def get_all():
