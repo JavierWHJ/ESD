@@ -113,28 +113,22 @@ def update_doctor():
     data = request.get_json()
 
     doctorID = data['doctorID']
-    # name = data['name']
-    # sex = data['sex']
-    # price = data['price']
-    # phone = data['phone']
-    # location = data['location']
-    # services = data['services']
-
-
+ 
     doctor = Doctor.query.filter_by(doctorID=doctorID).first()
 
-    doctor.name = data['name']
-    doctor.sex = data['sex']
-    doctor.price = data['price']
-    doctor.phone = data['phone']
-    doctor.location = data['location']
-    doctor.services = data['services']
-
     try:
+        doctor.name = data['name']
+        doctor.sex = data['sex']
+        doctor.price = data['price']
+        doctor.phone = data['phone']
+        doctor.location = data['location']
+        doctor.services = data['services']
+
         db.session.commit()
         return jsonify({"message": "Successfully updated record."}), 200
     except:
         return jsonify({"message": "An error occurred while trying to update record."}), 500
+    
 
     
 
