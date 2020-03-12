@@ -31,7 +31,7 @@ class Doctor(db.Model):
         self.services = services
 
     def json(self):
-        return {"doctorID": self.doctorID, "name": self.name, "sex": self.sex,"price": self.price, "phone": self.phone, "location": self.location, "services": self.services}
+        return {"doctorID": self.doctorID, "name": self.name, "sex": self.sex, "price": self.price, "phone": self.phone, "location": self.location, "services": self.services}
 
 
 @app.route("/doctor")

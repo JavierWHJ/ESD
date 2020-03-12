@@ -14,13 +14,13 @@ create schema if not exists doctors;
 use doctors;
 create table doctors (
 	# doctor stuff
-   `doctorID` int(11) NOT NULL AUTO_INCREMENT,
-   `name` varchar(64) NOT NULL,
-   `price` decimal(10,2) NOT NULL,
-   `sex` varchar(10) NOT NULL,
-   `phone` varchar(20) NOT NULL,
-   `location` varchar(64) NOT NULL,
-   `services` varchar(64) NOT NULL,
+    `doctorID` int(11) NOT NULL AUTO_INCREMENT,
+    `name` varchar(64) NOT NULL,
+    `price` decimal(10,2) NOT NULL,
+    `sex` varchar(10) NOT NULL,
+    `phone` varchar(20) NOT NULL,
+    `location` varchar(64) NOT NULL,
+    `services` varchar(64) NOT NULL,
     isadmin boolean not null default false,
     PRIMARY KEY (`doctorID`)
     
@@ -42,16 +42,20 @@ use admins;
 create table admins (
 	# bookings stuff
     adminID int auto_increment not null,
-     isadmin boolean not null default true,
-     PRIMARY KEY (adminID)
+    isadmin boolean not null default true,
+    PRIMARY KEY (adminID)
 );
 
-# incomplete pls finish, remove this line when done   
 create schema if not exists bookings;
 use bookings;
 create table bookings (
 	# bookings stuff
     bookingID int auto_increment not null,
+    customerID int not null,
+    doctorID int not null,
+    `datetime` datetime not null,
+    `status` varchar(20) not null,
+    price decimal(10,2) not null,
     PRIMARY KEY (bookingID)
 );
 
