@@ -31,7 +31,7 @@ class Doctor(db.Model):
         self.services = services
 
     def json(self):
-        return {"doctorID": self.doctorID, "name": self.name, "price": self.price, "phone": self.phone, "location": self.location, "services": self.services}
+        return {"doctorID": self.doctorID, "name": self.name, "sex": self.sex,"price": self.price, "phone": self.phone, "location": self.location, "services": self.services}
 
 
 @app.route("/doctor")
@@ -79,7 +79,7 @@ def find_by_services(services):
     return jsonify({"message": "services not found."}), 404
 
 
-@app.route("/doctor/<string:doctorID>", methods=['POST'])
+@app.route("/doctor/<int:doctorID>", methods=['POST'])
 def create_doctor(doctorID):
     if (Doctor.query.filter_by(doctorID=doctorID).first()):
         return jsonify({"message": "A doctor with doctorID '{}' already exists.".format(doctorID)}), 400
@@ -94,6 +94,51 @@ def create_doctor(doctorID):
         return jsonify({"message": "An error occurred creating the doctor."}), 500
 
     return jsonify(doctor.json()), 201
+
+@app.route("/delete-doctor/<int:doctorID>", methods=['DELETE'])
+#delete doctor by passing the doctorID through the URL
+def delete_doctor(doctorID):
+    doctor = Doctor.query.filter_by(doctorID=doctorID).first()
+
+    try:
+        db.session.delete(doctor)
+        db.session.commit()
+        return jsonify({"message": "Successfully deleted record."}), 200
+    except:
+        return jsonify({"message": "An error occurred while trying to delete record."}), 500
+
+@app.route("/update-doctor", methods=['PUT'])
+#pass through the whole JSON Doctor's Object (including doctorID) and update doctorID
+def update_doctor():
+    data = request.get_json()
+
+    doctorID = data['doctorID']
+    # name = data['name']
+    # sex = data['sex']
+    # price = data['price']
+    # phone = data['phone']
+    # location = data['location']
+    # services = data['services']
+
+
+    doctor = Doctor.query.filter_by(doctorID=doctorID).first()
+
+    doctor.name = data['name']
+    doctor.sex = data['sex']
+    doctor.price = data['price']
+    doctor.phone = data['phone']
+    doctor.location = data['location']
+    doctor.services = data['services']
+
+    try:
+        db.session.commit()
+        return jsonify({"message": "Successfully updated record."}), 200
+    except:
+        return jsonify({"message": "An error occurred while trying to update record."}), 500
+
+    
+
+
 
 
 if __name__ == '__main__':
