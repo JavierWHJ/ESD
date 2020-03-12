@@ -115,23 +115,28 @@ def update_doctor():
     doctorID = data['doctorID']
  
     doctor = Doctor.query.filter_by(doctorID=doctorID).first()
+    if(doctor):
+        if('name' in data):
+            doctor.name = data['name']
+        if('sex' in data):
+            doctor.sex = data['sex']
+        if('price' in data):
+            doctor.price = data['price']
+        if('phone' in data):
+            doctor.phone = data['phone']
+        if('location' in data):
+            doctor.location = data['location']
+        if('services' in data):
+            doctor.services = data['services']
+    else:
+        return jsonify({"message": "Doctor ID not found."}), 404
 
     try:
-        doctor.name = data['name']
-        doctor.sex = data['sex']
-        doctor.price = data['price']
-        doctor.phone = data['phone']
-        doctor.location = data['location']
-        doctor.services = data['services']
-
         db.session.commit()
         return jsonify({"message": "Successfully updated record."}), 200
     except:
         return jsonify({"message": "An error occurred while trying to update record."}), 500
     
-
-    
-
 
 
 
