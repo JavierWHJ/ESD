@@ -14,9 +14,9 @@ CORS(app)
 
 class Prescription(db.Model):
     __tablename__ = 'prescription'
-    bookingID = db.Column(db.Integer, primary_key=True)
-    doctorID = db.Column(db.Integer, primary_key=True)
-    customerID = db.Column(db.Integer, nullable=False)
+    bookingID = db.Column(db.integer, primary_key=True)
+    doctorID = db.Column(db.String(2), primary_key=True)
+    customerID = db.Column(db.String(2), nullable=False)
     prescription = db.Column(db.String(500), nullable=True)
 
     def __init__(self, bookingID, doctorID, customerID, prescription):

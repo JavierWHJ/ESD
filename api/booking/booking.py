@@ -13,9 +13,9 @@ CORS(app)
 class Booking(db.Model):
     __tablename__ = 'bookings'
 
-    bookingID = db.Column(db.Integer, primary_key=True)
-    customerID = db.Column(db.Integer, nullable=False)
-    doctorID = db.Column(db.Integer, nullable=False)
+    bookingID = db.Column(db.integer, primary_key=True)
+    customerID = db.Column(db.String(2), nullable=False)
+    doctorID = db.Column(db.String(2), nullable=False)
     datetime = db.Column(db.DateTime, nullable=False)
     status = db.Column(db.String(20), nullable=False)
     price = db.Column(db.Float(precision=2), nullable=False)
@@ -76,6 +76,7 @@ def create_booking(bookingID):
         return jsonify({"message": "An error occurred creating the booking."}), 500
 
     return jsonify(booking.json()), 201
+
 
 @app.route("/bookings", methods=['DELETE'])
 def delete_booking():
