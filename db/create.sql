@@ -54,6 +54,8 @@ create table bookings (
     customerID int not null,
     doctorID int not null,
     `datetime` datetime not null,
+    location varchar(45) not null,
+    services varchar(45) not null,
     `status` varchar(20) not null,
     price decimal(10,2) not null,
     PRIMARY KEY (bookingID)
