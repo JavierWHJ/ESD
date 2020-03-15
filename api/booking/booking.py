@@ -17,19 +17,23 @@ class Booking(db.Model):
     customerID = db.Column(db.String(2), nullable=False)
     doctorID = db.Column(db.String(2), nullable=False)
     datetime = db.Column(db.DateTime, nullable=False)
+    location = db.Column(db.String(45), nullable=False)
+    services = db.Column(db.String(45), nullable=False)
     status = db.Column(db.String(20), nullable=False)
     price = db.Column(db.Float(precision=2), nullable=False)
 
-    def __init__(self, bookingID, customerID, doctorID, datetime, status, price):
+    def __init__(self, bookingID, customerID, doctorID, datetime, location, services, status, price):
         self.bookingID = bookingID
         self.customerID = customerID
         self.doctorID = doctorID
         self.datetime = datetime
+        self.location = location
+        self.services = services
         self.status = status
         self.price = price
 
     def json(self):
-        return {"bookingID": self.bookingID, "customerID": self.customerID, "doctorID": self.doctorID, "datetime": self.datetime, "status": self.status, "price": self.price}
+        return {"bookingID": self.bookingID, "customerID": self.customerID, "doctorID": self.doctorID, "datetime": self.datetime, "location": self.location, "services": self.services, "status": self.status, "price": self.price}
 
 
 @app.route("/bookings")
@@ -46,7 +50,7 @@ def find_by_bookingID(bookingID):
 
 
 @app.route("/bookings/<int:customerID>")
-def find_by_name(customerID):
+def find_by_customer(customerID):
     booking = Booking.query.filter_by(customerID=customerID).all()
     if booking:
         return jsonify({"bookings": [booking.json() for booking in Booking.query.filter_by(customerID=customerID).all()]})
@@ -54,7 +58,7 @@ def find_by_name(customerID):
 
 
 @app.route("/bookings/<int:doctorID>")
-def find_by_location(doctorID):
+def find_by_doctor(doctorID):
     booking = booking.query.filter_by(doctorID=doctorID).all()
     if booking:
         return jsonify({"bookings": [booking.json() for booking in Booking.query.filter_by(doctorID=doctorID).all()]})
@@ -106,6 +110,10 @@ def update_booking():
             booking.doctorID = data['doctorID']
         if('datetime' in data):
             booking.datetime = data['datetime']
+        if('location' in data):
+            booking.location = data['location']
+        if('services' in data):
+            booking.services = data['services']        
         if('status' in data):
             booking.status = data['status']
         if('price' in data):
