@@ -21,8 +21,9 @@ class Booking(db.Model):
     dateend = db.Column(db.DateTime, nullable=True)
     status = db.Column(db.String(20), nullable=True)
     price = db.Column(db.Float(precision=2), nullable=False)
+    service = db.Column(db.String(256), nullable=True)
 
-    def __init__(self, bookingID, customerID, doctorID, datestart, dateend, status, price):
+    def __init__(self, bookingID, customerID, doctorID, datestart, dateend, status, price, service):
         self.bookingID = bookingID
         self.customerID = customerID
         self.doctorID = doctorID
@@ -30,9 +31,10 @@ class Booking(db.Model):
         self.dateend = dateend
         self.status = status
         self.price = price
+        self.service = service
 
     def json(self):
-        return {"bookingID": self.bookingID, "customerID": self.customerID, "doctorID": self.doctorID, "datestart": self.datestart, "dateend": self.dateend, "status": self.status, "price": self.price}
+        return {"bookingID": self.bookingID, "customerID": self.customerID, "doctorID": self.doctorID, "datestart": self.datestart, "dateend": self.dateend, "status": self.status, "price": self.price, "service": self.service}
 
 
 @app.route("/bookings")
@@ -113,6 +115,9 @@ def update_booking():
             booking.status = data['status']
         if('price' in data):
             booking.price = data['price']
+        if('service' in data):
+            booking.service = data['service']
+
     try:
         db.session.commit()
         return jsonify({"message": "Successfully updated record."}), 200

@@ -56,6 +56,7 @@ create table bookings (
     `dateend` datetime null,
     `status` varchar(20) not null,
     price decimal(10,2) not null,
+    service varchar(256) null,
     PRIMARY KEY (bookingID)
 );
 
