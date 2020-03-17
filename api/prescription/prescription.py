@@ -14,7 +14,7 @@ CORS(app)
 
 class Prescription(db.Model):
     __tablename__ = 'prescription'
-    bookingID = db.Column(db.integer, primary_key=True)
+    bookingID = db.Column(db.Integer, primary_key=True)
     doctorID = db.Column(db.String(2), primary_key=True)
     customerID = db.Column(db.String(2), nullable=False)
     prescription = db.Column(db.String(500), nullable=True)
@@ -82,5 +82,5 @@ def update_prescription():
         return jsonify({"message": "An error occurred while trying to update record."}), 500
 
 
-if __name__ == "__main__":
-    app.run(debug=True)
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000, debug=True)

@@ -3,7 +3,8 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 app = Flask(__name__)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root@localhost:3306/bookings'
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root@localhost:3306/bookings'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root:root@localhost:8889/bookings'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
@@ -13,23 +14,25 @@ CORS(app)
 class Booking(db.Model):
     __tablename__ = 'bookings'
 
-    bookingID = db.Column(db.integer, primary_key=True)
-    customerID = db.Column(db.String(2), nullable=False)
+    bookingID = db.Column(db.Integer, primary_key=True)
+    customerID = db.Column(db.String(2), nullable=True)
     doctorID = db.Column(db.String(2), nullable=False)
-    datetime = db.Column(db.DateTime, nullable=False)
-    status = db.Column(db.String(20), nullable=False)
+    datestart = db.Column(db.DateTime, nullable=True)
+    dateend = db.Column(db.DateTime, nullable=True)
+    status = db.Column(db.String(20), nullable=True)
     price = db.Column(db.Float(precision=2), nullable=False)
 
-    def __init__(self, bookingID, customerID, doctorID, datetime, status, price):
+    def __init__(self, bookingID, customerID, doctorID, datestart, dateend, status, price):
         self.bookingID = bookingID
         self.customerID = customerID
         self.doctorID = doctorID
-        self.datetime = datetime
+        self.datestart = datestart
+        self.dateend = dateend
         self.status = status
         self.price = price
 
     def json(self):
-        return {"bookingID": self.bookingID, "customerID": self.customerID, "doctorID": self.doctorID, "datetime": self.datetime, "status": self.status, "price": self.price}
+        return {"bookingID": self.bookingID, "customerID": self.customerID, "doctorID": self.doctorID, "datestart": self.datestart, "dateend": self.dateend, "status": self.status, "price": self.price}
 
 
 @app.route("/bookings")
@@ -45,7 +48,7 @@ def find_by_bookingID(bookingID):
     return jsonify({"message": "booking ID not found."}), 404
 
 
-@app.route("/bookings/<int:customerID>")
+@app.route("/bookings/cid=<string:customerID>")
 def find_by_name(customerID):
     booking = Booking.query.filter_by(customerID=customerID).all()
     if booking:
@@ -53,15 +56,15 @@ def find_by_name(customerID):
     return jsonify({"message": "customer ID not found."}), 404
 
 
-@app.route("/bookings/<int:doctorID>")
+@app.route("/bookings/did=<string:doctorID>")
 def find_by_location(doctorID):
-    booking = booking.query.filter_by(doctorID=doctorID).all()
+    booking = Booking.query.filter_by(doctorID=doctorID).all()
     if booking:
         return jsonify({"bookings": [booking.json() for booking in Booking.query.filter_by(doctorID=doctorID).all()]})
     return jsonify({"message": "doctor ID not found."}), 404
 
 
-@app.route("/bookings/<string:bookingID>", methods=['POST'])
+@app.route("/bookings/<int:bookingID>", methods=['POST'])
 def create_booking(bookingID):
     if (Booking.query.filter_by(bookingID=bookingID).first()):
         return jsonify({"message": "A booking with bookingID '{}' already exists.".format(bookingID)}), 400
@@ -78,12 +81,10 @@ def create_booking(bookingID):
     return jsonify(booking.json()), 201
 
 
-@app.route("/bookings", methods=['DELETE'])
-def delete_booking():
-    data = request.get_json()
-    bid = data['bookingID']
+@app.route("/bookings/<int:bookingID>", methods=['DELETE'])
+def delete_booking(bookingID):
     booking = Booking.query.filter_by(
-        bookingID=bid).first()
+        bookingID=bookingID).first()
 
     try:
         db.session.delete(booking)
@@ -104,8 +105,10 @@ def update_booking():
             booking.customerID = data['customerID']
         if('doctorID' in data):
             booking.doctorID = data['doctorID']
-        if('datetime' in data):
-            booking.datetime = data['datetime']
+        if('datestart' in data):
+            booking.datestart = data['datestart']
+        if('dateend' in data):
+            booking.dateend = data['dateend']
         if('status' in data):
             booking.status = data['status']
         if('price' in data):
@@ -117,5 +120,9 @@ def update_booking():
         return jsonify({"message": "An error occurred while trying to update record."}), 500
 
 
+# if __name__ == '__main__':
+#     app.run(host='0.0.0.0', port=5000, debug=True)
+
+
 if __name__ == '__main__':
-    app.run(port=5000, debug=True)
+    app.run(host='localhost', port=5000, debug=True)
