@@ -1,10 +1,10 @@
 create schema if not exists prescriptions;
 use prescriptions;
 create table prescription(
-    bookingID int NOT NULL, # changed this to bookingID from jobid to be consistent with booking microservice
-    doctorID varchar(2) NOT NULL,
-    customerID varchar(2) NOT NULL,
-    prescription varchar(500),
+    `bookingID` int NOT NULL, # changed this to bookingID from jobid to be consistent with booking microservice
+    `doctorID` varchar(2) NOT NULL,
+    `customerID` varchar(2) NOT NULL,
+    `prescription` varchar(500),
     PRIMARY KEY (bookingID, doctorID, customerID)
     );
 
@@ -39,7 +39,7 @@ create table customers (
 create schema if not exists admins;
 use admins;
 create table admins (
-    adminID varchar(2) NOT NULL,
+    `adminID` varchar(2) NOT NULL,
     `name` varchar(64) NOT NULL,
     `email` varchar(256) NOT NULL,
     PRIMARY KEY (adminID)
@@ -49,17 +49,26 @@ create schema if not exists bookings;
 use bookings;
 create table bookings (
 	
-    bookingID int NOT NULL,
-    customerID varchar(2)  null,
+    `bookingID` int auto_increment NOT NULL,
+    `customerID` varchar(2)  null,
     `doctorID` varchar(2) not null,
     `datestart` datetime null,
     `dateend` datetime null,
     `status` varchar(20) not null,
-    price decimal(10,2) not null,
-    service varchar(256) null,
+    `price` decimal(10,2) not null,
+    `service` varchar(256) null,
     PRIMARY KEY (bookingID)
 );
 
+create schema if not exists notifications;
+use notifications;
+
+create table notifications (
+	`nid` int not null,
+    `userid` int not null,
+    `message` varchar(500) not null,
+    PRIMARY KEY (nid)
+);
 
 use admins;
 insert into admins values ('a1', 'admin', 'admin@gmail.com');
@@ -90,6 +99,12 @@ insert into bookings (bookingID,  doctorID, datestart, dateend, status, price ) 
 (8, 'd3', '2020-05-01 12:00:00', '2020-05-01 15:00:00' , 'Unbooked', 200.00),
 (9, 'd3', '2020-05-01 15:00:00', '2020-05-01 18:00:00' , 'Unbooked', 200.00)
 ;
+
+
+use notifications;
+insert into notifications (nid, userid, message) values (1, 'd1', 'You have a new booking');
+
+
 
 
 
