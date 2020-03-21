@@ -5,8 +5,8 @@ import json
 from os import environ
 app = Flask(__name__)
 
-# app.config['SQLALCHEMY_DATABASE_URI'] = environ.get('dbURL')
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://is213@localhost:8889/customers'
+app.config['SQLALCHEMY_DATABASE_URI'] = environ.get('dbURL')
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://is213@localhost:8889/customers'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
@@ -49,5 +49,5 @@ def get_customer_by_id(customerID):
 if __name__ == '__main__':
     # if want to build the image use 0.0.0.0
     # localhost is for testing locally
-    app.run(host='localhost', port=5000, debug=True)
-    # app.run(host='0.0.0.0', port=5000, debug=True)
+    # app.run(host='localhost', port=5000, debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True)

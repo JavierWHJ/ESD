@@ -65,7 +65,7 @@ use notifications;
 
 create table notifications (
 	`nid` int not null,
-    `userid` int not null,
+    `userid` varchar(2) not null,
     `message` varchar(500) not null,
     PRIMARY KEY (nid)
 );

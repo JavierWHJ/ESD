@@ -1,0 +1,5 @@
+version: "3.7"
+services:
+  booking:
+    image: leonardtan13/booking:1.0.0
+    networks: [kong]
