@@ -41,7 +41,7 @@ def get_all():
     return jsonify({"doctors": [doctor.json() for doctor in Doctor.query.all()]})
 
 
-@app.route("/doctor/<int:doctorID>")
+@app.route("/doctor/<string:doctorID>")
 def find_by_doctorID(doctorID):
     doctor = Doctor.query.filter_by(doctorID=doctorID).first()
     if doctor:

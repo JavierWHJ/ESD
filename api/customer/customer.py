@@ -38,7 +38,7 @@ def get_all_customer():
     return jsonify({"customers": [customer.json() for customer in Customer.query.all()]})
 
 
-@app.route('/customer/id=<string:customerID>', methods=['GET'])
+@app.route('/customer/<string:customerID>', methods=['GET'])
 def get_customer_by_id(customerID):
     customer = Customer.query.filter_by(customerID=customerID).first()
     if customer:

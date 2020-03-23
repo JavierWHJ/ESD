@@ -4,8 +4,8 @@ create table prescription(
     `bookingID` int NOT NULL, # changed this to bookingID from jobid to be consistent with booking microservice
     `doctorID` varchar(2) NOT NULL,
     `customerID` varchar(2) NOT NULL,
-    `prescription` varchar(500),
-    PRIMARY KEY (bookingID, doctorID, customerID)
+    `prescription` varchar(500) not null,
+    PRIMARY KEY (bookingID)
     );
 
 create schema if not exists doctors;
@@ -103,6 +103,8 @@ insert into bookings (bookingID,  doctorID, datestart, dateend, status, price ) 
 
 use notifications;
 insert into notifications (nid, userid, message) values (1, 'd1', 'You have a new booking');
+
+
 
 
 

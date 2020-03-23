@@ -6,6 +6,7 @@ from os import environ
 app = Flask(__name__)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = environ.get('dbURL')
+# app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+mysqlconnector://is213@localhost:8889/prescriptions"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
@@ -15,9 +16,9 @@ CORS(app)
 class Prescription(db.Model):
     __tablename__ = 'prescription'
     bookingID = db.Column(db.Integer, primary_key=True)
-    doctorID = db.Column(db.String(2), primary_key=True)
+    doctorID = db.Column(db.String(2), nullable=False)
     customerID = db.Column(db.String(2), nullable=False)
-    prescription = db.Column(db.String(500), nullable=True)
+    prescription = db.Column(db.String(500), nullable=False)
 
     def __init__(self, bookingID, doctorID, customerID, prescription):
         self.bookingID = bookingID
@@ -29,12 +30,19 @@ class Prescription(db.Model):
         return {"bookingID": self.bookingID, "doctorID": self.doctorID, "customerID": self.customerID, "prescription": self.prescription}
 
 
-@app.route("/prescriptions")
+@app.route("/prescription")
 def get_all():
     return jsonify({"prescriptions": [prescription.json() for prescription in Prescription.query.all()]}), 200
 
 
-@app.route("/prescriptions", methods=['POST'])
+@app.route("/prescription/cid=<string:cid>")
+def get_prescription_by_cid(cid):
+    return jsonify({
+        "prescriptions": [prescription.json for prescription in Prescription.query.filter_by(customerID=cid).all()]
+    }), 200
+
+
+@app.route("/prescription", methods=['POST'])
 def add_prescription():
     data = request.get_json()
     prescription = Prescription(**data)
@@ -48,7 +56,7 @@ def add_prescription():
     return jsonify(prescription.json()), 200
 
 
-@app.route("/delete-prescription", methods=['DELETE'])
+@app.route("/prescription", methods=['DELETE'])
 def delete_prescription():
     data = request.get_json()
     cid = data['customerID']
@@ -65,10 +73,10 @@ def delete_prescription():
         return jsonify({"message": "An error occurred while trying to delete record."}), 500
 
 
-@app.route("/update-prescription", methods=['PUT'])
+@app.route("/prescription", methods=['PUT'])
 def update_prescription():
     data = request.get_json()
-    print(data)
+    # print(data)
     cid = data['customerID']
     did = data['doctorID']
     bid = data['bookingID']
