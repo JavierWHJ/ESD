@@ -1,0 +1,539 @@
+﻿<!DOCTYPE html> 
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>FastDoc</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+		
+		<!-- Favicons -->
+		<link href="assets\img\favicon2.png" rel="icon">
+		
+		<!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="assets\css\bootstrap.min.css">
+		
+		<!-- Fontawesome CSS -->
+		<link rel="stylesheet" href="assets\plugins\fontawesome\css\fontawesome.min.css">
+		<link rel="stylesheet" href="assets\plugins\fontawesome\css\all.min.css">
+		
+		<!-- Select2 CSS -->
+		<link rel="stylesheet" href="assets\plugins\select2\css\select2.min.css">
+		
+		<!-- Fancybox CSS -->
+		<link rel="stylesheet" href="assets\plugins\fancybox\jquery.fancybox.min.css">
+		
+		<!-- Main CSS -->
+		<link rel="stylesheet" href="assets\css\style.css">
+
+		<!-- BASE CSS -->
+		<link href="css\style.css" rel="stylesheet">
+		<link href="css\menu.css" rel="stylesheet">
+		<link href="css\vendors.css" rel="stylesheet">
+		<link href="css\icon_fonts\css\all_icons_min.css" rel="stylesheet">
+
+		
+		
+		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!--[if lt IE 9]>
+			<script src="assets/js/html5shiv.min.js"></script>
+			<script src="assets/js/respond.min.js"></script>
+		<![endif]-->
+	
+	</head>
+	<body class="map-page">
+
+	<!-- Header -->
+	<header class="navbar navbar-expand-lg header-nav header_sticky">
+		<div class="navbar-header">
+			<a id="mobile_btn" href="javascript:void(0);">
+				<span class="bar-icon">
+					<span></span>
+					<span></span>
+					<span></span>
+				</span>
+			</a>
+			<a href="index.html" class="navbar-brand logo">
+				<img src="img/logo2.PNG" class="img-fluid" alt="Logo">
+			</a>
+		</div>
+		<div class="main-menu-wrapper">
+			<div class="menu-header">
+				<a href="index.html" class="menu-logo">
+					<img src="img/logo2.PNG" class="img-fluid" alt="Logo">
+				</a>
+				<a id="menu_close" class="menu-close" href="javascript:void(0);">
+					<i class="fas fa-times"></i>
+				</a>
+			</div>
+			<ul class="main-nav">
+				<li>
+					<a href="index.html" style="color:black">Home</a>
+				</li>
+				<li>
+					<a href="about.html" style="color:black">About Us</a>
+				</li>	
+				<li>
+					<a href="contacts.html" style="color:black">Contact Us</a>
+				</li>	
+				<li>
+					<a href="map-list.html" style="color:black">Our Doctors</a>
+				</li>
+				<li class="login-link">
+					<a href="login.html">Login / Signup</a>
+				</li>
+			</ul>		 
+		</div>		 
+		<ul class="nav header-navbar-rht">
+			<li class="nav-item contact-item">
+				<div class="header-contact-img">
+					<i class="far fa-hospital"></i>							
+				</div>
+				<div class="header-contact-detail">
+					<p class="contact-header">Contact</p>
+					<p class="contact-info-header"> +65 1234 5678</p>
+				</div>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link header-login" href="login.html">login / Signup </a>
+			</li>
+		</ul>
+	</header>
+	<!-- /Header -->
+			
+	<main class="theia-exception">
+		<div id="results">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6">
+						<h4><strong>Showing 5</strong> of 13 results</h4>
+					</div>
+					<div class="col-md-6">
+						<div class="search_bar_list">
+							<input type="text" class="form-control" placeholder="Ex. Specialist, Name, Doctor...">
+							<input type="submit" value="Search">
+						</div>
+					</div>
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /results -->
+
+		<div class="filters_listing">
+			<div class="container">
+				<ul class="clearfix">
+					<li>
+						<h6>Type</h6>
+						<div class="switch-field">
+							<input type="radio" id="all" name="type_patient" value="all" checked="">
+							<label for="all">All</label>
+							<input type="radio" id="doctors" name="type_patient" value="doctors">
+							<label for="doctors">Doctors</label>
+						</div>
+					</li>
+					<li>
+						<h6>Sort by</h6>
+						<select name="orderby" class="selectbox">
+						<option value="Closest">Closest</option>
+						<option value="Best rated">Best rated</option>
+						<option value="Men">Men</option>
+						<option value="Women">Women</option>
+						</select>
+					</li>
+				</ul>
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /filters -->
+		
+		<div class="container margin_60_35">
+			<div class="row">
+				<div class="col-lg-7">
+
+					<!-- Doctor Widget -->
+					<div class="card">
+						<div class="card-body">
+							<div class="doctor-widget">
+								<div class="doc-info-left">
+									<div class="doctor-img">
+										<a href="doctor-profile.html">
+											<img src="assets\img\doctors\doctor-thumb-01.jpg" class="img-fluid" alt="User Image">
+										</a>
+									</div>
+									<div class="doc-info-cont">
+										<h4 class="doc-name"><a href="doctor-profile.html">Dr. Ruby Perrin</a></h4>
+										<p class="doc-speciality">MDS - General Medicine, BDS</p>
+										<p class="doc-department"><img src="img\icon_cat_1.svg" class="img-fluid" alt="Speciality">Primary Care</p>
+										<div class="rating">
+											<i class="fas fa-star filled"></i>
+											<i class="fas fa-star filled"></i>
+											<i class="fas fa-star filled"></i>
+											<i class="fas fa-star filled"></i>
+											<i class="fas fa-star"></i>
+											<span class="d-inline-block average-rating">(17)</span>
+										</div>
+										<div class="clinic-details">
+											<p class="doc-location"><i class="fas fa-map-marker-alt"></i> Singapore</p>
+										</div>
+										<div class="clinic-services">
+											<span>Diagnosis</span>
+											<span>Treatment</span>
+										</div>
+									</div>
+								</div>
+								<div class="doc-info-right">
+									<div class="clini-infos">
+										<ul>
+											<li><i class="far fa-thumbs-up"></i> 98%</li>
+											<li><i class="far fa-comment"></i> 17 Feedback</li>
+											<li><i class="far fa-money-bill-alt"></i> $300 - $1000 </li>
+											<li><a href="#0" onclick="onHtmlClick('Doctors', 1)" class="btn_listing">View on Map</a></li>
+										</ul>
+									</div>
+									<div class="clinic-booking">
+										<a class="view-pro-btn" href="doctor-profile.html">View Profile</a>
+										<a class="apt-btn" href="booking.html">Book Appointment</a>
+										<br>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- /Doctor Widget -->
+					<br>
+					<!-- Doctor Widget -->
+					<div class="card">
+						<div class="card-body">
+							<div class="doctor-widget">
+								<div class="doc-info-left">
+									<div class="doctor-img">
+										<a href="doctor-profile.html">
+											<img src="assets\img\doctors\doctor-thumb-02.jpg" class="img-fluid" alt="User Image">
+										</a>
+									</div>
+									<div class="doc-info-cont">
+										<h4 class="doc-name"><a href="doctor-profile.html">Dr. Darren Elder</a></h4>
+										<p class="doc-speciality">BDS, MDS - Geriatric Medicine</p>
+										<p class="doc-department"><img src="assets\img\specialities\specialities-02.png" class="img-fluid" alt="Speciality">Neurology</p>
+										<div class="rating">
+											<i class="fas fa-star filled"></i>
+											<i class="fas fa-star filled"></i>
+											<i class="fas fa-star filled"></i>
+											<i class="fas fa-star filled"></i>
+											<i class="fas fa-star"></i>
+											<span class="d-inline-block average-rating">(35)</span>
+										</div>
+										<div class="clinic-details">
+											<p class="doc-location"><i class="fas fa-map-marker-alt"></i> Singapore</p>
+										</div>
+										<div class="clinic-services">
+											<span>Diagnosis</span>
+											<span>Treatment</span>
+										</div>
+									</div>
+								</div>
+								<div class="doc-info-right">
+									<div class="clini-infos">
+										<ul>
+											<li><i class="far fa-thumbs-up"></i> 100%</li>
+											<li><i class="far fa-comment"></i> 35 Feedback</li>
+											<li><i class="far fa-money-bill-alt"></i> $50 - $300</li>
+											<li><a href="#0" onclick="onHtmlClick('Doctors', 2)" class="btn_listing">View on Map</a></li>
+										</ul>
+									</div>
+									<div class="clinic-booking">
+										<a class="view-pro-btn" href="doctor-profile.html">View Profile</a>
+										<a class="apt-btn" href="booking.html">Book Appointment</a>
+										<br>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- /Doctor Widget -->
+					<br>
+					<!-- Doctor Widget -->
+					<div class="card">
+						<div class="card-body">
+							<div class="doctor-widget">
+								<div class="doc-info-left">
+									<div class="doctor-img">
+										<a href="doctor-profile.html">
+											<img src="assets\img\doctors\doctor-thumb-03.jpg" class="img-fluid" alt="User Image">
+										</a>
+									</div>
+									<div class="doc-info-cont">
+										<h4 class="doc-name"><a href="doctor-profile.html">Dr. Deborah Angel</a></h4>
+										<p class="doc-speciality">MBBS, MD - General Medicine, DNB - Cardiology</p>
+										<p class="doc-department"><img src="assets\img\specialities\specialities-04.png" class="img-fluid" alt="Speciality">Cardiology</p>
+										<div class="rating">
+											<i class="fas fa-star filled"></i>
+											<i class="fas fa-star filled"></i>
+											<i class="fas fa-star filled"></i>
+											<i class="fas fa-star filled"></i>
+											<i class="fas fa-star"></i>
+											<span class="d-inline-block average-rating">(27)</span>
+										</div>
+										<div class="clinic-details">
+											<p class="doc-location"><i class="fas fa-map-marker-alt"></i> Singapore</p>
+										</div>
+										<div class="clinic-services">
+											<span>Diagnosis</span>
+											<span>Treatment</span>
+										</div>
+									</div>
+								</div>
+								<div class="doc-info-right">
+									<div class="clini-infos">
+										<ul>
+											<li><i class="far fa-thumbs-up"></i> 99%</li>
+											<li><i class="far fa-comment"></i> 35 Feedback</li>
+											<li><i class="far fa-money-bill-alt"></i> $100 - $400</li>
+											<li><a href="#0" onclick="onHtmlClick('Doctors', 1)" class="btn_listing">View on Map</a></li>
+										</ul>
+									</div>
+									<div class="clinic-booking">
+										<a class="view-pro-btn" href="doctor-profile.html">View Profile</a>
+										<a class="apt-btn" href="booking.html">Book Appointment</a>
+										<br>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- /Doctor Widget -->
+					<br>
+					<!-- Doctor Widget -->
+					<div class="card">
+						<div class="card-body">
+							<div class="doctor-widget">
+								<div class="doc-info-left">
+									<div class="doctor-img">
+										<a href="doctor-profile.html">
+											<img src="assets\img\doctors\doctor-thumb-04.jpg" class="img-fluid" alt="User Image">
+										</a>
+									</div>
+									<div class="doc-info-cont">
+										<h4 class="doc-name"><a href="doctor-profile.html">Dr. Sofia Brient</a></h4>
+										<p class="doc-speciality">MBBS, MS - General Medicine, MCh - Urology</p>
+										<p class="doc-department"><img src="assets\img\specialities\specialities-01.png" class="img-fluid" alt="Speciality">Urology</p>
+										<div class="rating">
+											<i class="fas fa-star filled"></i>
+											<i class="fas fa-star filled"></i>
+											<i class="fas fa-star filled"></i>
+											<i class="fas fa-star filled"></i>
+											<i class="fas fa-star"></i>
+											<span class="d-inline-block average-rating">(4)</span>
+										</div>
+										<div class="clinic-details">
+											<p class="doc-location"><i class="fas fa-map-marker-alt"></i> Singapore</p>
+										</div>
+										<div class="clinic-services">
+											<span>Diagnosis</span>
+											<span>Treatment</span>
+										</div>
+									</div>
+								</div>
+								<div class="doc-info-right">
+									<div class="clini-infos">
+										<ul>
+											<li><i class="far fa-thumbs-up"></i> 97%</li>
+											<li><i class="far fa-comment"></i> 4 Feedback</li>
+											<li><i class="far fa-money-bill-alt"></i> $150 - $250</li>
+											<li><a href="#0" onclick="onHtmlClick('Doctors', 1)" class="btn_listing">View on Map</a></li>
+										</ul>
+									</div>
+									<div class="clinic-booking">
+										<a class="view-pro-btn" href="doctor-profile.html">View Profile</a>
+										<a class="apt-btn" href="booking.html">Book Appointment</a>
+										<br>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- /Doctor Widget -->
+					<br>
+					<!-- Doctor Widget -->
+					<div class="card">
+						<div class="card-body">
+							<div class="doctor-widget">
+								<div class="doc-info-left">
+									<div class="doctor-img">
+										<a href="doctor-profile.html">
+											<img src="assets\img\doctors\doctor-thumb-06.jpg" class="img-fluid" alt="User Image">
+										</a>
+									</div>
+									<div class="doc-info-cont">
+										<h4 class="doc-name"><a href="doctor-profile.html">Dr. Katharine Berthold</a></h4>
+										<p class="doc-speciality">MS - Orthopaedics, MBBS, M.Ch - Orthopaedics</p>
+										<p class="doc-department"><img src="assets\img\specialities\specialities-03.png" class="img-fluid" alt="Speciality">Orthopaedics</p>
+										<div class="rating">
+											<i class="fas fa-star filled"></i>
+											<i class="fas fa-star filled"></i>
+											<i class="fas fa-star filled"></i>
+											<i class="fas fa-star filled"></i>
+											<i class="fas fa-star"></i>
+											<span class="d-inline-block average-rating">(52)</span>
+										</div>
+										<div class="clinic-details">
+											<p class="doc-location"><i class="fas fa-map-marker-alt"></i> Singapore</p>
+										</div>
+										<div class="clinic-services">
+											<span>Diagnosis</span>
+											<span>Treatment</span>
+										</div>
+									</div>
+								</div>
+								<div class="doc-info-right">
+									<div class="clini-infos">
+										<ul>
+											<li><i class="far fa-thumbs-up"></i> 100%</li>
+											<li><i class="far fa-comment"></i> 52 Feedback</li>
+											<li><i class="far fa-money-bill-alt"></i> $100 - $500</li>
+											<li><a href="#0" onclick="onHtmlClick('Doctors', 0)" class="btn_listing">View on Map</a></li>
+										</ul>
+									</div>
+									<div class="clinic-booking">
+										<a class="view-pro-btn" href="doctor-profile.html">View Profile</a>
+										<a class="apt-btn" href="booking.html">Book Appointment</a>
+										<br>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- /Doctor Widget -->
+					<br>
+					<nav aria-label="" class="add_top_20">
+						<ul class="pagination pagination-sm">
+							<li class="page-item disabled">
+								<a class="page-link" href="#" tabindex="-1">Previous</a>
+							</li>
+							<li class="page-item active"><a class="page-link" href="#">1</a></li>
+							<li class="page-item"><a class="page-link" href="#">2</a></li>
+							<li class="page-item"><a class="page-link" href="#">3</a></li>
+							<li class="page-item">
+								<a class="page-link" href="#">Next</a>
+							</li>
+						</ul>
+					</nav>
+					<!-- /pagination -->
+				</div>
+				<!-- /col -->
+				
+				<aside class="col-lg-5" id="sidebar">
+					<div id="map_listing" class="normal_list">
+					</div>
+				</aside>
+				<!-- /aside -->
+				
+			</div>
+			<!-- /row -->
+		</div>
+		<!-- /container -->
+	</main>
+	<!-- /main -->
+
+	<!-- /white_bg -->
+	<div class="container">
+		<footer>
+			<div class="container margin_60_35">
+				<div class="row">
+					<div class="col-lg-3 col-md-12">
+						<p>
+							<a href="index.html" title="FastDoc">
+								<img src="img\logo2.png" data-retina="true" alt="" width="163" height="36" class="img-fluid">
+							</a>
+						</p>
+					</div>
+					<div class="col-lg-3 col-md-4">
+						<h5>About</h5>
+						<ul class="links">
+							<li><a href="about.html">About us</a></li>
+							<li><a href="contacts.html">Contact Us</a></li>
+							<li><a href="login.html">Login</a></li>
+							<li><a href="register.html">Register</a></li>
+						</ul>
+					</div>
+					<div class="col-lg-3 col-md-4">
+						<h5>Useful links</h5>
+						<ul class="links">
+							<li><a href="map-list.html">Our Doctors</a></li>
+							<li><a href="register.html">Join as a Patient</a></li>
+							<li><a href="doctor-register.html">Join as a Doctor</a></li>
+						</ul>
+					</div>
+					<div class="col-lg-3 col-md-4">
+						<h5>Contact with Us</h5>
+						<ul class="contacts">
+							<li><a href="tel://61280932400"><i class="icon_mobile"></i> + 65 1234 5678</a></li>
+							<li><a href="mailto:info@fastdoc.com"><i class="icon_mail_alt"></i> help@fastdoc.com</a></li>
+						</ul>
+						<div class="follow_us">
+							<h5>Follow us</h5>
+							<ul>
+								<li><a href="#0"><i class="social_facebook"></i></a></li>
+								<li><a href="#0"><i class="social_twitter"></i></a></li>
+								<li><a href="#0"><i class="social_linkedin"></i></a></li>
+								<li><a href="#0"><i class="social_instagram"></i></a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<!--/row-->
+				<hr>
+				<div class="row">
+					<div class="col-md-8">
+						<ul id="additional_links">
+							<li><a href="#0">Terms and conditions</a></li>
+							<li><a href="#0">Privacy</a></li>
+						</ul>
+					</div>
+					<div class="col-md-4">
+						<div id="copy">© 2020 FastDoc</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+		<!--/footer-->
+	</div>
+
+	<div id="toTop"></div>
+	<!-- Back to top button -->
+
+
+		</div>
+		<!-- /Main Wrapper -->
+		<!-- jQuery -->
+		<script src="assets\js\jquery.min.js"></script>
+		
+		<!-- Bootstrap Core JS -->
+		<script src="assets\js\popper.min.js"></script>
+		<script src="assets\js\bootstrap.min.js"></script>
+		
+		<!-- Select2 JS -->
+		<script src="assets\plugins\select2\js\select2.min.js"></script>
+		
+		<!-- Fancybox JS -->
+		<script src="assets\plugins\fancybox\jquery.fancybox.min.js"></script>
+		
+		<!-- Custom JS -->
+		<script src="assets\js\script.js"></script>
+		<script src="assets\js\map.js"></script>
+
+		<!-- COMMON SCRIPTS -->
+		<script src="js\jquery-2.2.4.min.js"></script>
+		<script src="js\common_scripts.min.js"></script>
+		<script src="js\functions.js"></script>
+		
+		<!-- SPECIFIC SCRIPTS -->
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyChZfWfurzE-Tml80GT8G1hxPO6dblJ41I"></script>
+		<script src="js\markerclusterer.js"></script>
+		<script src="js\map_listing.js"></script>
+		<script src="js\infobox.js"></script>
+
+		
+		
+	</body>
+</html>
