@@ -45,7 +45,7 @@ def get_prescription_by_cid(cid):
 @app.route("/prescription", methods=['POST'])
 def add_prescription():
     data = request.get_json()
-    prescription = Prescription(**data)
+    prescription = Prescription(data['bookingID'], data['doctorID'], data['customerID'], data['prescription'])
 
     try:
         db.session.add(prescription)

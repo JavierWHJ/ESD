@@ -42,8 +42,8 @@ def make_booking():
         channel = connection.channel()
 
         # set up exchange name
-        exchangename="booking_direct"
-        channel.exchange_declare(exchange=exchangename, exchange_type='direct')
+        exchangename="notification_topic"
+        channel.exchange_declare(exchange=exchangename, exchange_type='topic')
 
         notification = {
             "nid" : data['nid'],
