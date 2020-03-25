@@ -1,0 +1,621 @@
+﻿<!DOCTYPE html> 
+<html lang="en">
+	<head>
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+		<title>FastDoc</title>
+		
+		<!-- Favicons -->
+		<link href="assets\img\favicon2.png" rel="icon">
+		
+		<!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="assets\css\bootstrap.min.css">
+		
+		<!-- Fontawesome CSS -->
+		<link rel="stylesheet" href="assets\plugins\fontawesome\css\fontawesome.min.css">
+		<link rel="stylesheet" href="assets\plugins\fontawesome\css\all.min.css">
+		
+		<!-- Main CSS -->
+		<link rel="stylesheet" href="assets\css\style.css">
+		
+		<!-- GOOGLE WEB FONT -->
+		<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800" rel="stylesheet">
+
+		<!-- BASE CSS -->
+		<link href="css\style.css" rel="stylesheet">
+		<link href="css\menu.css" rel="stylesheet">
+		<link href="css\vendors.css" rel="stylesheet">
+		<link href="css\icon_fonts\css\all_icons_min.css" rel="stylesheet">
+		
+		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!--[if lt IE 9]>
+			<script src="assets/js/html5shiv.min.js"></script>
+			<script src="assets/js/respond.min.js"></script>
+		<![endif]-->
+	
+	</head>
+	<body>
+
+		<!-- Main Wrapper -->
+		<div class="main-wrapper">
+		
+			<!-- Loader -->
+			<div id="loader">
+				<div class="loader">
+					<span></span>
+					<span></span>
+				</div>
+			</div>
+			<!-- /Loader  -->
+
+			<!-- Header -->
+			<header class="navbar navbar-expand-lg header-nav header_sticky">
+				<div class="navbar-header">
+					<a id="mobile_btn" href="javascript:void(0);">
+						<span class="bar-icon">
+							<span></span>
+							<span></span>
+							<span></span>
+						</span>
+					</a>
+					<a href="index.html" class="navbar-brand logo">
+						<img src="img/logo2.PNG" class="img-fluid" alt="Logo">
+					</a>
+				</div>
+				<div class="main-menu-wrapper">
+					<div class="menu-header">
+						<a href="index.html" class="menu-logo">
+							<img src="img/logo2.PNG" class="img-fluid" alt="Logo">
+						</a>
+						<a id="menu_close" class="menu-close" href="javascript:void(0);">
+							<i class="fas fa-times"></i>
+						</a>
+					</div>
+					<ul class="main-nav">
+						<li>
+							<a href="index.html" style="color:black">Home</a>
+						</li>
+						<li>
+							<a href="about.html" style="color:black">About Us</a>
+						</li>	
+						<li>
+							<a href="contacts.html" style="color:black">Contact Us</a>
+						</li>	
+						<li>
+							<a href="map-list.html" style="color:black">Our Doctors</a>
+						</li>
+						<li class="login-link">
+							<a href="login.html">Login / Signup</a>
+						</li>
+					</ul>		 
+				</div>		 
+				<ul class="nav header-navbar-rht">
+					<li class="nav-item contact-item">
+						<div class="header-contact-img">
+							<i class="far fa-hospital"></i>							
+						</div>
+						<div class="header-contact-detail">
+							<p class="contact-header">Contact</p>
+							<p class="contact-info-header"> +65 1234 5678</p>
+						</div>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link header-login" href="login.html">login / Signup </a>
+					</li>
+				</ul>
+			</header>
+			<!-- /Header -->
+			<!-- Home Banner -->
+			<div class="hero_home version_1">
+			<div class="content">
+				<h3>Find a Doctor!</h3>
+				<p>
+					Book a doctor, wherever you want, whenever you want!
+				</p>
+				<form method="get" action="map-list.html">
+					<div id="custom-search-input">
+						<div class="input-group">
+							<input type="text" class=" search-query" placeholder="Ex. Name, Specialization ....">
+							<input type="submit" class="btn_search" value="Search">
+						</div>
+						<ul>
+							<li>
+								<input type="radio" id="all" name="radio_search" value="all" checked="">
+								<label for="all">All</label>
+							</li>
+							<li>
+								<input type="radio" id="doctor" name="radio_search" value="doctor">
+								<label for="doctor">Doctor</label>
+							</li>
+							<li>
+								<input type="radio" id="specialization" name="radio_search" value="specialization">
+								<label for="specialization">Specialization</label>
+							</li>
+						</ul>
+					</div>
+				</form>
+			</div>
+		</div>
+		<!-- /Hero -->
+			<!-- /Home Banner -->
+			<div class="container margin_120_95">
+				<div class="main_title">
+					<h2><Strong>How It Works!</Strong></h2>
+					<p>Consider FastDoc, your mobile clinic for professional healthcare whenever you need it, wherever you are. No more travel time. No more waiting rooms. No more long lines.</p>
+				</div>
+				<div class="row add_bottom_30">
+					<div class="col-lg-4">
+						<div class="box_feat" id="icon_1">
+							<span></span>
+							<h3 style="color:black">Find a Doctor</h3>
+							<p>Search for the doctor you want!</p>
+						</div>
+					</div>
+					<div class="col-lg-4">
+						<div class="box_feat" id="icon_3">
+							<span></span>
+							<h3 style="color:black">Book a visit</h3>
+							<p>Book an appointment on available timings!</p>
+						</div>
+					</div>
+					<div class="col-lg-4">
+						<div class="box_feat" id="icon_2">
+							<h3 style="color:black">Wait at Home</h3>
+							<p>Receive medical assistance without leaving your doorstep!</p>
+						</div>
+					</div>
+				</div>
+				<!-- /row -->
+				<p class="text-center"><a href="map-list.html" class="btn_1 medium">Find Doctor</a></p>
+			</div>
+			<div class="container margin_120_95">
+				<div class="main_title">
+					<h2>Find by specialization</h2>
+				</div>
+				<div class="row">
+					<div class="col-lg-3 col-md-6">
+						<a href="map-list.html" class="box_cat_home">
+							<i class="icon-info-4"></i>
+							<img src="img\icon_cat_1.svg" width="60" height="60" alt="">
+							<h3>Primary Care</h3>
+							<ul class="clearfix">
+								<li><strong>15</strong>Doctors</li>
+								<li></li>
+							</ul>
+						</a>
+					</div>
+					<div class="col-lg-3 col-md-6">
+						<a href="map-list.html" class="box_cat_home">
+							<i class="icon-info-4"></i>
+							<img src="img\icon_cat_2.svg" width="60" height="60" alt="">
+							<h3>Cardiology</h3>
+							<ul class="clearfix">
+								<li><strong>10</strong>Doctors</li>
+								<li></li>
+							</ul>
+						</a>
+					</div>
+					<div class="col-lg-3 col-md-6">
+						<a href="map-list.html" class="box_cat_home">
+							<i class="icon-info-4"></i>
+							<img src="img\icon_cat_4.svg" width="60" height="60" alt="">
+						<h3>Blood test</h3>
+							<ul class="clearfix">
+								<li><strong>4</strong>Doctors</li>
+								<li></li>
+							</ul>
+						</a>
+					</div>
+					<div class="col-lg-3 col-md-6">
+						<a href="map-list.html" class="box_cat_home">
+							<i class="icon-info-4"></i>
+							<img src="img\icon_cat_8.svg" width="60" height="60" alt="">
+							<h3>Psychologist</h3>
+							<ul class="clearfix">
+								<li><strong>2</strong>Doctors</li>
+								<li></li>
+							</ul>
+						</a>
+					</div>
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+			<!-- /Popular Section -->
+			<div class="bg_color_1">
+				<div class="container margin_120_95">
+					<div class="main_title">
+						<h2>Most Viewed doctors</h2>
+						<p></p>
+					</div>
+					<div class="row">
+						<!-- Doctor Widget -->
+						<div class="col-lg-4 col-md-6">
+							<div class="profile-widget">
+								<div class="doc-img">
+									<a href="doctor-profile.html">
+										<img class="img-fluid" alt="User Image" src="assets\img\doctors\doctor-01.jpg">
+									</a>
+									<a href="javascript:void(0)" class="fav-btn">
+										<i class="far fa-bookmark"></i>
+									</a>
+								</div>
+								<div class="pro-content">
+									<h3 class="title">
+										<a href="doctor-profile.html" style="color:black">Ruby Perrin</a> 
+										<i class="fas fa-check-circle verified"></i>
+									</h3>
+									<p class="speciality">MDS - Family Physician</p>
+									<div class="rating">
+										<i class="fas fa-star filled"></i>
+										<i class="fas fa-star filled"></i>
+										<i class="fas fa-star filled"></i>
+										<i class="fas fa-star filled"></i>
+										<i class="fas fa-star filled"></i>
+										<span class="d-inline-block average-rating">(17)</span>
+									</div>
+									<ul class="available-info">
+										<li>
+											<i class="fas fa-map-marker-alt"></i> Tampines, Singapore
+										</li>
+										<li>
+											<i class="far fa-clock"></i> Available on Thur, 2 April
+										</li>
+										<li>
+											<i class="far fa-money-bill-alt"></i> $300 - $1000 
+											<i class="fas fa-info-circle" data-toggle="tooltip" title="Lorem Ipsum"></i>
+										</li>
+									</ul>
+									<div class="row row-sm">
+										<div class="col-6">
+											<a href="doctor-profile.html" class="btn view-btn">View Profile</a>
+										</div>
+										<div class="col-6">
+											<a href="booking.html" class="btn book-btn">Book Now</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- /Doctor Widget -->
+				
+						<!-- Doctor Widget -->
+						<div class="col-lg-4 col-md-6">
+							<div class="profile-widget">
+								<div class="doc-img">
+									<a href="doctor-profile.html">
+										<img class="img-fluid" alt="User Image" src="assets\img\doctors\doctor-02.jpg">
+									</a>
+									<a href="javascript:void(0)" class="fav-btn">
+										<i class="far fa-bookmark"></i>
+									</a>
+								</div>
+								<div class="pro-content">
+									<h3 class="title">
+										<a href="doctor-profile.html" style="color:black">Darren Elder</a> 
+										<i class="fas fa-check-circle verified"></i>
+									</h3>
+									<p class="speciality">BDS, MDS - Pediatrician</p>
+									<div class="rating">
+										<i class="fas fa-star filled"></i>
+										<i class="fas fa-star filled"></i>
+										<i class="fas fa-star filled"></i>
+										<i class="fas fa-star filled"></i>
+										<i class="fas fa-star"></i>
+										<span class="d-inline-block average-rating">(35)</span>
+									</div>
+									<ul class="available-info">
+										<li>
+											<i class="fas fa-map-marker-alt"></i> Woodlands, Singapore
+										</li>
+										<li>
+											<i class="far fa-clock"></i> Available on Thur, 2 April
+										</li>
+										<li>
+											<i class="far fa-money-bill-alt"></i> $50 - $300 
+											<i class="fas fa-info-circle" data-toggle="tooltip" title="Lorem Ipsum"></i>
+										</li>
+									</ul>
+									<div class="row row-sm">
+										<div class="col-6">
+											<a href="doctor-profile.html" class="btn view-btn">View Profile</a>
+										</div>
+										<div class="col-6">
+											<a href="booking.html" class="btn book-btn">Book Now</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- /Doctor Widget -->
+				
+						<!-- Doctor Widget -->
+						<div class="col-lg-4 col-md-6">
+							<div class="profile-widget">
+								<div class="doc-img">
+									<a href="doctor-profile.html">
+										<img class="img-fluid" alt="User Image" src="assets\img\doctors\doctor-03.jpg">
+									</a>
+									<a href="javascript:void(0)" class="fav-btn">
+										<i class="far fa-bookmark"></i>
+									</a>
+								</div>
+								<div class="pro-content">
+									<h3 class="title">
+										<a href="doctor-profile.html" style="color:black">Deborah Angel</a> 
+										<i class="fas fa-check-circle verified"></i>
+									</h3>
+									<p class="speciality">MBBS, MD - General Medicine</p>
+									<div class="rating">
+										<i class="fas fa-star filled"></i>
+										<i class="fas fa-star filled"></i>
+										<i class="fas fa-star filled"></i>
+										<i class="fas fa-star filled"></i>
+										<i class="fas fa-star"></i>
+										<span class="d-inline-block average-rating">(27)</span>
+									</div>
+									<ul class="available-info">
+										<li>
+											<i class="fas fa-map-marker-alt"></i> Bukit Timah, Singapore
+										</li>
+										<li>
+											<i class="far fa-clock"></i> Available on Thur, 2 April
+										</li>
+										<li>
+											<i class="far fa-money-bill-alt"></i> $100 - $400 
+											<i class="fas fa-info-circle" data-toggle="tooltip" title="Lorem Ipsum"></i>
+										</li>
+									</ul>
+									<div class="row row-sm">
+										<div class="col-6">
+											<a href="doctor-profile.html" class="btn view-btn">View Profile</a>
+										</div>
+										<div class="col-6">
+											<a href="booking.html" class="btn book-btn">Book Now</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- /Doctor Widget -->
+						<!-- Doctor Widget -->
+						<div class="col-lg-4 col-md-6">
+							<div class="profile-widget">
+								<div class="doc-img">
+									<a href="doctor-profile.html">
+										<img class="img-fluid" alt="User Image" src="assets\img\doctors\doctor-06.jpg">
+									</a>
+									<a href="javascript:void(0)" class="fav-btn">
+										<i class="far fa-bookmark"></i>
+									</a>
+								</div>
+								<div class="pro-content">
+									<h3 class="title">
+										<a href="doctor-profile.html" style="color:black">Katharine Berthold</a> 
+										<i class="fas fa-check-circle verified"></i>
+									</h3>
+									<p class="speciality">MS - Orthopaedics, MBBS, M.Ch - Orthopaedics</p>
+									<div class="rating">
+										<i class="fas fa-star filled"></i>
+										<i class="fas fa-star filled"></i>
+										<i class="fas fa-star filled"></i>
+										<i class="fas fa-star filled"></i>
+										<i class="fas fa-star"></i>
+										<span class="d-inline-block average-rating">(52)</span>
+									</div>
+									<ul class="available-info">
+										<li>
+											<i class="fas fa-map-marker-alt"></i> Serangoon, Singapore
+										</li>
+										<li>
+											<i class="far fa-clock"></i> Available on Thur, 2 April
+										</li>
+										<li>
+											<i class="far fa-money-bill-alt"></i> $100 - $500 
+											<i class="fas fa-info-circle" data-toggle="tooltip" title="Lorem Ipsum"></i>
+										</li>
+									</ul>
+									<div class="row row-sm">
+										<div class="col-6">
+											<a href="doctor-profile.html" class="btn view-btn">View Profile</a>
+										</div>
+										<div class="col-6">
+											<a href="booking.html" class="btn book-btn">Book Now</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- /Doctor Widget -->
+						<!-- Doctor Widget -->
+						<div class="col-lg-4 col-md-6">
+							<div class="profile-widget">
+								<div class="doc-img">
+									<a href="doctor-profile.html">
+										<img class="img-fluid" alt="User Image" src="assets\img\doctors\doctor-05.jpg">
+									</a>
+									<a href="javascript:void(0)" class="fav-btn">
+										<i class="far fa-bookmark"></i>
+									</a>
+								</div>
+								<div class="pro-content">
+									<h3 class="title">
+										<a href="doctor-profile.html" style="color:black">Marvin Campbell</a> 
+										<i class="fas fa-check-circle verified"></i>
+									</h3>
+									<p class="speciality">MBBS, MD - Ophthalmology, DNB - Ophthalmology</p>
+									<div class="rating">
+										<i class="fas fa-star filled"></i>
+										<i class="fas fa-star filled"></i>
+										<i class="fas fa-star filled"></i>
+										<i class="fas fa-star filled"></i>
+										<i class="fas fa-star"></i>
+										<span class="d-inline-block average-rating">(66)</span>
+									</div>
+									<ul class="available-info">
+										<li>
+											<i class="fas fa-map-marker-alt"></i> Harbourfront, Singapore
+										</li>
+										<li>
+											<i class="far fa-clock"></i> Available on Thur, 2 April
+										</li>
+										<li>
+											<i class="far fa-money-bill-alt"></i> $50 - $700 
+											<i class="fas fa-info-circle" data-toggle="tooltip" title="Lorem Ipsum"></i>
+										</li>
+									</ul>
+									<div class="row row-sm">
+										<div class="col-6">
+											<a href="doctor-profile.html" class="btn view-btn">View Profile</a>
+										</div>
+										<div class="col-6">
+											<a href="booking.html" class="btn book-btn">Book Now</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- /Doctor Widget -->
+						<!-- Doctor Widget -->
+						<div class="col-lg-4 col-md-6">
+							<div class="profile-widget">
+								<div class="doc-img">
+									<a href="doctor-profile.html">
+										<img class="img-fluid" alt="User Image" src="assets\img\doctors\doctor-04.jpg">
+									</a>
+									<a href="javascript:void(0)" class="fav-btn">
+										<i class="far fa-bookmark"></i>
+									</a>
+								</div>
+								<div class="pro-content">
+									<h3 class="title">
+										<a href="doctor-profile.html"style="color:black">Sofia Brient</a> 
+										<i class="fas fa-check-circle verified"></i>
+									</h3>
+									<p class="speciality">MBBS, MS - General Surgery, MCh - Urology</p>
+									<div class="rating">
+										<i class="fas fa-star filled"></i>
+										<i class="fas fa-star filled"></i>
+										<i class="fas fa-star filled"></i>
+										<i class="fas fa-star filled"></i>
+										<i class="fas fa-star"></i>
+										<span class="d-inline-block average-rating">(4)</span>
+									</div>
+									<ul class="available-info">
+										<li>
+											<i class="fas fa-map-marker-alt"></i> Bugis, Singapore
+										</li>
+										<li>
+											<i class="far fa-clock"></i> Available on Thur, 2 April
+										</li>
+										<li>
+											<i class="far fa-money-bill-alt"></i> $150 - $250 
+											<i class="fas fa-info-circle" data-toggle="tooltip" title="Lorem Ipsum"></i>
+										</li>
+									</ul>
+									<div class="row row-sm">
+										<div class="col-6">
+											<a href="doctor-profile.html" class="btn view-btn">View Profile</a>
+										</div>
+										<div class="col-6">
+											<a href="booking.html" class="btn book-btn">Book Now</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- /Doctor Widget -->
+					</div>
+					<!-- /row -->
+					<p class="text-center add_top_30"><a href="map-list.html" class="btn_1 medium">View all Doctors</a></p>
+				</div>
+				<!-- /container -->
+			</div>
+			<!-- /white_bg -->
+			<div class="container">
+				<footer>
+					<div class="container margin_60_35">
+						<div class="row">
+							<div class="col-lg-3 col-md-12">
+								<p>
+									<a href="index.html" title="FastDoc">
+										<img src="img\logo2.png" data-retina="true" alt="" width="163" height="36" class="img-fluid">
+									</a>
+								</p>
+							</div>
+							<div class="col-lg-3 col-md-4">
+								<h5>About</h5>
+								<ul class="links">
+									<li><a href="about.html">About us</a></li>
+									<li><a href="contacts.html">Contact Us</a></li>
+									<li><a href="login.html">Login</a></li>
+									<li><a href="register.html">Register</a></li>
+								</ul>
+							</div>
+							<div class="col-lg-3 col-md-4">
+								<h5>Useful links</h5>
+								<ul class="links">
+									<li><a href="map-list.html">Our Doctors</a></li>
+									<li><a href="register.html">Join as a Patient</a></li>
+									<li><a href="doctor-register.html">Join as a Doctor</a></li>
+								</ul>
+							</div>
+							<div class="col-lg-3 col-md-4">
+								<h5>Contact with Us</h5>
+								<ul class="contacts">
+									<li><a href="tel://61280932400"><i class="icon_mobile"></i> + 65 1234 5678</a></li>
+									<li><a href="mailto:info@fastdoc.com"><i class="icon_mail_alt"></i> help@fastdoc.com</a></li>
+								</ul>
+								<div class="follow_us">
+									<h5>Follow us</h5>
+									<ul>
+										<li><a href="#0"><i class="social_facebook"></i></a></li>
+										<li><a href="#0"><i class="social_twitter"></i></a></li>
+										<li><a href="#0"><i class="social_linkedin"></i></a></li>
+										<li><a href="#0"><i class="social_instagram"></i></a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<!--/row-->
+						<hr>
+						<div class="row">
+							<div class="col-md-8">
+								<ul id="additional_links">
+									<li><a href="#0">Terms and conditions</a></li>
+									<li><a href="#0">Privacy</a></li>
+								</ul>
+							</div>
+							<div class="col-md-4">
+								<div id="copy">© 2020 FastDoc</div>
+							</div>
+						</div>
+					</div>
+				</footer>
+				<!--/footer-->
+			</div>
+	</div>
+	<!-- /Main Wrapper -->
+	<div id="toTop"></div>
+	<!-- Back to top button -->
+
+
+		<!-- jQuery -->
+		<script src="assets\js\jquery.min.js"></script>
+		
+		<!-- Bootstrap Core JS -->
+		<script src="assets\js\popper.min.js"></script>
+		<script src="assets\js\bootstrap.min.js"></script>
+		
+		<!-- Slick JS -->
+		<script src="assets\js\slick.js"></script>
+		
+		<!-- Custom JS -->
+		<script src="assets\js\script.js"></script>
+		<script src="js\jquery-2.2.4.min.js"></script>
+		<script src="js\common_scripts.min.js"></script>
+		<script src="js\functions.js"></script>
+		
+	</body>
+</html>
