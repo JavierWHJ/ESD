@@ -1,0 +1,8 @@
+
+api/admin/Dockerfile
+api/booking/Dockerfile
+api/customer/Dockerfile
+api/doctor/Dockerfile
+api/notification/Dockerfile
+api/notification_listen/Dockerfile
+api/prescription/Dockerfile
