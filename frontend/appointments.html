@@ -23,6 +23,19 @@
 		<link href="css\menu.css" rel="stylesheet">
 		<link href="css\vendors.css" rel="stylesheet">
 		<link href="css\icon_fonts\css\all_icons_min.css" rel="stylesheet">
+
+		<script 
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		
+		<script 
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+		integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+		crossorigin="anonymous"></script>
+		
+		<script 
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+		integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+		crossorigin="anonymous"></script>
 		
 		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 		<!--[if lt IE 9]>
@@ -204,8 +217,98 @@
 						
 						<div class="col-md-7 col-lg-8 col-xl-9">
 							<div class="appointments">
-							
-								<!-- Appointment List -->
+								<script>
+									function showError(message) {
+										// Hide the table and button in the event of error
+										$('#appointments').hide();
+										
+								
+										// Display an error under the main container
+										$('#appointments')
+											.append("<label>"+message+"</label>");
+									}
+									$(async() => {          
+										var serviceURL = "http://127.0.0.1:8000/api/v1/booking";
+										try {
+											const response =
+											await fetch(
+												serviceURL, { method: 'GET' }
+											);
+											const data = await response.json();
+											var appointments = data.bookings; 
+											if (!appointments || !appointments.length) {
+												showError('No current booking')
+											} else {
+												var rows = "";
+												for (const appointment of appointments) {
+													var serviceURL = "http://127.0.0.1:8000/api/v1/customer/";
+													var customerid = appointment.customerID;
+													if (customerid && customerid.length) {
+														serviceURL += customerid;
+														
+														try {
+															const response =
+															await fetch(
+																serviceURL, { method: 'GET' }
+															);
+															const data = await response.json();
+															var customer = data; 
+															var image = "assets/img/patients/patient.jpg";
+
+															
+															appointmentlist = "<div class='appointment-list'>" +
+																					"<div class='profile-info-widget'>" +
+																						"<a href='patient-profile.html' class='booking-doc-img'>" +
+																							"<img src ="+ image +" alt='User Image'>" +
+																						"</a>"+
+																						"<div class='profile-det-info'>"+
+																							"<h3><a href='patient-profile.html'>"+customer.name+"</a></h3>"+
+																							"<div class='patient-details'>";
+																
+															profile =
+																"<h5><i class='far fa-clock'></i>" + appointment.datestart + "</h5>" +
+																"<h5><i class='fas fa-map-marker-alt'></i>" + customer.postalcode + "</h5>" +
+																"<h5><i class='fas fa-envelope'></i>" + customer.email + "</h5>" +
+																"<h5 class='b-0'><i class='fas fa-phone'></i>" + customer.phone + "</h5>";
+
+																
+															appointmentaction = "</div>"+
+																			"</div>"+
+																		"</div>"+
+																		"<div class='appointment-action'>"+
+																			"<a href='#'' class='btn btn-sm bg-info-light' data-toggle='modal' data-target='#appt_details'>"+
+																				"<i class='far fa-eye'></i> View"+
+																			"</a>"+
+																			"<a href='javascript:void(0);' class='btn btn-sm bg-success-light'>"+
+																				"<i class='fas fa-check'></i> Accept"+
+																			"</a>"+
+																			"<a href='javascript:void(0);' class='btn btn-sm bg-danger-light'>"+
+																				"<i class='fas fa-times'></i> Cancel"+
+																			"</a>"+
+																		"</div>"+
+																	"</div>";
+															
+															rows = appointmentlist + profile + appointmentaction;
+															$('.appointments').append(rows);
+															
+														} catch (error) {
+															showError
+															('There is a problem retrieving customer data, please try again later.<br />'+error);
+														}
+													
+													}
+												}
+											} 
+										}catch (error) {
+											showError
+											('There is a problem retrieving booking data, please try again later.<br />'+error);
+										}
+									});
+
+								
+								</script>
+
+								<!--
 								<div class="appointment-list">
 									<div class="profile-info-widget">
 										<a href="patient-profile.html" class="booking-doc-img">
@@ -233,9 +336,8 @@
 										</a>
 									</div>
 								</div>
-								<!-- /Appointment List -->
-							
-								<!-- Appointment List -->
+								
+								
 								<div class="appointment-list">
 									<div class="profile-info-widget">
 										<a href="patient-profile.html" class="booking-doc-img">
@@ -263,9 +365,7 @@
 										</a>
 									</div>
 								</div>
-								<!-- /Appointment List -->
 								
-								<!-- Appointment List -->
 								<div class="appointment-list">
 									<div class="profile-info-widget">
 										<a href="patient-profile.html" class="booking-doc-img">
@@ -295,9 +395,7 @@
 										</a>
 									</div>
 								</div>
-								<!-- /Appointment List -->
-								
-								<!-- Appointment List -->
+							
 								<div class="appointment-list">
 									<div class="profile-info-widget">
 										<a href="patient-profile.html" class="booking-doc-img">
@@ -325,9 +423,7 @@
 										</a>
 									</div>
 								</div>
-								<!-- /Appointment List -->
 								
-								<!-- Appointment List -->
 								<div class="appointment-list">
 									<div class="profile-info-widget">
 										<a href="patient-profile.html" class="booking-doc-img">
@@ -355,9 +451,7 @@
 										</a>
 									</div>
 								</div>
-								<!-- /Appointment List -->
 								
-								<!-- Appointment List -->
 								<div class="appointment-list">
 									<div class="profile-info-widget">
 										<a href="patient-profile.html" class="booking-doc-img">
@@ -385,9 +479,7 @@
 										</a>
 									</div>
 								</div>
-								<!-- /Appointment List -->
 								
-								<!-- Appointment List -->
 								<div class="appointment-list">
 									<div class="profile-info-widget">
 										<a href="patient-profile.html" class="booking-doc-img">
@@ -415,9 +507,7 @@
 										</a>
 									</div>
 								</div>
-								<!-- /Appointment List -->
 								
-								<!-- Appointment List -->
 								<div class="appointment-list">
 									<div class="profile-info-widget">
 										<a href="patient-profile.html" class="booking-doc-img">
@@ -445,9 +535,7 @@
 										</a>
 									</div>
 								</div>
-								<!-- /Appointment List -->
-								
-								<!-- Appointment List -->
+							
 								<div class="appointment-list">
 									<div class="profile-info-widget">
 										<a href="patient-profile.html" class="booking-doc-img">
@@ -475,9 +563,7 @@
 										</a>
 									</div>
 								</div>
-								<!-- /Appointment List -->
-								
-								<!-- Appointment List -->
+							
 								<div class="appointment-list">
 									<div class="profile-info-widget">
 										<a href="patient-profile.html" class="booking-doc-img">
@@ -505,9 +591,7 @@
 										</a>
 									</div>
 								</div>
-								<!-- /Appointment List -->
 								
-								<!-- Appointment List -->
 								<div class="appointment-list">
 									<div class="profile-info-widget">
 										<a href="patient-profile.html" class="booking-doc-img">
@@ -535,9 +619,7 @@
 										</a>
 									</div>
 								</div>
-								<!-- /Appointment List -->
 								
-								<!-- Appointment List -->
 								<div class="appointment-list">
 									<div class="profile-info-widget">
 										<a href="patient-profile.html" class="booking-doc-img">
@@ -565,7 +647,8 @@
 										</a>
 									</div>
 								</div>
-								<!-- /Appointment List -->
+								
+								-->
 								
 							</div>
 						</div>
