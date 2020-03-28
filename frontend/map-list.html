@@ -190,6 +190,39 @@
 							<input type="text" class="form-control" placeholder="Ex. Specialist, Name, Doctor..." id="searchval">
 							<input type="submit" value="Search" id="searchbtn">
 						</div>
+						<script>
+							$("#searchbtn").click(async (event) => {
+								event.preventDefault();
+								var serviceURL = "http://localhost:8000/api/v1/doctor";
+								var searchvalue = $('#searchval').val();
+								if(searchvalue == null || searchvalue.length == 0){
+									window.location.replace("map-list.html");
+								}
+								try {
+										const response = await fetch(
+											serviceURL,
+											{method: "GET"}
+										);
+										var doctors = await response.json();
+										var data = doctors.doctors;
+										for(var i in data){
+											var doctor = data[i];
+											for(var d in doctor){
+												var res = JSON.parse(JSON.stringify(doctor[d], function(a, b) {
+												return typeof b === "string" ? b.toLowerCase() : b
+												}));
+												if(res == searchvalue){
+													var searchkey = d + "=";
+													window.location.replace("map-list.html?"+searchkey+doctor[d]);
+												}
+											}
+										}
+								}
+								catch (e) {
+									console.log(e);
+								}
+							});
+						</script>
 					</div>
 				</div>
 				<!-- /row -->
