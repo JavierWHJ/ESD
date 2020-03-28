@@ -68,7 +68,7 @@
 										</div>
 										<div class="col-md-6">
 											<div class="text-right">
-												<button type="button" class="btn bg-success-light btn-sm" id="topup_status">Completed</button>
+												<!-- <button type="button" class="btn bg-success-light btn-sm" id="topup_status">Completed</button> -->
 											</div>
 										</div>
 									</div>
@@ -84,7 +84,7 @@
 							</li>
 							<li>
 								<span class="title">Paid Amount</span>
-								<span class="appt_paid"></span>
+								$<span class="appt_paid"></span>
 							</li>
 						</ul>
 					</div>
@@ -340,17 +340,8 @@
 															
 															rows = appointmentlist + profile + appointmentaction;
 
-															
-															
-															// $(".appt_number").html(appointment.bookingID);
-															// $(".appt_date").html(appointment.datestart);
-															// $(".appt_status").html(appointment.status);
-					
-															// $(".appt_paid").html(appointment.price);
-														
 															$('.appointments').append(rows);
 															
-															// var myJSON = JSON.stringify(appointment);
 															appt_dict[appointment.bookingID] = appointment;
 															
 														
@@ -370,6 +361,7 @@
 
 				
 								</script>
+									<!-- when 'view' is clicked -->
 								 <script>
 									$(document).on("click", ".open-Dialog", function () {
 										var bookingid = $(this).data('id');
@@ -385,7 +377,7 @@
 		
 									});
 								</script>
-								<!-- appointment list -->
+								
 
 							</div>
 						</div>
