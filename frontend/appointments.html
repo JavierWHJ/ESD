@@ -294,7 +294,9 @@
 											.append("<label>"+message+"</label>");
 									}
 									$(async() => {          
+										var did = sessionStorage.getItem('sessionid');
 										var serviceURL = "http://127.0.0.1:8000/api/v1/booking";
+										serviceURL += "/"+"did="+did;
 										try {
 											const response =
 											await fetch(
@@ -302,6 +304,7 @@
 											);
 											const data = await response.json();
 											var appointments = data.bookings; 
+											
 											if (!appointments || !appointments.length) {
 												showError('No current booking');
 											} else {
@@ -364,10 +367,12 @@
 																	"</div>";
 															
 															rows = appointmentlist + profile + appointmentaction;
+															
 
 															$('.appointments').append(rows);
 															
 															appt_dict[appointment.bookingID] = appointment;
+
 															
 														
 														} catch (error) {
