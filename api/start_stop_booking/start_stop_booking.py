@@ -6,9 +6,9 @@ import requests
 app = Flask(__name__)
 
 CORS(app)
-bookingURL = "http://booking/bookings"
-notificationURL = 'http://notification/notifications'
-customerURL = "http://customer/customer"
+bookingURL = "http://booking:5000/bookings"
+notificationURL = 'http://notification:5000/notifications'
+customerURL = "http://customer:5000/customer"
 
 @app.route('/start_booking', methods=['POST'])
 def start_booking():
@@ -22,7 +22,6 @@ def start_booking():
             "message": "error occurred when starting booking."
         }), 500
     else:
-        print("r", r.json())
         r = r.json()
         customerID = r['customerID']
         
@@ -81,7 +80,55 @@ def start_booking():
             "message": "Booking started."
         }), 200
 
+@app.route('/stop_booking', methods=['POST'])
+def stop_booking():
 
+    data = request.get_data()
+    booking = json.loads(data)
+    r = requests.put(bookingURL, json=booking)
+    if r.status_code != 200:
+        return jsonify({
+            "message": "error occurred when stopping booking."
+        }), 500
+    else:
+        r = r.json()
+        customerID = r['customerID']
+        doctorID = booking['doctorID']
+        # no error so send notification to customer
+        hostname = "host.docker.internal"  # change to host.docker.internal before building image
+        port = 5672  # port of rabbitmq
+        connection = pika.BlockingConnection(pika.ConnectionParameters(host=hostname, port=port))
+        channel = connection.channel()
+
+        # set up exchange name
+        exchangename="notification_topic"
+        channel.exchange_declare(exchange=exchangename, exchange_type='topic')
+
+        r = requests.get(notificationURL).json()
+        nid = r['notifications'][-1]['nid'] + 1
+
+        # notification to customer
+        notificationCustomer= {
+            "nid" : nid,
+            "userid" : customerID,
+            "message" : "Appointment has ended."
+        }
+        
+        notificationDoctor= {
+            "nid" : nid+1,
+            "userid" : doctorID,
+            "message" : "Appointment has ended."
+        }
+        
+        notificationCustomer = json.dumps(notificationCustomer, default=str)
+        notificationDoctor = json.dumps(notificationDoctor, default=str)
+        channel.basic_publish(exchange=exchangename, routing_key="booking.notification", body=notificationCustomer, properties=pika.BasicProperties(delivery_mode = 2))
+        channel.basic_publish(exchange=exchangename, routing_key="booking.notification", body=notificationDoctor, properties=pika.BasicProperties(delivery_mode = 2))
+        connection.close()
+
+        return jsonify({
+            "message": "Booking ended."
+        }), 200
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
