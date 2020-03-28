@@ -306,12 +306,12 @@
 																						"<div class='profile-det-info'>"+
 																							"<h3><a href='patient-profile.html'>"+customer.name+"</a></h3>"+
 																							"<div class='patient-details'>";
-																
 															profile =
 																"<h5><i class='far fa-clock'></i>" + appointment.datestart + "</h5>" +
 																"<h5><i class='fas fa-map-marker-alt'></i>" + customer.postalcode + "</h5>" +
 																"<h5><i class='fas fa-envelope'></i>" + customer.email + "</h5>" +
-																"<h5 class='b-0'><i class='fas fa-phone'></i>" + customer.phone + "</h5>";
+																"<h5 class='b-0'><i class='fas fa-phone'></i>" + customer.phone + "</h5>" + 
+																"<h5>" + "Booking ID: #" + "<span class='booking'>" + appointment.bookingID + "<span></h5>";
 
 																
 															appointmentaction = "</div>"+
@@ -322,7 +322,7 @@
 																				"<i class='far fa-eye'></i> View"+
 																			"</a>"+
 																			"<a href='javascript:void(0);' class='btn btn-sm bg-success-light'>"+
-																				"<i class='fas fa-check'></i> Accept"+
+																				"<i class='fas fa-check'></i> Start Appointment"+
 																			"</a>"+
 																			"<a href='javascript:void(0);' class='btn btn-sm bg-danger-light'>"+
 																				"<i class='fas fa-times'></i> Cancel"+
@@ -469,6 +469,8 @@
 		
 		<!-- Custom JS -->
 		<script src="assets\js\script.js"></script>
+		
+		<script src="assets\js\appointment.js"></script>
 		
 	</body>
 </html>
