@@ -179,8 +179,8 @@
 				<form method="get" action="map-list.html">
 					<div id="custom-search-input">
 						<div class="input-group">
-							<input type="text" class=" search-query" placeholder="Ex. Name, Specialization ....">
-							<input type="submit" class="btn_search" value="Search">
+							<input type="text" class=" search-query" placeholder="Ex. Name, Specialization ...." id="searchval">
+							<input type="submit" class="btn_search" value="Search" id="searchbtn">
 						</div>
 						<ul>
 							<li>
@@ -200,6 +200,38 @@
 				</form>
 			</div>
 		</div>
+		<script>
+			$("#searchbtn").click(async (event) => {
+				event.preventDefault();
+				var serviceURL = "http://localhost:8000/api/v1/doctor";
+				var searchvalue = $('#searchval').val();
+				$(async() => {
+					try {
+						const response = await fetch(
+							serviceURL,
+							{method: "GET"}
+						);
+						var doctors = await response.json();
+						var data = doctors.doctors;
+						for(var i in data){
+							var doctor = data[i];
+							for(var d in doctor){
+								var res = JSON.parse(JSON.stringify(doctor[d], function(a, b) {
+								return typeof b === "string" ? b.toLowerCase() : b
+								}));
+								if(res == searchvalue){
+									var searchkey = d + "=";
+									window.location.replace("map-list.html?"+searchkey+doctor[d]);
+								}
+							}
+						}
+					}
+					catch (e) {
+						console.log(e);
+					}
+				});
+			});
+		</script>
 		<!-- /Hero -->
 			<!-- /Home Banner -->
 			<div class="container margin_120_95">
