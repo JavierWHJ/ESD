@@ -154,3 +154,8 @@ services:
     container_name: prescription
     networks:
       - kong-net   
+  start_stop_booking:
+    build: './start_stop_booking'
+    container_name: start_stop_booking
+    networks:
+      - kong-net 
