@@ -26,7 +26,29 @@
 		<link href="css\menu.css" rel="stylesheet">
 		<link href="css\vendors.css" rel="stylesheet">
 		<link href="css\icon_fonts\css\all_icons_min.css" rel="stylesheet">
-		
+
+    <!-- Latest compiled and minified CSS
+    <link rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+    integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" 
+    crossorigin="anonymous"> -->
+
+    <!-- Latest compiled and minified JavaScript -->
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script 
+    src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    
+    <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+    integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+    crossorigin="anonymous"></script>
+    
+    <script 
+    src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+    integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+	crossorigin="anonymous"></script>
+	
+
 		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 		<!--[if lt IE 9]>
 			<script src="assets/js/html5shiv.min.js"></script>
@@ -459,6 +481,54 @@
 											</div>
 										</div>
 										<!-- /Appointment Tab -->
+
+										<!-- Prescription Details Modal -->
+										<div class="modal fade custom-modal" id="pres_details">
+											<div class="modal-dialog modal-dialog-centered">
+												<div class="modal-content">
+													<div class="modal-header">
+														<h5 class="modal-title">Prescription Details</h5>
+														<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+															<span aria-hidden="true">&times;</span>
+														</button>
+													</div>
+													<div class="modal-body">
+														<ul class="info-details">
+															<li>
+																<div class="details-header">
+																	<div class="row">
+																		<div class="col-md-6"> 
+																			<strong>#APPT</strong>
+																			<strong><span class="appt_number"></span></strong><br>
+																			
+																			
+																		</div>
+																		<div class="col-md-6">
+																			<div class="text-right">
+																				<button type="button" class="btn bg-success-light btn-sm" id="topup_status">Completed</button>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+															</li>
+															<li>
+																<span class="title">Status:</span>
+																<span id="appt_status"></span>
+															</li>
+															<li>
+																<span class="title">Date:</span>
+																<span id="appt_date"></span>
+															</li>
+															<li>
+																<span class="title">Paid Amount</span>
+																<span id="appt_paid"></span>
+															</li>
+														</ul>
+													</div>
+												</div>
+											</div>
+										</div>
+										<!-- /Prescription Details Modal -->
 										
 										<!-- Prescription Tab -->
 										<div class="tab-pane fade" id="pres">
@@ -468,243 +538,205 @@
 											<div class="card card-table mb-0">
 												<div class="card-body">
 													<div class="table-responsive">
-														<table class="table table-hover table-center mb-0">
-															<thead>
-																<tr>
-																	<th>Date </th>
-																	<th>Name</th>									
-																	<th>Created by </th>
-																	<th></th>
-																</tr>     
-															</thead>
-															<tbody>
-																<tr>
-																	<td>14 Nov 2019</td>
-																	<td>Prescription 1</td>
-																	<td>
-																		<h2 class="table-avatar">
-																			<a href="doctor-profile.html" class="avatar avatar-sm mr-2">
-																				<img class="avatar-img rounded-circle" src="assets\img\doctors\doctor-thumb-01.jpg" alt="User Image">
-																			</a>
-																			<a href="doctor-profile.html">Dr. Ruby Perrin <span>Dental</span></a>
-																		</h2>
-																	</td>
-																	<td class="text-right">
-																		<div class="table-action">
-																			<a href="javascript:void(0);" class="btn btn-sm bg-primary-light">
-																				<i class="fas fa-print"></i> Print
-																			</a>
-																			<a href="javascript:void(0);" class="btn btn-sm bg-info-light">
-																				<i class="far fa-eye"></i> View
-																			</a>
-																		</div>
-																	</td>
-																</tr>
-																<tr>
-																	<td>13 Nov 2019</td>
-																	<td>Prescription 2</td>
-																	<td>
-																		<h2 class="table-avatar">
-																			<a href="doctor-profile.html" class="avatar avatar-sm mr-2">
-																				<img class="avatar-img rounded-circle" src="assets\img\doctors\doctor-thumb-02.jpg" alt="User Image">
-																			</a>
-																			<a href="doctor-profile.html">Dr. Darren Elder <span>Dental</span></a>
-																		</h2>
-																	</td>
-																	<td class="text-right">
-																		<div class="table-action">
-																			<a href="javascript:void(0);" class="btn btn-sm bg-primary-light">
-																				<i class="fas fa-print"></i> Print
-																			</a>
-																			<a href="javascript:void(0);" class="btn btn-sm bg-info-light">
-																				<i class="far fa-eye"></i> View
-																			</a>
-																			<a href="edit-prescription.html" class="btn btn-sm bg-success-light">
-																				<i class="fas fa-edit"></i> Edit
-																			</a>
-																			<a href="javascript:void(0);" class="btn btn-sm bg-danger-light">
-																				<i class="far fa-trash-alt"></i> Delete
-																			</a>
-																		</div>
-																	</td>
-																</tr>
-																<tr>
-																	<td>12 Nov 2019</td>
-																	<td>Prescription 3</td>
-																	<td>
-																		<h2 class="table-avatar">
-																			<a href="doctor-profile.html" class="avatar avatar-sm mr-2">
-																				<img class="avatar-img rounded-circle" src="assets\img\doctors\doctor-thumb-03.jpg" alt="User Image">
-																			</a>
-																			<a href="doctor-profile.html">Dr. Deborah Angel <span>Cardiology</span></a>
-																		</h2>
-																	</td>
-																	<td class="text-right">
-																		<div class="table-action">
-																			<a href="javascript:void(0);" class="btn btn-sm bg-primary-light">
-																				<i class="fas fa-print"></i> Print
-																			</a>
-																			<a href="javascript:void(0);" class="btn btn-sm bg-info-light">
-																				<i class="far fa-eye"></i> View
-																			</a>
-																		</div>
-																	</td>
-																</tr>
-																<tr>
-																	<td>11 Nov 2019</td>
-																	<td>Prescription 4</td>
-																	<td>
-																		<h2 class="table-avatar">
-																			<a href="doctor-profile.html" class="avatar avatar-sm mr-2">
-																				<img class="avatar-img rounded-circle" src="assets\img\doctors\doctor-thumb-04.jpg" alt="User Image">
-																			</a>
-																			<a href="doctor-profile.html">Dr. Sofia Brient <span>Urology</span></a>
-																		</h2>
-																	</td>
-																	<td class="text-right">
-																		<div class="table-action">
-																			<a href="javascript:void(0);" class="btn btn-sm bg-primary-light">
-																				<i class="fas fa-print"></i> Print
-																			</a>
-																			<a href="javascript:void(0);" class="btn btn-sm bg-info-light">
-																				<i class="far fa-eye"></i> View
-																			</a>
-																		</div>
-																	</td>
-																</tr>
-																<tr>
-																	<td>10 Nov 2019</td>
-																	<td>Prescription 5</td>
-																	<td>
-																		<h2 class="table-avatar">
-																			<a href="doctor-profile.html" class="avatar avatar-sm mr-2">
-																				<img class="avatar-img rounded-circle" src="assets\img\doctors\doctor-thumb-05.jpg" alt="User Image">
-																			</a>
-																			<a href="doctor-profile.html">Dr. Marvin Campbell <span>Dental</span></a>
-																		</h2>
-																	</td>
-																	<td class="text-right">
-																		<div class="table-action">
-																			<a href="javascript:void(0);" class="btn btn-sm bg-primary-light">
-																				<i class="fas fa-print"></i> Print
-																			</a>
-																			<a href="javascript:void(0);" class="btn btn-sm bg-info-light">
-																				<i class="far fa-eye"></i> View
-																			</a>
-																		</div>
-																	</td>
-																</tr>
-																<tr>
-																	<td>9 Nov 2019</td>
-																	<td>Prescription 6</td>
-																	<td>
-																		<h2 class="table-avatar">
-																			<a href="doctor-profile.html" class="avatar avatar-sm mr-2">
-																				<img class="avatar-img rounded-circle" src="assets\img\doctors\doctor-thumb-06.jpg" alt="User Image">
-																			</a>
-																			<a href="doctor-profile.html">Dr. Katharine Berthold <span>Orthopaedics</span></a>
-																		</h2>
-																	</td>
-																	<td class="text-right">
-																		<div class="table-action">
-																			<a href="javascript:void(0);" class="btn btn-sm bg-primary-light">
-																				<i class="fas fa-print"></i> Print
-																			</a>
-																			<a href="javascript:void(0);" class="btn btn-sm bg-info-light">
-																				<i class="far fa-eye"></i> View
-																			</a>
-																		</div>
-																	</td>
-																</tr>
-																<tr>
-																	<td>8 Nov 2019</td>
-																	<td>Prescription 7</td>
-																	<td>
-																		<h2 class="table-avatar">
-																			<a href="doctor-profile.html" class="avatar avatar-sm mr-2">
-																				<img class="avatar-img rounded-circle" src="assets\img\doctors\doctor-thumb-07.jpg" alt="User Image">
-																			</a>
-																			<a href="doctor-profile.html">Dr. Linda Tobin <span>Neurology</span></a>
-																		</h2>
-																	</td>
-																	<td class="text-right">
-																		<div class="table-action">
-																			<a href="javascript:void(0);" class="btn btn-sm bg-primary-light">
-																				<i class="fas fa-print"></i> Print
-																			</a>
-																			<a href="javascript:void(0);" class="btn btn-sm bg-info-light">
-																				<i class="far fa-eye"></i> View
-																			</a>
-																		</div>
-																	</td>
-																</tr>
-																<tr>
-																	<td>7 Nov 2019</td>
-																	<td>Prescription 8</td>
-																	<td>
-																		<h2 class="table-avatar">
-																			<a href="doctor-profile.html" class="avatar avatar-sm mr-2">
-																				<img class="avatar-img rounded-circle" src="assets\img\doctors\doctor-thumb-08.jpg" alt="User Image">
-																			</a>
-																			<a href="doctor-profile.html">Dr. Paul Richard <span>Dermatology</span></a>
-																		</h2>
-																	</td>
-																	<td class="text-right">
-																		<div class="table-action">
-																			<a href="javascript:void(0);" class="btn btn-sm bg-primary-light">
-																				<i class="fas fa-print"></i> Print
-																			</a>
-																			<a href="javascript:void(0);" class="btn btn-sm bg-info-light">
-																				<i class="far fa-eye"></i> View
-																			</a>
-																		</div>
-																	</td>
-																</tr>
-																<tr>
-																	<td>6 Nov 2019</td>
-																	<td>Prescription 9</td>
-																	<td>
-																		<h2 class="table-avatar">
-																			<a href="doctor-profile.html" class="avatar avatar-sm mr-2">
-																				<img class="avatar-img rounded-circle" src="assets\img\doctors\doctor-thumb-09.jpg" alt="User Image">
-																			</a>
-																			<a href="doctor-profile.html">Dr. John Gibbs <span>Dental</span></a>
-																		</h2>
-																	</td>
-																	<td class="text-right">
-																		<div class="table-action">
-																			<a href="javascript:void(0);" class="btn btn-sm bg-primary-light">
-																				<i class="fas fa-print"></i> Print
-																			</a>
-																			<a href="javascript:void(0);" class="btn btn-sm bg-info-light">
-																				<i class="far fa-eye"></i> View
-																			</a>
-																		</div>
-																	</td>
-																</tr>
-																<tr>
-																	<td>5 Nov 2019</td>
-																	<td>Prescription 10</td>
-																	<td>
-																		<h2 class="table-avatar">
-																			<a href="doctor-profile.html" class="avatar avatar-sm mr-2">
-																				<img class="avatar-img rounded-circle" src="assets\img\doctors\doctor-thumb-10.jpg" alt="User Image">
-																			</a>
-																			<a href="doctor-profile.html">Dr. Olga Barlow <span>Dental</span></a>
-																		</h2>
-																	</td>
-																	<td class="text-right">
-																		<div class="table-action">
-																			<a href="javascript:void(0);" class="btn btn-sm bg-primary-light">
-																				<i class="fas fa-print"></i> Print
-																			</a>
-																			<a href="javascript:void(0);" class="btn btn-sm bg-info-light">
-																				<i class="far fa-eye"></i> View
-																			</a>
-																		</div>
-																	</td>
-																</tr>
-															</tbody>	
+														<table class="table table-hover table-center mb-0" id="view_prescription">
+															
+																<!-- <thead>
+																	<tr>
+																		<th>Date otigiintig </th>
+																		<th>Name</th>									
+																		<th>Created by </th>
+																		<th></th>
+																	</tr>     
+																</thead>
+																<tbody>
+																	<tr>
+																		<td>14 Nov 2019</td>
+																		<td>Prescription 1</td>
+																		<td>
+																			<h2 class="table-avatar">
+																				<a href="doctor-profile.html" class="avatar avatar-sm mr-2">
+																					<img class="avatar-img rounded-circle" src="assets\img\doctors\doctor-thumb-01.jpg" alt="User Image">
+																				</a>
+																				<a href="doctor-profile.html">Dr. Ruby Perrin <span>Dental</span></a>
+																			</h2>
+																		</td>
+																		<td class="text-right">
+																			<div class="table-action">
+																				<a href="javascript:void(0);" class="btn btn-sm bg-primary-light">
+																					<i class="fas fa-print"></i> Print
+																				</a>
+																				<a href="javascript:void(0);" class="btn btn-sm bg-info-light">
+																					<i class="far fa-eye"></i> View
+																				</a>
+																				<a href="edit-prescription.html" class="btn btn-sm bg-success-light">
+																					<i class="fas fa-edit"></i> Edit
+																				</a>
+																				<a href="javascript:void(0);" class="btn btn-sm bg-danger-light">
+																					<i class="far fa-trash-alt"></i> Delete
+																				</a>
+																			</div>
+																		</td>
+																	</tr>
+																</tbody> -->
+														
+															
+									<script>
+									// var pres_dict = {};
+									function showError(message) {
+										$('#view_prescription').hide();
+										$('#view_prescription')
+											.append("<label>"+message+"</label>");
+									}
+
+									$(async() => {           
+										// Change serviceURL to your own
+										var serviceURL = "http://127.0.0.1:8000/api/v1/prescription";
+								
+										try {
+											const response =
+											await fetch(
+											serviceURL, { method: 'GET' }
+											);
+											
+											const data = await response.json();
+											var prescriptions = data.prescriptions; //the arr is in data.books of the JSON data
+											//console.log(data);
+											var image = "assets/img/doctors/doctor-thumb-01.jpg";
+											if (!prescriptions || !prescriptions.length) {
+												showError('Prescriptions list empty or undefined.')
+											} else {
+												// for loop to setup all table rows with obtained book data
+												var rows = "";
+												
+												for (const prescription of prescriptions) {
+													var custURL = "http://127.0.0.1:8000/api/v1/customer/";
+													var docURL = "http://127.0.0.1:8000/api/v1/doctor/";
+													var bookURL = "http://127.0.0.1:8000/api/v1/booking/";
+													var customerid = prescription.customerID;
+													var doctorid = prescription.doctorID;
+													var bookid =  prescription.bookingID;
+
+													if (customerid && customerid.length) {
+														custURL += customerid;
+														docURL += doctorid;
+														bookURL += bookid;
+														
+														try {
+															var c_response =
+															await fetch(
+																custURL, { method: 'GET' }
+
+															);
+															var d_response =
+															await fetch(
+																docURL, { method: 'GET' }
+
+															);
+															var b_response =
+															await fetch(
+																bookURL, { method: 'GET' }
+
+															);
+
+															var cust_data = await c_response.json();
+															var customer = cust_data; 
+															// console.log(customer);
+
+															var doc_data = await d_response.json();
+															var doctor = doc_data; 
+															// console.log(doctor);
+
+															var book_data = await b_response.json();
+															var booking = book_data; 
+															// console.log(booking);
+
+															console.log(booking.customerID == "c1")
+
+															if (booking.customerID == prescription.customerID && doctor.doctorID == prescription.doctorID) {
+																date = booking.datestart.split(" ");
+																date = date.slice(1,4);
+																bookdate = date.join(" ");
+																prescriptionlist = '<thead>'+
+																	'<tr>'+
+'																		<th>Date </th>'+
+'																		<th>Created by </th>'+
+'																		<th>Prescription </th>'+
+'																		<th></th>'+
+'																	</tr>     '+
+'																</thead>'+
+'																<tbody>'+
+'																	<tr>'+
+																		
+'																		<td>' + bookdate+'</td>'+
+'																		<td>'+
+'																			<h2 class="table-avatar">'+
+'																				<a href="doctor-profile.html" class="avatar avatar-sm mr-2">'+
+'																					<img class="avatar-img rounded-circle" src="' + image + '"alt="User Image">'+
+'																				</a>'+
+'																				<a href="doctor-profile.html">'+ doctor.name+' <span>'+ doctor.services +'</span></a>'+
+'																			</h2>'+
+'																		</td>'+ 
+'																		<td>' + prescription.prescription + '</td>'+
+
+
+'																		<td class="text-right">'+
+'																			<div class="table-action">'+
+'																				<a href="edit-prescription.html" class="btn btn-sm bg-success-light">'+
+'																					<i class="fas fa-edit"></i> Edit'+
+'																				</a>'+
+// 																					ADD TO EDIT MODAL
+// '																				<a href="javascript:void(0);" class="btn btn-sm bg-danger-light">'+
+// '																					<i class="far fa-trash-alt"></i> Delete'+
+// '																				</a>'+
+'																			</div>'+
+'																		</td>'+
+'																	</tr>'+
+'																</tbody>';
+	
+														
+													rows = prescriptionlist;
+													$('#view_prescription').append(rows);
+												
+													}
+
+															
+												
+												
+												}catch (error) {
+											// Errors when calling the service; such as network error, 
+											// service offline, etc
+											showError
+										('There is a problem retrieving books data, please try again later.<br />'+error);
+										
+									}			
+												}
+											}
+										} 
+									}catch (error) {
+										showError
+										('There is a problem retrieving booking data, please try again later.<br />'+error);
+									}
+								});
+									
+
+								$(document).on("click", ".open-Dialog", function () {
+									var bookingid = $(this).data('id');
+									$(".appt_number").html(bookingid);
+									var appt_array= appt_dict[bookingid];
+										
+									var appointment_datestart= appt_array.datestart;
+									var appointment_status = appt_array.status;
+									var appointment_price = appt_array.price;
+									$(".appt_date").html(appointment_datestart);
+									$(".appt_status").html(appointment_status);
+									$(".appt_paid").html(appointment_price);
+	
+								});
+
+																
+
+															</script>	
+															
 														</table>
 													</div>
 												</div>
@@ -1398,6 +1430,8 @@
 		
 		<!-- Custom JS -->
 		<script src="assets\js\script.js"></script>
+
+		<sc
 		
 	</body>
 </html>
