@@ -38,7 +38,7 @@ def get_all():
 @app.route("/prescription/cid=<string:cid>")
 def get_prescription_by_cid(cid):
     return jsonify({
-        "prescriptions": [prescription.json for prescription in Prescription.query.filter_by(customerID=cid).all()]
+        "prescriptions": [prescription.json() for prescription in Prescription.query.filter_by(customerID=cid).all()]
     }), 200
 
 
