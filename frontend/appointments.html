@@ -278,7 +278,7 @@
 											const data = await response.json();
 											var appointments = data.bookings; 
 											if (!appointments || !appointments.length) {
-												showError('No current booking')
+												showError('No current booking');
 											} else {
 												var rows = "";
 												for (const appointment of appointments) {
