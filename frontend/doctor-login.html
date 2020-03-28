@@ -24,6 +24,16 @@
 		<link href="css\vendors.css" rel="stylesheet">
 		<link href="css\icon_fonts\css\all_icons_min.css" rel="stylesheet">
 		
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+			integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous">
+		</script>
+
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+			integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous">
+		</script>
+
 		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 		<!--[if lt IE 9]>
 			<script src="assets/js/html5shiv.min.js"></script>
@@ -113,7 +123,7 @@
 										</div>
 										<form action="patient-dashboard.html">
 											<div class="form-group form-focus">
-												<input type="email" class="form-control floating">
+												<input type="email" class="form-control floating" id="email">
 												<label class="focus-label">Email</label>
 											</div>
 											<div class="form-group form-focus">
@@ -123,7 +133,7 @@
 											<div class="text-right">
 												<a class="forgot-link" href="forgot-password.html">Forgot Password ?</a>
 											</div>
-											<button class="btn btn-primary btn-block btn-lg login-btn" type="submit">Login</button>
+											<button class="btn btn-primary btn-block btn-lg login-btn" type="submit" id="loginbtn">Login</button>
 											<div class="login-or">
 												<span class="or-line"></span>
 												<span class="span-or">or</span>
@@ -141,6 +151,36 @@
 									</div>
 								</div>
 							</div>
+							<script>
+								$("#loginbtn").click(async (event) => {
+									event.preventDefault();
+									var loginemail = $('#email').val();
+									var serviceURL = "http://127.0.0.1:8000/api/v1/doctor";
+										try {
+											const response =
+											await fetch(
+												serviceURL, { method: 'GET' }
+											);
+											const data = await response.json();
+											var doctors = data.doctors; 
+											if (!doctors || !doctors.length) {
+												showError('No doctor!')
+											} else {
+												for (const doctor of doctors) {
+													var doctorid = doctor.doctorID;
+													var doctoremail = doctor.email;
+													if(loginemail === doctoremail){
+														sessionStorage.setItem('sessionid', doctorid);
+														console.log(sessionStorage.getItem('sessionid'));
+														window.location.replace("doctor-dashboard.html");
+													}
+												}
+											}
+										} catch (error) {
+										('There is a problem retrieving customer data, please try again later.<br />'+error);
+										} 
+								});
+							</script>
 							<!-- /Login Tab Content -->
 								
 						</div>

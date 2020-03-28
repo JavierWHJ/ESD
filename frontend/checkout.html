@@ -27,16 +27,6 @@
 		<script 
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 		
-		<script 
-		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
-		integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
-		crossorigin="anonymous"></script>
-		
-		<script 
-		src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
-		integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
-		crossorigin="anonymous"></script>
-		
 		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 		<!--[if lt IE 9]>
 			<script src="assets/js/html5shiv.min.js"></script>
@@ -50,61 +40,93 @@
 		<div class="main-wrapper">
 		
 			<!-- Header -->
-			<header class="navbar navbar-expand-lg header-nav header_sticky">
-				<div class="navbar-header">
-					<a id="mobile_btn" href="javascript:void(0);">
-						<span class="bar-icon">
-							<span></span>
-							<span></span>
-							<span></span>
-						</span>
-					</a>
-					<a href="index.html" class="navbar-brand logo">
-						<img src="img/logo2.PNG" class="img-fluid" alt="Logo">
-					</a>
+				<!-- Loader -->
+				<div id="loader">
+					<div class="loader">
+						<span></span>
+						<span></span>
+					</div>
 				</div>
-				<div class="main-menu-wrapper">
-					<div class="menu-header">
-						<a href="index.html" class="menu-logo">
+				<!-- /Loader  -->
+
+				<header class="navbar navbar-expand-lg header-nav header_sticky">
+					<div class="navbar-header">
+						<a id="mobile_btn" href="javascript:void(0);">
+							<span class="bar-icon">
+								<span></span>
+								<span></span>
+								<span></span>
+							</span>
+						</a>
+						<a href="index.html" class="navbar-brand logo">
 							<img src="img/logo2.PNG" class="img-fluid" alt="Logo">
 						</a>
-						<a id="menu_close" class="menu-close" href="javascript:void(0);">
-							<i class="fas fa-times"></i>
-						</a>
 					</div>
-					<ul class="main-nav">
-						<li>
-							<a href="index.html" style="color:black">Home</a>
-						</li>
-						<li>
-							<a href="about.html" style="color:black">About Us</a>
-						</li>	
-						<li>
-							<a href="contacts.html" style="color:black">Contact Us</a>
-						</li>	
-						<li>
-							<a href="map-list.html" style="color:black">Our Doctors</a>
-						</li>
-						<li class="login-link">
-							<a href="login.html">Login / Signup</a>
-						</li>
-					</ul>		 
-				</div>		 
-				<ul class="nav header-navbar-rht">
-					<li class="nav-item contact-item">
-						<div class="header-contact-img">
-							<i class="far fa-hospital"></i>							
+					<div class="main-menu-wrapper">
+						<div class="menu-header">
+							<a href="index.html" class="menu-logo">
+								<img src="img/logo2.PNG" class="img-fluid" alt="Logo">
+							</a>
+							<a id="menu_close" class="menu-close" href="javascript:void(0);">
+								<i class="fas fa-times"></i>
+							</a>
 						</div>
-						<div class="header-contact-detail">
-							<p class="contact-header">Contact</p>
-							<p class="contact-info-header"> +65 1234 5678</p>
-						</div>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link header-login" href="login.html">login / Signup </a>
-					</li>
-				</ul>
-			</header>
+						<ul class="main-nav">
+							<li>
+								<a href="index.html" style="color:black">Home</a>
+							</li>
+							<li>
+								<a href="about.html" style="color:black">About Us</a>
+							</li>	
+							<li>
+								<a href="contacts.html" style="color:black">Contact Us</a>
+							</li>	
+							<li>
+								<a href="map-list.html" style="color:black">Our Doctors</a>
+							</li>
+							<li class="login-link">
+								<a href="login.html">Login / Signup</a>
+							</li>
+						</ul>		 
+					</div>		 
+					<ul class="nav header-navbar-rht">
+						<li class="nav-item contact-item">
+							<div class="header-contact-img">
+								<i class="far fa-hospital"></i>							
+							</div>
+							<div class="header-contact-detail">
+								<p class="contact-header">Contact</p>
+								<p class="contact-info-header"> +65 1234 5678</p>
+							</div>
+						</li>
+						<li class="nav-item" id="loginheader">
+							<a class="nav-link header-login" href="login.html">login / Signup </a>
+						</li>
+						<!-- User Menu -->
+						<li class="nav-item dropdown has-arrow logged-item" id="usercircle">
+							<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+								<span class="user-img">
+									<img class="rounded-circle" src="assets\img\patients\patient.jpg" width="31" alt="Ryan Taylor" id="userimage1">
+								</span>
+							</a>
+							<div class="dropdown-menu dropdown-menu-right">
+								<div class="user-header">
+									<div class="avatar avatar-sm">
+										<img src="assets\img\patients\patient.jpg" alt="User Image" class="avatar-img rounded-circle" id="userimage2">
+									</div>
+									<div class="user-text">
+										<h6 id="username">name</h6>
+										<p class="text-muted mb-0">Patient</p>
+									</div>
+								</div>
+								<a class="dropdown-item" href="patient-dashboard.html">Dashboard</a>
+								<a class="dropdown-item" href="profile-settings.html">Profile Settings</a>
+								<a class="dropdown-item" href="login.html">Logout</a>
+							</div>
+						</li>
+						<!-- /User Menu -->
+					</ul>
+				</header>
 			<!-- /Header -->
 			
 			<!-- Page Content -->
@@ -120,7 +142,7 @@
 									<form action="booking-success.html">
 									
 										<!-- Personal Information -->
-										<div class="info-widget">
+										<div class="info-widget" id="customerinfo">
 											<h4 class="card-title">Personal Information</h4>
 											<div class="row">
 												<div class="col-md-6 col-sm-12">
@@ -293,7 +315,45 @@
 
 			</div>		
 			<!-- /Page Content -->
-   
+			<script>
+				if(sessionStorage.getItem('sessionid') != null){
+					$(document).ready(pageReady());
+					$("#loginheader").hide();
+					$("#customerinfo").hide();
+					function pageReady(){
+						var serviceURL = "http://127.0.0.1:8000/api/v1/customer";
+						$(async() => {
+							try {
+						const response =
+						await fetch(
+							serviceURL, { method: 'GET' }
+						);
+						const data = await response.json();
+						var customers = data.customers; 
+						if (!customers || !customers.length) {
+							showError('No customer!')
+						} else {
+							for (const customer of customers) {
+								var customerid = customer.customerID;
+								if(sessionStorage.getItem('sessionid') == customerid){
+									$("#usercircle").show();
+									$("#username").text(customer.name);
+									var imgname = "patient" + customerid[1];
+									$("#userimage1").attr("src","assets/img/patients/"+ imgname + ".jpg");
+									$("#userimage2").attr("src","assets/img/patients/"+ imgname + ".jpg");
+								}
+							}
+						}
+					} catch (error) {
+						('There is a problem retrieving customer data, please try again later.<br />'+error);
+					} 
+						});
+					}
+				} else{
+					$("#loginheader").show();
+					$("#usercircle").hide();
+				}
+			</script>
 			<!-- /white_bg -->
 			<div class="container">
 				<footer>
