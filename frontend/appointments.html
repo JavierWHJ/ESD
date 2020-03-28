@@ -296,7 +296,17 @@
 															var customer = data;
 															var patientimg = "patient" + customerid[1];
 															var image = "assets/img/patients/" + patientimg +".jpg";
-
+															//check if started or not
+															var apptStatus = appointment.status
+															if (apptStatus == 'started'){
+																var apptElement = "<a href='javascript:void(0);' class='btn btn-sm bg-success-light'>"+
+																				"<i class='fas fa-check'></i> Appointment Ongoing"+
+																			"</a>"
+															} else{
+																var apptElement = "<a href='javascript:void(0);' class='btn btn-sm bg-success-light'>"+
+																				"<i class='fas fa-check'></i> Start Appointment"+
+																			"</a>"
+															}
 															
 															appointmentlist = "<div class='appointment-list'>" +
 																					"<div class='profile-info-widget'>" +
@@ -321,9 +331,7 @@
 																			"<a href='#appt_details'' class='open-Dialog btn btn-sm bg-info-light' data-toggle='modal' data-id='"+ appointment.bookingID+"' >"+
 																				"<i class='far fa-eye'></i> View"+
 																			"</a>"+
-																			"<a href='javascript:void(0);' class='btn btn-sm bg-success-light'>"+
-																				"<i class='fas fa-check'></i> Start Appointment"+
-																			"</a>"+
+																			apptElement +
 																			"<a href='javascript:void(0);' class='btn btn-sm bg-danger-light'>"+
 																				"<i class='fas fa-times'></i> Cancel"+
 																			"</a>"+
