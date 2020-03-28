@@ -14,6 +14,7 @@ create table doctors (
 	# doctor stuff
     `doctorID` varchar(2) NOT NULL,
     `name` varchar(64) NOT NULL,
+    `email` varchar(256) NOT NULL,
     `price` decimal(10,2) NOT NULL,
     `sex` varchar(10) NOT NULL,
     `phone` varchar(20) NOT NULL,
@@ -81,23 +82,23 @@ insert into customers values
 
 use doctors;
 insert into doctors values
-	('d1', 'doctor1', 50.00, 'Male', '12345678', '169036', 'Flu'),
-    ('d2', 'doctor2', 150.00, 'Male', '12345678', '238864', 'Flu'),
-    ('d3', 'doctor3', 250.00, 'Female', '12345678', '178903', 'Flu');
+	('d1', 'doctor1', 'doctor1@gmail.com', 50.00, 'Male', '12345678', '169036', 'Flu'),
+    ('d2', 'doctor2', 'doctor2@gmail.com', 150.00, 'Male', '12345678', '238864', 'Flu'),
+    ('d3', 'doctor3', 'doctor3@gmail.com', 250.00, 'Female', '12345678', '178903', 'Flu');
     
 use bookings;
-insert into bookings (bookingID,  customerID, doctorID, datestart, dateend, status, price ) values
+insert into bookings (bookingID, doctorID, datestart, dateend, status, price ) values
 (1, 'd1', '2020-05-01 08:00:00', '2020-05-01 12:00:00' , 'Unbooked', 200.00),
 (2, 'd1', '2020-05-01 12:00:00', '2020-05-01 15:00:00' , 'Unbooked', 200.00),
 (3, 'd1', '2020-05-01 15:00:00', '2020-05-01 18:00:00' , 'Unbooked', 200.00),
 
 (4, 'd2', '2020-05-01 08:00:00', '2020-05-01 12:00:00' , 'Unbooked', 200.00),
-(5, 'c2', 'd2', '2020-05-01 12:00:00', '2020-05-01 15:00:00' , 'Booked', 200.00),
-(6, 'c3', 'd2', '2020-05-01 15:00:00', '2020-05-01 18:00:00' , 'Booked', 200.00),
+(5, 'd2', '2020-05-01 12:00:00', '2020-05-01 15:00:00' , 'Unbooked', 200.00),
+(6, 'd2', '2020-05-01 15:00:00', '2020-05-01 18:00:00' , 'Unbooked', 200.00),
 
 (7, 'd3', '2020-05-01 08:00:00', '2020-05-01 12:00:00' , 'Unbooked', 200.00),
 (8, 'd3', '2020-05-01 12:00:00', '2020-05-01 15:00:00' , 'Unbooked', 200.00),
-(9, 'c3', 'd3', '2020-05-01 15:00:00', '2020-05-01 18:00:00' , 'Booked', 200.00)
+(9, 'd3', '2020-05-01 15:00:00', '2020-05-01 18:00:00' , 'Unbooked', 200.00)
 ;
 
 

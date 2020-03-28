@@ -17,15 +17,17 @@ class Doctor(db.Model):
 
     doctorID = db.Column(db.String(2), primary_key=True)
     name = db.Column(db.String(64), nullable=False)
+    email = db.Column(db.String(256), nullable=False)
     sex = db.Column(db.String(10), nullable=False)
     price = db.Column(db.Float(precision=2), nullable=False)
     phone = db.Column(db.String(20), nullable=False)
     postalcode = db.Column(db.String(512), nullable=False)
     services = db.Column(db.String(64), nullable=False)
 
-    def __init__(self, doctorID, name, sex, price, phone, postalcode, services):
+    def __init__(self, doctorID, name, email, sex, price, phone, postalcode, services):
         self.doctorID = doctorID
         self.name = name
+        self.email = email
         self.sex = sex
         self.price = price
         self.phone = phone
@@ -33,7 +35,7 @@ class Doctor(db.Model):
         self.services = services
 
     def json(self):
-        return {"doctorID": self.doctorID, "name": self.name, "sex": self.sex, "price": self.price, "phone": self.phone, "postalcode": self.postalcode, "services": self.services}
+        return {"doctorID": self.doctorID, "name": self.name, "email": self.email, "sex": self.sex, "price": self.price, "phone": self.phone, "postalcode": self.postalcode, "services": self.services}
 
 
 @app.route("/doctor")
@@ -48,13 +50,19 @@ def find_by_doctorID(doctorID):
         return jsonify(doctor.json())
     return jsonify({"message": "Doctor ID not found."}), 404
 
-
 @app.route("/doctor/name=<string:name>")
 def find_by_name(name):
     doctor = Doctor.query.filter_by(name=name).first()
     if doctor:
         return jsonify(doctor.json())
     return jsonify({"message": "Doctor name not found."}), 404
+
+@app.route("/doctor/name=<string:email>")
+def find_by_email(email):
+    doctor = Doctor.query.filter_by(email=email).first()
+    if doctor:
+        return jsonify(doctor.json())
+    return jsonify({"message": "Doctor email not found."}), 404
 
 
 @app.route("/doctor/sex=<string:sex>")
@@ -122,6 +130,8 @@ def update_doctor():
     if(doctor):
         if('name' in data):
             doctor.name = data['name']
+        if('email' in data):
+            doctor.email = data['email']
         if('sex' in data):
             doctor.sex = data['sex']
         if('price' in data):
