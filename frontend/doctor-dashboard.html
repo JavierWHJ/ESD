@@ -732,52 +732,68 @@
 		
 		<!-- Get CID of Selected Appointment from Dashboard Page (Does not work on Appointments page..) -->
 		<script>
-		$('.bg-success-light').click(function(){
-			$('table').find('tr').on('click',function(){
-				var bid = $(this).find("span:first").text();
-				getLocation();
-				function getLocation() {
-					if (navigator.geolocation) {
-						navigator.geolocation.getCurrentPosition(showPosition);
-					} else {
-						alert("Geolocation is not supported by this browser.");
+			var x = document.getElementsByClassName('bg-info-light').length
+			if (x==0){
+				setTimeout(onReady,1000)
+			}else{
+				onReady();
+			}
+			
+			function onReady(){
+				$('.bg-success-light').click(function(){
+					console.log('clicked');
+					var element = this;
+					var customerRow = element.parentNode.parentNode.parentNode
+					var bid = customerRow.querySelector('h2.table-avatar a:nth-child(2) span').textContent
+					getLocation();
+					function getLocation() {
+						if (navigator.geolocation) {
+							navigator.geolocation.getCurrentPosition(showPosition);
+						} else {
+							alert("Geolocation is not supported by this browser.");
+						}
 					}
-				}
-				
-				function showPosition(position) {
-					var pos = {lat:position.coords.latitude, long:position.coords.longitude}
-					function showError(message) {
-						alert(message);
-					}
-					$(async() => {
-						// change url to localhost:8000/api/v1/start_booking
-						// var serviceURL = 'http://localhost:5005/start_booking';
-						serviceURL = 'http://localhost:8000/api/v1/start_booking';
-						try {
-							const response =
-							fetch(
-								serviceURL,
-								{
-									method: "POST",
-									headers: {"Content-Type" : "application/json"},
-									mode: "no-cors",
-									body: JSON.stringify({
-										bookingID: bid,
-										status: "started",
-										location: pos
-									})
+					
+					function showPosition(position) {
+						var pos = {lat:position.coords.latitude, long:position.coords.longitude}
+						function showError(message) {
+							alert(message);
+						}
+						if (element.innerText != "Appointment Started"){
+							$(async() => {
+								// change url to localhost:8000/api/v1/start_booking
+								// var serviceURL = 'http://localhost:5005/start_booking';
+								serviceURL = 'http://localhost:8000/api/v1/start_booking';
+								try {
+									const response =
+									await fetch(
+										serviceURL,
+										{
+											method: "POST",
+											headers: {"Content-Type" : "application/json"},
+											body: JSON.stringify({
+												bookingID: bid,
+												status: 'started',
+												location: pos
+											})
+										}
+									)
+									console.log(bid)
+								} catch (error) {
+									// Errors when calling the service; such as network error, 
+									// service offline, etc
+									showError
+									(error);                
+								} finally{
+									window.location.reload();
 								}
-							);
-						} catch (error) {
-							// Errors when calling the service; such as network error, 
-							// service offline, etc
-							showError
-							('Failed to start appointment, please try again');                
-						} 
-					});
-				}
-			})		
-		})
+							});
+						}else{
+							console.log("already started")
+						}
+					}
+				})		
+			}
 		</script>
 	</body>
 </html>
