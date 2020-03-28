@@ -122,7 +122,7 @@ def update_booking():
 
     try:
         db.session.commit()
-        return jsonify({"message": "Successfully updated record."}), 200
+        return jsonify({"message": "Successfully updated record.", "customerID": booking.customerID}), 200
     except:
         return jsonify({"message": "An error occurred while trying to update record."}), 500
 
