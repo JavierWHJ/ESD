@@ -317,7 +317,7 @@
 																							var bookingstatus = booking.status;
 																							var bookingservice = booking.service;
 																							if(!bookingservice){
-																								bookingservice = "-";
+																								bookingservice = "General";
 																							}
 
 																							doctorprofile = 
@@ -333,18 +333,26 @@
 
 																							bookinginfo = 
 																							"<td>"+date+"<span class='d-block text-info'>"+time+"</span></td>"+
-																							"<td><center>"+bookingservice+"</center></td>"+
+																							"<td>"+bookingservice+"</td>"+
 																							"<td><center>$"+bookingprice+"</center></td>";
 
-																							if(bookingstatus=="booked" || bookingstatus=="started"){
+																							if((bookingstatus.toLowerCase()=="booked") ||( bookingstatus.toLowerCase()=="started")){
 																								action=
 																									"<td><span class='badge badge-pill bg-success-light'>Confirm</span></td>"+
 																									
 																								"</tr>";
 
 																							}
+
+																							if(bookingstatus.toLowerCase()=="completed"){
+																								action=
+																									"<td><span class='badge badge-pill bg-info-light'>Completed</span></td>"+
+																									
+																								"</tr>";
+
+																							}
 																							
-																							if(bookingstatus=="unbooked"){
+																							if(bookingstatus.toLowerCase()=="unbooked"){
 																								action=
 																									"<td><span class='badge badge-pill bg-warning-light'>Pending</span></td>"+
 																									
