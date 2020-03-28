@@ -82,7 +82,7 @@ insert into customers values
 
 use doctors;
 insert into doctors values
-	('d1', 'doctor1', 'doctor1@gmail.com', 50.00, 'Male', '12345678', '169036', 'Flu'),
+	('d1', 'doctor1', 'doctor1@gmail.com', 50.00, 'Male', '12345678', '169608', 'Flu'),
     ('d2', 'doctor2', 'doctor2@gmail.com', 150.00, 'Male', '12345678', '238864', 'Flu'),
     ('d3', 'doctor3', 'doctor3@gmail.com', 250.00, 'Female', '12345678', '178903', 'Flu');
     
