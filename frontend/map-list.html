@@ -349,7 +349,7 @@
 			function initMap() {
 				map = new google.maps.Map(document.getElementById('map_listing'), {
 					center: {lat: 1.286498854, lng: 103.841163302}, 
-					zoom: 6
+					zoom: 12
 				});
 				infoWindow = new google.maps.InfoWindow;
 				// Try HTML5 geolocation.
@@ -361,7 +361,7 @@
 						};
 						
 						infoWindow.setPosition(pos);
-						infoWindow.setContent('Location found.');
+						infoWindow.setContent('Your current location');
 						infoWindow.open(map);
 						map.setCenter(pos);
 					}, function() {
@@ -385,7 +385,27 @@
 		<!-- <script src="js\map_listing.js"></script> -->
 		<script src="js\infobox.js"></script>
 
-		
+		<script>
+			function onHtmlClick(address){
+				var a = address.toString();
+				console.log(a)
+				var geocoder = new google.maps.Geocoder();
+				geocoder.geocode({ 'address': address.toString()}, function(results, status) {
+					console.log(status)
+					if (status == google.maps.GeocoderStatus.OK) {
+						var latitude = results[0].geometry.location.lat();
+						var longitude = results[0].geometry.location.lng();
+						pos = {
+							lat: latitude,
+							lng: longitude
+						}
+						infoWindow.setPosition(pos);
+						infoWindow.setContent("Doctor's Location");
+						infoWindow.open(map)
+					} 
+				});
+			}
+		</script>
 		
 	</body>
 </html>
