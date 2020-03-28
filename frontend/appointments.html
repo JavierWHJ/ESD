@@ -147,9 +147,6 @@
 							<p class="contact-info-header"> +65 1234 5678</p>
 						</div>
 					</li>
-					<li class="nav-item">
-						<a class="nav-link header-login" href="login.html">login / Signup </a>
-					</li>
 						
 					<!-- User Menu -->
 					<li class="nav-item dropdown has-arrow logged-item">
@@ -198,7 +195,7 @@
 											<h3>Dr. Darren Elder</h3>
 											
 											<div class="patient-details">
-												<h5 class="mb-0">BDS, MDS - Oral & Maxillofacial Surgery</h5>
+												<h5 class="mb-0">BDS, MDS - Geriatric Medicine</h5>
 											</div>
 										</div>
 									</div>
@@ -296,8 +293,9 @@
 																serviceURL, { method: 'GET' }
 															);
 															const data = await response.json();
-															var customer = data; 
-															var image = "assets/img/patients/patient.jpg";
+															var customer = data;
+															var patientimg = "patient" + customerid[1];
+															var image = "assets/img/patients/" + patientimg +".jpg";
 
 															
 															appointmentlist = "<div class='appointment-list'>" +
