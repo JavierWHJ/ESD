@@ -182,10 +182,10 @@
 								<div class="card-body">
 									<div class="booking-doc-info">
 										<a href="doctor-profile.html" class="booking-doc-img">
-											<img src="assets\img\doctors\doctor-thumb-02.jpg" alt="User Image">
 										</a>
 										<div class="booking-info">
-											<h4><a href="doctor-profile.html">Dr. Darren Elder</a></h4>
+											<h4><a href="doctor-profile.html" id='docName'></a></h4>
+											<h4>Doctor ID: #<span id='doctorID'></span></h4>
 											<div class="rating">
 												<i class="fas fa-star filled"></i>
 												<i class="fas fa-star filled"></i>
@@ -194,12 +194,12 @@
 												<i class="fas fa-star"></i>
 												<span class="d-inline-block average-rating">35</span>
 											</div>
-											<p class="text-muted mb-0"><i class="fas fa-map-marker-alt"></i> Newyork, USA</p>
+											<p class="text-muted mb-0"><i class="fas fa-map-marker-alt"></i> Singapore</p>
 										</div>
 									</div>
 								</div>
 							</div>
-							<div class="row">
+							<!-- <div class="row">
 								<div class="col-12 col-sm-4 col-md-6">
 									<h4 class="mb-1">11 November 2019</h4>
 									<p class="text-muted">Monday</p>
@@ -211,7 +211,7 @@
 										<i class="fas fa-chevron-down ml-2"></i>
 									</div>
 								</div>
-                            </div>
+                            </div> -->
 							<!-- Schedule Widget -->
 							<div class="card booking-schedule schedule-widget">
 							
@@ -369,7 +369,7 @@
 							
 							<!-- Submit Section -->
 							<div class="submit-section proceed-btn text-right">
-								<a href="checkout.html" class="btn btn-primary submit-btn">Proceed to Pay</a>
+								<a href="checkout.html" class="btn btn-secondary submit-btn disabled">Proceed to Pay</a>
 							</div>
 							<!-- /Submit Section -->
 							
@@ -459,6 +459,93 @@
 		
 		<!-- Custom JS -->
 		<script src="assets\js\script.js"></script>
-		
+		<script>
+			$('#docName').ready(function(){
+				
+				const queryString = window.location.search;
+				const urlParams = new URLSearchParams(queryString);
+				doctorname = urlParams.get('docName')
+				doctorID = urlParams.get('doctorID')
+				$('#docName').append("Dr. " + doctorname)
+				$('#doctorID').append(doctorID)
+				$(".booking-doc-img").append('<img src="assets\\img\\doctors\\' + doctorname + '.jpg" alt="User Image">')
+				$(async() => {
+					var serviceURL = 'http://localhost:8000/api/v1/booking/did='+doctorID;
+					try{
+						const response = await fetch(
+							serviceURL,
+							{
+								method: "GET"
+							}
+						)
+						const data = await response.json()
+						console.log(data)
+						element = document.getElementsByClassName('clearfix')[0]
+						var x = "<li>"
+						var days = [];
+						var nameDay = ['Sun','Mon','Tues','Wed','Thurs','Fri','Sat'];
+						var monthNames = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
+						var found = []
+						data.bookings.forEach(function(row){
+							var dateStart = new Date(row.datestart)
+							var dateEnd = new Date(row.dateend)
+							if (jQuery.inArray(dateStart,days) == -1 & jQuery.inArray(dateStart.getDay(),found) == -1){
+								days.push(dateStart)
+								found.push(dateStart.getDay());
+							}
+							x += `
+							
+								<a class="timing" href="#" id=${row.bookingID}>
+									<span>${dateStart.getUTCHours()}:${dateStart.getUTCMinutes()}0  - ${dateEnd.getUTCHours()}:${dateEnd.getUTCMinutes()}0 </span>
+								</a>
+							
+							`
+						});
+						console.log(days)
+						console.log('found' , found)
+						x += '</li>'
+						dayElement = document.getElementsByClassName('day-slot')[0]
+						var y = '<ul>'
+						console.log(days)
+						days.forEach(function(day) {
+							console.log(nameDay[day])
+							y += `
+							<li>
+								<span>${nameDay[day.getDay()]}</span>
+								<span class="slot-date">${day.getDate()} ${monthNames[day.getMonth()]} <small class="slot-year">2020</small></span>
+							</li>
+							`
+						});
+						y+='</ul>'
+						
+						$('.clearfix')[0].innerHTML = x;
+						$('.day-slot')[0].innerHTML = y
+						$('.timing').click(function(){
+							console.log('click')
+							$('.selected').removeClass('selected');
+							$(this).toggleClass('selected');
+							$('.submit-btn').removeClass('btn-secondary')
+							$('.submit-btn').removeClass('disabled')
+							$('.submit-btn').addClass('btn-primary')
+						})
+
+						// $('.submit-btn').toggleClass("btn btn-secondary submit-btn disabled")
+						$('.submit-btn').click(function(){
+							if (document.getElementsByClassName('selected').length == 0){
+								return false
+							}else{
+
+								var selectedBooking = $('.selected')[0].id
+								href = `checkout.html?doctorid=${doctorID}&bookingid=${selectedBooking}`
+								this.setAttribute('href', href)
+
+							}
+						})
+					}catch (e){
+
+					}
+				});
+			})
+		</script>
 	</body>
 </html>
