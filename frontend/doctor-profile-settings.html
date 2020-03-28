@@ -31,6 +31,8 @@
 		<link href="css\menu.css" rel="stylesheet">
 		<link href="css\vendors.css" rel="stylesheet">
 		<link href="css\icon_fonts\css\all_icons_min.css" rel="stylesheet">
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 		
 		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 		<!--[if lt IE 9]>
@@ -97,22 +99,22 @@
 					<li class="nav-item dropdown has-arrow logged-item">
 						<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
 							<span class="user-img">
-								<img class="rounded-circle" src="assets\img\doctors\doctor-thumb-02.jpg" width="31" alt="Darren Elder">
+								<img class="rounded-circle" width="31" alt="Darren Elder" id="userimage1">
 							</span>
 						</a>
 						<div class="dropdown-menu dropdown-menu-right">
 							<div class="user-header">
 								<div class="avatar avatar-sm">
-									<img src="assets\img\doctors\doctor-thumb-02.jpg" alt="User Image" class="avatar-img rounded-circle">
+									<img alt="User Image" class="avatar-img rounded-circle" id="userimage2">
 								</div>
 								<div class="user-text">
-									<h6>Darren Elder</h6>
+									<h6 class="username">Darren Elder</h6>
 									<p class="text-muted mb-0">Doctor</p>
 								</div>
 							</div>
 							<a class="dropdown-item" href="doctor-dashboard.html">Dashboard</a>
 							<a class="dropdown-item" href="doctor-profile-settings.html">Profile Settings</a>
-							<a class="dropdown-item" href="login.html">Logout</a>
+							<a class="dropdown-item" href="doctor-login.html">Logout</a>
 						</div>
 					</li>
 					<!-- /User Menu -->
@@ -134,13 +136,13 @@
 								<div class="widget-profile pro-widget-content">
 									<div class="profile-info-widget">
 										<a href="#" class="booking-doc-img">
-											<img src="assets\img\doctors\doctor-thumb-02.jpg" alt="User Image">
+											<img alt="User Image" id="userimage3">
 										</a>
 										<div class="profile-det-info">
-											<h3>Dr. Darren Elder</h3>
+											<h3 class="username">name</h3>
 											
 											<div class="patient-details">
-												<h5 class="mb-0">BDS, MDS - Geriatric Medicine</h5>
+												<h5 class="mb-0" id="services">BDS, MDS - Geriatric Medicine</h5>
 											</div>
 										</div>
 									</div>
@@ -191,7 +193,7 @@
 												</a>
 											</li>
 											<li>
-												<a href="index.html">
+												<a href="doctor-login.html">
 													<i class="fas fa-sign-out-alt"></i>
 													<span>Logout</span>
 												</a>
@@ -588,7 +590,44 @@
 
 			</div>		
 			<!-- /Page Content -->
-   
+			<script>
+				if(sessionStorage.getItem('sessionid') != null){
+					$(document).ready(pageReady());
+					function pageReady(){
+						var serviceURL = "http://127.0.0.1:8000/api/v1/doctor";
+						$(async() => {
+							try {
+								const response =
+								await fetch(
+									serviceURL, { method: 'GET' }
+								);
+								const data = await response.json();
+								var doctors = data.doctors; 
+								if (!doctors || !doctors.length) {
+									showError('No doctor!')
+								} else {
+									for (const doctor of doctors) {
+										var doctorid = doctor.doctorID;
+										if(sessionStorage.getItem('sessionid') == doctorid){
+											console.log(sessionStorage.getItem('sessionid'));
+											$(".username").text(doctor.name);
+											var imgname = "doctor" + doctorid[1];
+											$("#userimage1").attr("src","assets/img/doctors/"+ imgname + ".jpg");
+											$("#userimage2").attr("src","assets/img/doctors/"+ imgname + ".jpg");
+											$("#userimage3").attr("src","assets/img/doctors/"+ imgname + ".jpg");
+											$("#services").text(doctor.services);
+										}
+									}
+								}
+						} catch (error) {
+							('There is a problem retrieving customer data, please try again later.<br />'+error);
+						} 
+							});
+						}
+				} else{
+					window.location.replace("doctor-login.html");
+				}
+			</script>
 			<!-- /white_bg -->
 			<div class="container">
 				<footer>

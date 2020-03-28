@@ -130,7 +130,7 @@
 					<!-- /User Menu -->
 				</ul>
 				<script>
-					if(sessionStorage.getItem('sessionid') != null){
+					if(sessionStorage.getItem('sessionid') != null && sessionStorage.getItem('sessionid')[0] == 'c'){
 						$(document).ready(pageReady());
 						$("#loginheader").hide();
 						function pageReady(){
