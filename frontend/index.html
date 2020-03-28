@@ -205,6 +205,9 @@
 				event.preventDefault();
 				var serviceURL = "http://localhost:8000/api/v1/doctor";
 				var searchvalue = $('#searchval').val();
+				if(searchvalue == null || searchvalue.length == 0){
+					window.location.replace("map-list.html");
+				}
 				$(async() => {
 					try {
 						const response = await fetch(
