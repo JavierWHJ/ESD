@@ -388,10 +388,8 @@
 		<script>
 			function onHtmlClick(address){
 				var a = address.toString();
-				console.log(a)
 				var geocoder = new google.maps.Geocoder();
 				geocoder.geocode({ 'address': address.toString()}, function(results, status) {
-					console.log(status)
 					if (status == google.maps.GeocoderStatus.OK) {
 						var latitude = results[0].geometry.location.lat();
 						var longitude = results[0].geometry.location.lng();
