@@ -537,6 +537,7 @@ function onReady(){
 							headers: {"Content-Type" : "application/json"},
 							mode: 'no-cors',
                             body: JSON.stringify({
+								doctorID: sessionStorage.getItem('sessionid'),
                                 bookingID: bid,
                                 status: "started",
                                 location: pos
