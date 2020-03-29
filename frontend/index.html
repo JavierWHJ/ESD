@@ -105,29 +105,30 @@
 					<li class="nav-item" id="loginheader">
 						<a class="nav-link header-login" href="login.html">login / Signup </a>
 					</li>
-					<!-- User Menu -->
-					<li class="nav-item dropdown has-arrow logged-item" id="usercircle">
-						<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-							<span class="user-img">
-								<img class="rounded-circle" src="assets\img\patients\patient.jpg" width="31" alt="Ryan Taylor" id="userimage1">
-							</span>
-						</a>
-						<div class="dropdown-menu dropdown-menu-right">
-							<div class="user-header">
-								<div class="avatar avatar-sm">
-									<img src="assets\img\patients\patient.jpg" alt="User Image" class="avatar-img rounded-circle" id="userimage2">
+						<!-- User Menu -->
+						<li class="nav-item dropdown has-arrow logged-item" id="usercircle">
+							<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+								<span class="user-img">
+									<img class="rounded-circle" src="assets\img\patients\patient.jpg" width="31" alt="Ryan Taylor" id="userimage1">
+								</span>
+							</a>
+							<div class="dropdown-menu dropdown-menu-right">
+								<div class="user-header">
+									<div class="avatar avatar-sm">
+										<img src="assets\img\patients\patient.jpg" alt="User Image" class="avatar-img rounded-circle" id="userimage2">
+									</div>
+									<div class="user-text">
+										<h6 class="username">name</h6>
+										<p class="text-muted mb-0">Patient</p>
+									</div>
 								</div>
-								<div class="user-text">
-									<h6 id="username">name</h6>
-									<p class="text-muted mb-0">Patient</p>
-								</div>
+								<a class="dropdown-item" href="patient-dashboard.html">Dashboard</a>
+								<a class="dropdown-item" href="notification-patient.html">Notifications</a>
+								<a class="dropdown-item" href="profile-settings.html">Profile Settings</a>
+								<a class="dropdown-item" href="login.html">Logout</a>
 							</div>
-							<a class="dropdown-item" href="patient-dashboard.html">Dashboard</a>
-							<a class="dropdown-item" href="profile-settings.html">Profile Settings</a>
-							<a class="dropdown-item" href="login.html">Logout</a>
-						</div>
-					</li>
-					<!-- /User Menu -->
+						</li>
+						<!-- /User Menu -->
 				</ul>
 				<script>
 					if(sessionStorage.getItem('sessionid') != null && sessionStorage.getItem('sessionid')[0] == 'c'){
