@@ -31,7 +31,7 @@ def start_booking():
         try:
             r = r.json()
             customerID = r['customerID']
-            doctorID = r['doctorID']
+            doctorID = booking['doctorID']
             
             # retrieve doctor's current location
             docLocation = f"{booking['location']['lat']},{booking['location']['long']}" 
