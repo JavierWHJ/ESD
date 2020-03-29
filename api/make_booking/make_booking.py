@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 CORS(app)
 bookingURL = "http://booking:5000/bookings"
-
+notificationURL = "http://notification:5000/notifications"
 
 def send_to_booking(data):
     # data is json {"booking_id" ,  "customer_id" , "status" : "booked", "service"}
@@ -26,8 +26,8 @@ def send_to_booking(data):
 def make_booking():
     # booking and notification
     # no need entire booking object. bookingid, customerid, doctorid, status, service, notificationID
-    data = request.get_json()
-    booking = json.loads(json.dumps(data, default=str))
+    data = request.get_data()
+    booking = json.loads(data)
     r = requests.put(bookingURL, json=booking)
     if r.status_code != 200:
         return jsonify({
@@ -35,7 +35,7 @@ def make_booking():
         }), 500
     else:
         # no error so send notification to doctor
-        doctorID = data['doctorID']
+        doctorID = booking['doctorID']
         hostname = "host.docker.internal"  # change to host.docker.internal before building image
         port = 5672  # port of rabbitmq
         connection = pika.BlockingConnection(pika.ConnectionParameters(host=hostname, port=port))
@@ -45,8 +45,13 @@ def make_booking():
         exchangename="notification_topic"
         channel.exchange_declare(exchange=exchangename, exchange_type='topic')
 
+        r = requests.get(notificationURL).json()
+        if len(r['notifications']) == 0:
+            nid = 1
+        else:
+            nid = r['notifications'][-1]['nid'] + 1
         notification = {
-            "nid" : data['nid'],
+            "nid" : nid,
             "userid" : doctorID,
             "message" : "You have a new booking"
         }
