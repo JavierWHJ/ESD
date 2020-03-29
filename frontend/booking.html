@@ -486,16 +486,24 @@
 						var nameDay = ['Sun','Mon','Tues','Wed','Thurs','Fri','Sat'];
 						var monthNames = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
 						var found = []
+						var currDate = ''
 						data.bookings.forEach(function(row){
 							var dateStart = new Date(row.datestart)
 							var dateEnd = new Date(row.dateend)
 
 							var date = dateStart.toLocaleDateString('en-GB')					
+							if (currDate == ''){
+								currDate = date
+							}
 							var starttime = dateStart.toLocaleTimeString('en-US')
 							var endtime = dateEnd.toLocaleTimeString('en-US')
 							if (jQuery.inArray(dateStart,days) == -1 & jQuery.inArray(dateStart.getDay(),found) == -1){
 								days.push(dateStart)
 								found.push(dateStart.getDay());
+							}
+							if (currDate != date){
+								x += '</li><li>'
+								currDate = date
 							}
 							if (row.status == 'Unbooked'){
 								x += `
@@ -507,7 +515,7 @@
 						});
 						console.log(days)
 						console.log('found' , found)
-						x += '</li>'
+						x += '</>'
 						dayElement = document.getElementsByClassName('day-slot')[0]
 						var y = '<ul>'
 						console.log(days)
