@@ -31,6 +31,7 @@ def start_booking():
         try:
             r = r.json()
             customerID = r['customerID']
+            doctorID = r['doctorID']
             
             # retrieve doctor's current location
             docLocation = f"{booking['location']['lat']},{booking['location']['long']}" 
@@ -75,7 +76,8 @@ def start_booking():
 
             notification = {
                 "nid" : nid,
-                "userid" : customerID,
+                "sender": doctorID,
+                "receiver" : customerID,
                 "message" : message
             }
             
@@ -123,13 +125,15 @@ def stop_booking():
         # notification to customer
         notificationCustomer= {
             "nid" : nid,
-            "userid" : customerID,
+            "sender": doctorID,
+            "recevier" : customerID,
             "message" : "Appointment has ended."
         }
         
         notificationDoctor= {
             "nid" : nid+1,
-            "userid" : doctorID,
+            "sender" : doctorID,
+            "receiver": doctorID,
             "message" : "Appointment has ended."
         }
         

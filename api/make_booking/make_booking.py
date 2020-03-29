@@ -36,6 +36,7 @@ def make_booking():
     else:
         # no error so send notification to doctor
         doctorID = booking['doctorID']
+        customerID = booking['customerID']
         hostname = "host.docker.internal"  # change to host.docker.internal before building image
         port = 5672  # port of rabbitmq
         connection = pika.BlockingConnection(pika.ConnectionParameters(host=hostname, port=port))
@@ -52,8 +53,9 @@ def make_booking():
             nid = r['notifications'][-1]['nid'] + 1
         notification = {
             "nid" : nid,
-            "userid" : doctorID,
-            "message" : "You have a new booking"
+            "sender" : customerID,
+            "receiver": doctorID,
+            "message" : "You have a new booking created",
         }
         notification = json.dumps(notification, default=str)
         channel.basic_publish(exchange=exchangename, routing_key="booking.notification", body=notification, properties=pika.BasicProperties(delivery_mode = 2))
