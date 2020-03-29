@@ -226,12 +226,13 @@
 																			.append("<label>"+message+"</label>");
 																	}
 																	$(async() => {   
+																		var customerid = sessionStorage.getItem('sessionid');
 																		//currently hardcoded c1 (have to change)       
-																		var serviceURL = "http://127.0.0.1:8000/api/v1/booking/cid=c1";
-																		// var customerid = ;
-																		// if (customerid && customerid.length) {
-																		// 	serviceURL += customerid;
-																		// }
+																		var serviceURL = "http://127.0.0.1:8000/api/v1/booking/";
+																			
+																		if (customerid && customerid.length) {
+																			serviceURL += "cid="+customerid;
+																		}
 																		try {
 																			const response =
 																			await fetch(
