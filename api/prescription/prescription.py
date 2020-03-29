@@ -1,16 +1,16 @@
 from flask import Flask, jsonify, request
 from flask_sqlalchemy import SQLAlchemy
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 import json
 from os import environ
 app = Flask(__name__)
+CORS(app, support_credentials=True)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = environ.get('dbURL')
 # app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+mysqlconnector://is213@localhost:8889/prescriptions"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
-CORS(app)
 
 
 class Prescription(db.Model):
@@ -57,13 +57,12 @@ def add_prescription():
 
 
 @app.route("/prescription", methods=['DELETE'])
+@cross_origin(supports_credentials=True)
 def delete_prescription():
     data = request.get_json()
-    cid = data['customerID']
-    did = data['doctorID']
     bid = data['bookingID']
-    prescription = Prescription.query.filter_by(
-        bookingID=bid, customerID=cid, doctorID=did).first()
+    print(bid)
+    prescription = Prescription.query.filter_by(bookingID=bid).first()
 
     try:
         db.session.delete(prescription)
@@ -74,6 +73,7 @@ def delete_prescription():
 
 
 @app.route("/prescription", methods=['PUT'])
+@cross_origin(supports_credentials=True)
 def update_prescription():
     data = request.get_json()
     # print(data)
