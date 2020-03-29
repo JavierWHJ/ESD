@@ -489,17 +489,21 @@
 						data.bookings.forEach(function(row){
 							var dateStart = new Date(row.datestart)
 							var dateEnd = new Date(row.dateend)
+
+							var date = dateStart.toLocaleDateString('en-GB')					
+							var starttime = dateStart.toLocaleTimeString('en-US')
+							var endtime = dateEnd.toLocaleTimeString('en-US')
 							if (jQuery.inArray(dateStart,days) == -1 & jQuery.inArray(dateStart.getDay(),found) == -1){
 								days.push(dateStart)
 								found.push(dateStart.getDay());
 							}
-							x += `
-							
-								<a class="timing" href="#" id=${row.bookingID}>
-									<span>${dateStart.getUTCHours()}:${dateStart.getUTCMinutes()}0  - ${dateEnd.getUTCHours()}:${dateEnd.getUTCMinutes()}0 </span>
-								</a>
-							
-							`
+							if (row.status == 'Unbooked'){
+								x += `
+									<a class="timing" href="#" id=${row.bookingID}>
+										<span>${starttime} - ${endtime}</span>
+									</a>
+								`
+							}
 						});
 						console.log(days)
 						console.log('found' , found)
