@@ -181,7 +181,6 @@
 										<i class="fas fa-check"></i>
 										<h3>Appointment booked Successfully!</h3>
 										<p>Appointment booked with <strong>Dr. Darren Elder</strong><br> on <strong>12 Nov 2019 5:00PM to 6:00PM</strong></p>
-										<a href="invoice-view.html" class="btn btn-primary view-inv-btn">View Invoice</a>
 									</div>
 								</div>
 							</div>
@@ -270,5 +269,46 @@
 		<!-- Custom JS -->
 		<script src="assets\js\script.js"></script>
 		
+		<script>
+			var name = ''
+			var doctorID = ''
+			var bookingID = ''
+			$('.success-page-cont').ready(function(){
+				const queryString = window.location.search;
+				const urlParams = new URLSearchParams(queryString);
+				bookingID = urlParams.get('bookingID')
+				doctorID = urlParams.get('doctorID')
+
+				$(async() =>{
+					var doctorURL = 'http://localhost:8000/api/v1/doctor/'+doctorID
+					var bookingURL = 'http://localhost:8000/api/v1/booking/'+bookingID
+					try{
+						var response = await fetch(
+							doctorURL, {method: "GET"}
+						)
+						var data = await response.json()
+						cost = data.price
+						name = data.name
+						
+						response = await fetch(
+							bookingURL, {method: "GET"}
+						)
+						data = await response.json()
+						var dateStartObj = new Date(data.datestart)
+						var dateEndObj = new Date(data.dateend)
+						var date = dateStartObj.toLocaleDateString('en-GB')					
+						var starttime = dateStartObj.toLocaleTimeString('en-US')
+						var endtime = dateEndObj.toLocaleTimeString('en-US')
+						
+						var apptText = `Appointment booked with <strong>Dr. ${name}</strong> <br> on <strong> ${date} ${starttime} to ${endtime}`
+						$("div.success-cont p")[0].innerHTML = apptText
+
+					}catch (e){
+
+					}
+				})
+			})
+
+		</script>
 	</body>
 </html>
