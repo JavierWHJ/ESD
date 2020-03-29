@@ -180,11 +180,11 @@
 											<!-- Credit Card Payment -->
 											<div class="payment-list">
 												<label class="payment-radio credit-card-option">
-													<input type="radio" name="radio" checked="">
+													<input type="radio" name="radio" id='cc'>
 													<span class="checkmark"></span>
 													Credit card
 												</label>
-												<div class="row">
+												<div class="row" id='cc-row'>
 													<div class="col-md-6">
 														<div class="form-group card-label">
 															<label for="card_name">Name on Card</label>
@@ -222,63 +222,23 @@
 											<!-- Paypal Payment -->
 											<div class="payment-list">
 												<label class="payment-radio paypal-option">
-													<input type="radio" name="radio">
+													<input type="radio" name="radio" id='paypal' checked>
 													<span class="checkmark"></span>
 													Paypal
 												</label>
 												<div id="paypal-button"></div>
 												<script src="https://www.paypalobjects.com/api/checkout.js"></script>
-												<script>
-												paypal.Button.render({
-													// Configure environment
-													env: 'sandbox',
-													client: {
-													sandbox: 'demo_sandbox_client_id',
-													production: 'demo_production_client_id'
-													},
-													// Customize button (optional)
-													locale: 'en_US',
-													style: {
-													size: 'medium',
-													color: 'silver',
-													shape: 'pill',
-													label: 'paypal',
-													tagline: 'false',
-													},
-
-													// Enable Pay Now checkout flow (optional)
-													commit: true,
-
-													// Set up a payment
-													payment: function(data, actions) {
-													return actions.payment.create({
-														transactions: [{
-														amount: {
-															total: '0.01',
-															currency: 'SGD'
-														}
-														}]
-													});
-													},
-													// Execute the payment
-													onAuthorize: function(data, actions) {
-													return actions.payment.execute().then(function() {
-														// Show a confirmation message to the buyer
-														window.alert('Thank you for your purchase!');
-													});
-													}
-												}, '#paypal-button');
-												</script>
+												
 											</div>
 											<!-- /Paypal Payment -->
 											
 											<!-- Terms Accept -->
-											<div class="terms-accept">
+											<!-- <div class="terms-accept">
 												<div class="custom-checkbox">
 												   <input type="checkbox" id="terms_accept">
 												   <label for="terms_accept">I have read and accept <a href="#">Terms &amp; Conditions</a></label>
 												</div>
-											</div>
+											</div> -->
 											<!-- /Terms Accept -->
 											
 											<!-- Submit Section -->
@@ -478,11 +438,26 @@
 		<script src="assets\js\script.js"></script>
 		
 		<script>
+			var cost = ''
 			$('.card-body').ready(function(){
+				$("#cc-row").hide()
 				const queryString = window.location.search;
 				const urlParams = new URLSearchParams(queryString);
 				const bookingID = urlParams.get('bookingid')
 				const doctorID = urlParams.get('doctorid')
+
+				// checkbox options display
+				$('.payment-radio').click(function(){
+					if ($('#cc')[0].checked == true){
+						$('#paypal-button').hide()
+						$('#cc-row').show()
+
+					}else{
+						$('#paypal-button').show()
+						$('#cc-row').hide()
+					}
+					
+				})	
 
 				// render checkout details
 				$(async() =>{
@@ -493,8 +468,7 @@
 							doctorURL, {method: "GET"}
 						)
 						var data = await response.json()
-						var cost = data.price
-						console.log(cost)
+						cost = data.price
 						var name = data.name
 						
 						response = await fetch(
@@ -504,7 +478,6 @@
 						var dateObj = new Date(data.datestart)
 						var date = dateObj.toLocaleDateString('en-GB')					
 						var time = dateObj.toLocaleTimeString('en-US')
-						console.log(date)
 
 						$(".booking-doc-img img")[0].setAttribute('src',`assets\\img\\doctors\\${name}.jpg`)
 						$(".booking-info h4 a")[0].innerText = name
@@ -526,6 +499,52 @@
 					
 				});
 			})
+		</script>
+
+		<script>
+			paypal.Button.render({
+				// Configure environment
+				env: 'sandbox',
+				client: {
+				sandbox: 'demo_sandbox_client_id',
+				production: 'demo_production_client_id'
+				},
+				// Customize button (optional)
+				locale: 'en_US',
+				style: {
+				size: 'medium',
+				color: 'silver',
+				shape: 'pill',
+				label: 'paypal',
+				tagline: 'false',
+				},
+
+				// Enable Pay Now checkout flow (optional)
+				commit: true,
+
+				// Set up a payment
+				payment: function(data, actions) {
+				return actions.payment.create({
+					transactions: [{
+					amount: {
+						total: cost,
+						currency: 'SGD'
+					}
+					}], redirect_urls: {
+							return_url: 'http://localhost:8888/booking-success.html',
+							cancel_url: window.location.href																													
+					}
+				});
+				},
+				// Execute the payment
+				onAuthorize: function(data, actions) {
+				return actions.payment.execute().then(function() {
+					// Show a confirmation message to the buyer
+					// window.alert('Thank you for your purchase!');
+					return actions.redirect()
+				});
+				}
+			}, '#paypal-button');
 		</script>
 	</body>
 </html>
