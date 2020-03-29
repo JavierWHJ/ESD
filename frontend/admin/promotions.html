@@ -18,8 +18,20 @@
         <link rel="stylesheet" href="assets\css\feathericon.min.css">
 		
 		<!-- Main CSS -->
-        <link rel="stylesheet" href="assets\css\style.css">
+		<link rel="stylesheet" href="assets\css\style.css">
 		
+		<script 
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		
+		<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+		integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+		crossorigin="anonymous"></script>
+		
+		<script 
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+		integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+		crossorigin="anonymous"></script>
 		<!--[if lt IE 9]>
 			<script src="assets/js/html5shiv.min.js"></script>
 			<script src="assets/js/respond.min.js"></script>
@@ -215,22 +227,15 @@
 										<h4 class="card-title">Facebook Posts</h4>
 									</div>
 									<div class="card-body">
-										<form action="#">
+										<form action="" method="POST">
 									
 											<div class="form-group">
-												<label>Post Message</label>
-												<input type="text" class="form-control">
+												<label>Post on <a href = "https://www.facebook.com/FastDocSG/"> FastDoc Facebook Page </a></label>
+												<input type="text" id="message" name="message" class="form-control">
 											</div>
-											<div class="form-group">
-												<label>Photos</label>
-												<input type="file" class="form-control">
-												<small class="text-secondary">Recommended image size is <b>150px x 150px</b></small>
-											</div>
-											<div class="form-group mb-0">
-												<label>Link</label>
-												<input type="text" class="form-control">
-											</div>
-											
+
+											<input type = "submit" id="submitFB" value="Submit">
+						
 										</form>
 									</div>
 								</div>
@@ -244,7 +249,50 @@
 			</div>
 			<!-- /Page Wrapper -->
 		
-        </div>
+		</div>
+		<script>
+			
+			function showError(message) {
+		
+					$('.card-body')
+						.append("<label>"+message+"</label>");
+				}
+
+
+			$("#submitFB").click(async (event) => {  
+						//Prevents screen from refreshing when submitting  
+						event.preventDefault();
+						var message = $("#message").val();
+
+						console.log(message);
+
+						// Change serviceURL to your own
+						var serviceURL = "http://localhost:8000/api/v1/promotion";
+						// var serviceURL = "http://localhost:5000/promotion";
+						console.log(serviceURL);
+				
+						try {
+
+							const response = await fetch(
+								serviceURL, {
+								method: 'POST',
+								mode: "no-cors",
+								headers: { "Content-Type": "application/json" },
+								body: JSON.stringify({ message: message})
+								}
+								
+
+							);
+							const data = await response;
+							console.log(data);  
+						
+							}catch (error){
+								showError('Please check your token or network.');
+							}
+							});
+   
+
+							</script>
 		<!-- /Main Wrapper -->
 		
 		<!-- jQuery -->
