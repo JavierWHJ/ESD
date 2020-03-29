@@ -218,7 +218,8 @@
 												</div>
 											</div>
 											<!-- /Credit Card Payment -->
-											
+											<input type="hidden" name="bookingID" id='bookingID'>
+											<input type="hidden" name="doctorID" id='doctorID'>
 											<!-- Paypal Payment -->
 											<div class="payment-list">
 												<label class="payment-radio paypal-option">
@@ -227,7 +228,8 @@
 													Paypal
 												</label>
 												<div id="paypal-button"></div>
-												<script src="https://www.paypalobjects.com/api/checkout.js"></script>
+												<script src="https://www.paypalobjects.com/api/checkout.js" data-order-id="2VW94544JM6797511"></script>
+												
 												
 											</div>
 											<!-- /Paypal Payment -->
@@ -439,12 +441,15 @@
 		
 		<script>
 			var cost = ''
+			var name = ''
+			var doctorID = ''
+			var bookingID = ''
 			$('.card-body').ready(function(){
 				$("#cc-row").hide()
 				const queryString = window.location.search;
 				const urlParams = new URLSearchParams(queryString);
-				const bookingID = urlParams.get('bookingid')
-				const doctorID = urlParams.get('doctorid')
+				bookingID = urlParams.get('bookingid')
+				doctorID = urlParams.get('doctorid')
 
 				// checkbox options display
 				$('.payment-radio').click(function(){
@@ -469,7 +474,7 @@
 						)
 						var data = await response.json()
 						cost = data.price
-						var name = data.name
+						name = data.name
 						
 						response = await fetch(
 							bookingURL, {method: "GET"}
@@ -500,13 +505,41 @@
 				});
 			})
 		</script>
+		<script>
+			$('.submit-btn').click(function(){
+				serviceURL = 'http://localhost:8000/api/v1/make_booking';
+				$("#bookingID")[0].setAttribute('value',bookingID)
+				$("#doctorID")[0].setAttribute('value',doctorID)
+				$(async() => {
+					try{
+						response = await fetch(
+							serviceURL,
+							{
+								method: "POST",
+								headers: {"Content-Type": "application/json"},
+								body: JSON.stringify({
+									bookingID: bookingID,
+									customerID: sessionStorage.getItem('sessionid'),
+									status: "booked",
+									doctorID: doctorID
+								}),
+								mode: 'no-cors'
+							},
+						)
+						
+					} catch (e){
 
+					}
+				})
+			})
+
+		</script>
 		<script>
 			paypal.Button.render({
 				// Configure environment
 				env: 'sandbox',
 				client: {
-				sandbox: 'demo_sandbox_client_id',
+				sandbox: 'Ac8lu9ttTb0Sn19jSB0m2j754wlr-hjJvn06M6vknJ3cQbdOHAyOoIQhM1RhwxOtXP3Ke5edAc9v00w2',
 				production: 'demo_production_client_id'
 				},
 				// Customize button (optional)
@@ -526,12 +559,25 @@
 				payment: function(data, actions) {
 				return actions.payment.create({
 					transactions: [{
-					amount: {
-						total: cost,
-						currency: 'SGD'
+						amount: {
+							total: cost,
+							currency: 'SGD'
+						}, 
+						item_list: {
+							items: [
+								{
+								name: "FastDoc Doctor Booking Services",
+								description: 'Dr.' + name,
+								quantity: '1',
+								price: cost,
+								sku: doctorID,
+								currency: 'SGD'
+								}
+							]
+						}
 					}
-					}], redirect_urls: {
-							return_url: 'http://localhost:8888/booking-success.html',
+				], redirect_urls: {
+							return_url: `http://localhost:8888/booking-success.html?doctorID=${doctorID}&bookingID=${bookingID}`,
 							cancel_url: window.location.href																													
 					}
 				});
@@ -541,6 +587,25 @@
 				return actions.payment.execute().then(function() {
 					// Show a confirmation message to the buyer
 					// window.alert('Thank you for your purchase!');
+
+					serviceURL = 'http://localhost:8000/api/v1/make_booking';
+
+					$(async() => {
+						response = await fetch(
+							serviceURL,
+							{
+								method: "POST",
+								headers: {"Content-Type": "application/json"},
+								body: JSON.stringify({
+									bookingID: bookingID,
+									customerID: sessionStorage.getItem('sessionid'),
+									status: "booked",
+									doctorID: doctorID
+								}),
+								mode: 'no-cors'
+							},
+						)
+					})
 					return actions.redirect()
 				});
 				}
