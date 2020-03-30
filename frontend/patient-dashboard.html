@@ -307,25 +307,26 @@
 																							"<td>"+bookingservice+"</td>"+
 																							"<td><center>$"+bookingprice+"</center></td>";
 
-																							if((bookingstatus.toLowerCase()=="booked") ||( bookingstatus.toLowerCase()=="started")){
+																							if((bookingstatus.toLowerCase()=="booked")){
 																								action=
 																									"<td><span class='badge badge-pill bg-success-light'>Confirm</span></td>"+
 																									
 																								"</tr>";
 
-																							}
-
-																							if(bookingstatus.toLowerCase()=="completed"){
+																							}else if(bookingstatus.toLowerCase()=="completed"){
 																								action=
 																									"<td><span class='badge badge-pill bg-info-light'>Completed</span></td>"+
 																									
 																								"</tr>";
 
-																							}
-																							
-																							if(bookingstatus.toLowerCase()=="unbooked"){
+																							}else if(bookingstatus.toLowerCase()=="unbooked"){
 																								action=
 																									"<td><span class='badge badge-pill bg-warning-light'>Pending</span></td>"+
+																									
+																								"</tr>";
+																							}else{
+																								action=
+																									"<td><span class='badge badge-pill bg-success-light''>Ongoing Appointment</span></td>"+
 																									
 																								"</tr>";
 																							}
