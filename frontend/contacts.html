@@ -27,6 +27,8 @@
 	<!-- YOUR CUSTOM CSS -->
 	<link href="css\custom.css" rel="stylesheet">	
 
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
 </head>
 
 <body>
@@ -82,10 +84,72 @@
 					<p class="contact-info-header"> +65 1234 5678</p>
 				</div>
 			</li>
-			<li class="nav-item">
+			<li class="nav-item" id="loginheader">
 				<a class="nav-link header-login" href="login.html">login / Signup </a>
 			</li>
+				<!-- User Menu -->
+				<li class="nav-item dropdown has-arrow logged-item" id="usercircle">
+					<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+						<span class="user-img">
+							<img class="rounded-circle" width="31" id="userimage1">
+						</span>
+					</a>
+					<div class="dropdown-menu dropdown-menu-right">
+						<div class="user-header">
+							<div class="avatar avatar-sm">
+								<img src="assets\img\patients\patient.jpg" alt="User Image" class="avatar-img rounded-circle" id="userimage2">
+							</div>
+							<div class="user-text">
+								<h6 class="username">name</h6>
+								<p class="text-muted mb-0">Patient</p>
+							</div>
+						</div>
+						<a class="dropdown-item" href="patient-dashboard.html">Dashboard</a>
+						<a class="dropdown-item" href="notification-patient.html">Notifications</a>
+						<a class="dropdown-item" href="profile-settings.html">Profile Settings</a>
+						<a class="dropdown-item" href="login.html">Logout</a>
+					</div>
+				</li>
+				<!-- /User Menu -->
 		</ul>
+		<script>
+			if(sessionStorage.getItem('sessionid') != null && sessionStorage.getItem('sessionid')[0] == 'c'){
+				$(document).ready(pageReady());
+				$("#loginheader").hide();
+				function pageReady(){
+					var serviceURL = "http://127.0.0.1:8000/api/v1/customer";
+					$(async() => {
+						try {
+					const response =
+					await fetch(
+						serviceURL, { method: 'GET' }
+					);
+					const data = await response.json();
+					var customers = data.customers; 
+					if (!customers || !customers.length) {
+						showError('No customer!')
+					} else {
+						for (const customer of customers) {
+							var customerid = customer.customerID;
+							if(sessionStorage.getItem('sessionid') == customerid){
+								$("#usercircle").show();
+								$(".username").text(customer.name);
+								var imgname = "patient" + customerid[1];
+								$("#userimage1").attr("src","assets/img/patients/"+ imgname + ".jpg");
+								$("#userimage2").attr("src","assets/img/patients/"+ imgname + ".jpg");
+							}
+						}
+					}
+				} catch (error) {
+					('There is a problem retrieving customer data, please try again later.<br />'+error);
+				} 
+					});
+				}
+			} else{
+				$("#loginheader").show();
+				$("#usercircle").hide();
+			}
+		</script>
 	</header>
 	<!-- /Header -->
 	
