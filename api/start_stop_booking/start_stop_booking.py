@@ -126,7 +126,7 @@ def stop_booking():
         notificationCustomer= {
             "nid" : nid,
             "sender": doctorID,
-            "recevier" : customerID,
+            "receiver" : customerID,
             "message" : "Appointment has ended."
         }
         
