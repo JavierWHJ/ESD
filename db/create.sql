@@ -66,8 +66,10 @@ use notifications;
 
 create table notifications (
 	`nid` int not null,
-    `userid` varchar(2) not null,
+    `sender` varchar(2) not null,
+    `receiver` varchar(2) not null,
     `message` varchar(500) not null,
+    `timestamp` datetime null,
     PRIMARY KEY (nid)
 );
 
