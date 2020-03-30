@@ -151,7 +151,7 @@
 									var customerid = customer.customerID;
 									if(sessionStorage.getItem('sessionid') == customerid){
 										$("#usercircle").show();
-										$("#username").text(customer.name);
+										$(".username").text(customer.name);
 										var imgname = "patient" + customerid[1];
 										$("#userimage1").attr("src","assets/img/patients/"+ imgname + ".jpg");
 										$("#userimage2").attr("src","assets/img/patients/"+ imgname + ".jpg");
