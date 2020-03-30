@@ -265,14 +265,26 @@
 															var image = "assets/img/patients/" + patientimg +".jpg";
 															//check if started or not
 															var apptStatus = appointment.status
+															var apptStatus = appointment.status
 															if (apptStatus.toLowerCase() == 'started'){
 																var apptElement = "<a href='javascript:void(0);' class='btn btn-sm bg-success-light'>"+
 																				"<i class='fas fa-check'></i> Appointment Ongoing"+
+																			"</a>"+
+																			"<a href='javascript:void(0);' class='btn btn-sm bg-danger-light'>"+
+																				"<i class='fas fa-check'></i>Set complete"+
 																			"</a>"
-															} else{
+																			
+															}else if (apptStatus.toLowerCase() == 'completed'){
+																var apptElement = 
+																			"<a href='javascript:void(0);' class='btn btn-sm bg-success-light'>"+
+																				"<i class='fas fa-check'></i>Completed"+
+																			"</a>"
+																			
+															} 
+															else{
 																var apptElement = "<a href='javascript:void(0);' class='btn btn-sm bg-success-light'>"+
 																				"<i class='fas fa-check'></i> Start Appointment"+
-																			"</a>"
+																			"</a>" 
 															}
 															
 															appointmentlist = "<div class='appointment-list'>" +
