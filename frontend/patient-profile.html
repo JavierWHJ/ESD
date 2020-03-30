@@ -466,53 +466,7 @@
 										</div>
 										<!-- /Appointment Tab -->
 
-										<!-- Prescription Details Modal -->
-										<div class="modal fade custom-modal" id="pres_details">
-											<div class="modal-dialog modal-dialog-centered">
-												<div class="modal-content">
-													<div class="modal-header">
-														<h5 class="modal-title">Prescription Details</h5>
-														<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-															<span aria-hidden="true">&times;</span>
-														</button>
-													</div>
-													<div class="modal-body">
-														<ul class="info-details">
-															<li>
-																<div class="details-header">
-																	<div class="row">
-																		<div class="col-md-6"> 
-																			<strong>#APPT</strong>
-																			<strong><span class="appt_number"></span></strong><br>
-																			
-																			
-																		</div>
-																		<div class="col-md-6">
-																			<div class="text-right">
-																				<button type="button" class="btn bg-success-light btn-sm" id="topup_status">Completed</button>
-																			</div>
-																		</div>
-																	</div>
-																</div>
-															</li>
-															<li>
-																<span class="title">Status:</span>
-																<span id="appt_status"></span>
-															</li>
-															<li>
-																<span class="title">Date:</span>
-																<span id="appt_date"></span>
-															</li>
-															<li>
-																<span class="title">Paid Amount</span>
-																<span id="appt_paid"></span>
-															</li>
-														</ul>
-													</div>
-												</div>
-											</div>
-										</div>
-										<!-- /Prescription Details Modal -->
+										
 										
 										<!-- Prescription Tab -->
 										<div class="tab-pane fade" id="pres">
@@ -527,42 +481,13 @@
 																<thead>
 																	<tr>
 																		<th>Date </th>
-																		<th>Name</th>									
-																		<th>Created by </th>
+																		<th>Created By</th>									
+																		<th>Prescription </th>
 																		<th></th>
 																	</tr>     
 																</thead>
 																<tbody>
-																<!--
-																	
-																	<tr>
-																		<td>14 Nov 2019</td>
-																		<td>Prescription 1</td>
-																		<td>
-																			<h2 class="table-avatar">
-																				<a href="doctor-profile.html" class="avatar avatar-sm mr-2">
-																					<img class="avatar-img rounded-circle" src="assets\img\doctors\doctor-thumb-01.jpg" alt="User Image">
-																				</a>
-																				<a href="doctor-profile.html">Dr. Ruby Perrin <span>Dental</span></a>
-																			</h2>
-																		</td>
-																		<td class="text-right">
-																			<div class="table-action">
-																				<a href="javascript:void(0);" class="btn btn-sm bg-primary-light">
-																					<i class="fas fa-print"></i> Print
-																				</a>
-																				<a href="javascript:void(0);" class="btn btn-sm bg-info-light">
-																					<i class="far fa-eye"></i> View
-																				</a>
-																				<a href="edit-prescription.html" class="btn btn-sm bg-success-light">
-																					<i class="fas fa-edit"></i> Edit
-																				</a>
-																				<a href="javascript:void(0);" class="btn btn-sm bg-danger-light">
-																					<i class="far fa-trash-alt"></i> Delete
-																				</a>
-																			</div>
-																		</td>
-																	</tr>-->
+																
 																</tbody> 
 														
 															
@@ -581,7 +506,9 @@
 										try {
 											const response =
 											await fetch(
-											serviceURL, { method: 'GET' }
+											serviceURL, { method: 'GET'
+										},
+											
 											);
 											
 											const data = await response.json();
@@ -719,8 +646,8 @@
 										response = fetch(
 											serviceURL, {
 											method: "DELETE",
-											// mode: "no-cors",
-											headers: { "Content-Type": "application/json" },
+											headers: { "Content-Type": "application/json"
+										},
 											body: JSON.stringify({bookingID: bookingID})
 											}
 										);
