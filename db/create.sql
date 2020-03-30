@@ -135,6 +135,11 @@ insert into bookings (bookingID, doctorID, datestart, dateend, status, price ) v
 -- insert into notifications (nid, userid, message) values (1, 'd1', 'You have a new booking');
 
 
+use prescriptions;
+insert into prescription values
+	('1', 'd1', 'c1', 'Panadol, 2 Qty, 5 Days, Morning and Night'),
+    ('2', 'd1', 'c1', 'Panana, 1 Qty, 2 Days, Morning and Afternoon'),
+    ('3', 'd1', 'c1', 'Apple, 1 Qty, 4 Days, Afternoon and Evening');
 
 
 

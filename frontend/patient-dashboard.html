@@ -150,6 +150,12 @@
 												</a>
 											</li>
 											<li>
+												<a href="notification-patient.html">
+													<i class="fas fa-bell"></i>
+													<span>Notifications</span>
+												</a>
+											</li>
+											<li>
 												<a href="profile-settings.html">
 													<i class="fas fa-user-cog"></i>
 													<span>Profile Settings</span>
@@ -206,7 +212,7 @@
 											<div class="card card-table mb-0">
 												<div class="card-body">
 													<div class="table-responsive">
-														<table class="table table-hover table-center mb-0">
+														<table class="table table-hover table-center mb-0" id="table1">
 															<thead>
 																<tr>
 																	<th>Doctor</th>
@@ -222,13 +228,13 @@
 																<script>
 																	var appt_dict = {};
 																	function showError(message) {
-																		$('#table').hide();
-																		$('#table')
+																		$('#table1').hide();
+																		$('#table1')
 																			.append("<label>"+message+"</label>");
 																	}
 																	$(async() => {   
 																		var customerid = sessionStorage.getItem('sessionid');
-																		//currently hardcoded c1 (have to change)       
+																		   
 																		var serviceURL = "http://127.0.0.1:8000/api/v1/booking/";
 																			
 																		if (customerid && customerid.length) {
@@ -326,7 +332,7 @@
 
 																							rows = doctorprofile + bookinginfo + action;
 																							
-																							$('.table').append(rows);
+																							$('#table1').append(rows);
 																							
 																							
 																						}catch(error){

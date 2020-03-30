@@ -159,3 +159,8 @@ services:
     container_name: start_stop_booking
     networks:
       - kong-net 
+  promotion:
+    build: './promotion'
+    container_name: promotion
+    networks:
+      - kong-net

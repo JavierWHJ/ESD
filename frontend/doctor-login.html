@@ -110,7 +110,9 @@
 					
 					<div class="row">
 						<div class="col-md-8 offset-md-2">
-							
+							<div class="alert alert-danger" role="alert" id="alert">
+								This is an error!
+							</div>
 							<!-- Login Tab Content -->
 							<div class="account-content">
 								<div class="row align-items-center justify-content-center">
@@ -154,6 +156,7 @@
 							<script>
 								$(document).ready(pageReady());
 								function pageReady(){
+									$("#alert").hide();
 									sessionStorage.clear();
 								}
 								$("#loginbtn").click(async (event) => {
@@ -170,14 +173,21 @@
 											if (!doctors || !doctors.length) {
 												showError('No doctor!')
 											} else {
+												var doctorCheck = false;
 												for (const doctor of doctors) {
 													var doctorid = doctor.doctorID;
 													var doctoremail = doctor.email;
 													if(loginemail === doctoremail){
+														doctorCheck = true;
+														$("#alert").hide();
 														sessionStorage.setItem('sessionid', doctorid);
 														console.log(sessionStorage.getItem('sessionid'));
 														window.location.replace("doctor-dashboard.html");
 													}
+												}
+												if(doctorCheck == false){
+													$("#alert").text("Invalid Email!");
+													$("#alert").show();
 												}
 											}
 										} catch (error) {
