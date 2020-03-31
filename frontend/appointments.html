@@ -269,17 +269,20 @@
 															if (apptStatus.toLowerCase() == 'started'){
 																var apptElement = "<a href='javascript:void(0);' class='btn btn-sm bg-success-light'>"+
 																				"<i class='fas fa-check'></i> Appointment Ongoing"+
-																			"</a>"+
+																			"</a>"+`
+																			<a href="add-prescription.html?customerid=${customerid}&bookingid=${appointment.bookingID}" class="btn btn-sm bg-primary-light">
+																				<i class="far fa-edit"></i> Add Prescription
+																			</a>` + 
 																			"<a class='btn btn-sm bg-danger-light'>"+
 																				"<i class='fas fa-check'></i>Set complete"+
-																			"</a>"
+																			"</a>"  
 																			
 															}else if (apptStatus.toLowerCase() == 'completed'){
 																var apptElement = 
 																			"<a href='javascript:void(0);' class='btn btn-sm bg-success-light'>"+
 																				"<i class='fas fa-check'></i>Completed"+
 																			"</a>"
-																			
+																				
 															} 
 															else{
 																var apptElement = "<a href='javascript:void(0);' class='btn btn-sm bg-success-light'>"+
