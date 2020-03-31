@@ -181,6 +181,7 @@
 														doctorCheck = true;
 														$("#alert").hide();
 														sessionStorage.setItem('sessionid', doctorid);
+														sessionStorage.setItem('doctorName', doctor.name);
 														console.log(sessionStorage.getItem('sessionid'));
 														window.location.replace("doctor-dashboard.html");
 													}
