@@ -56,7 +56,7 @@ function pageReady(){
                                             </div>
                                             <div class="clinic-booking">
                                                 <a class="view-pro-btn" href="doctor-profile.html">View Profile</a>
-                                                <a class="apt-btn" href="booking.html">Book Appointment</a>
+                                                <a class="apt-btn" href="booking.html?doctorID=${doctor.doctorID}&docName=${doctor.name}">Book Appointment</a>
                                                 <br>
                                             </div>
                                         </div>
@@ -107,7 +107,7 @@ function pageReady(){
                                             </div>
                                             <div class="clinic-booking">
                                                 <a class="view-pro-btn" href="doctor-profile.html">View Profile</a>
-                                                <a class="apt-btn" href="booking.html">Book Appointment</a>
+                                                <a class="apt-btn" href="booking.html?doctorID=${doctor.doctorID}&docName=${doctor.name}">Book Appointment</a>
                                                 <br>
                                             </div>
                                         </div>
