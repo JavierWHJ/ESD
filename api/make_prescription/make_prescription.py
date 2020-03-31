@@ -7,7 +7,7 @@ app = Flask(__name__)
 CORS(app)
 
 prescriptionURL = "http://prescription:5000/prescription"
-
+notificationURL = "http://notification:5000/notifications"
 
 @app.route('/make_prescription', methods=['POST'])
 def make_prescription():
@@ -20,7 +20,9 @@ def make_prescription():
     #   nid : 3
     # )
     data = request.get_json()
+    print(data)
     prescription = json.loads(json.dumps(data, default=str))
+    print(prescription)
     r = requests.post(prescriptionURL, json=prescription)
     if r.status_code != 200:
         return jsonify({
@@ -28,6 +30,7 @@ def make_prescription():
         }), 500
     else:
         customerID = data['customerID']
+        doctorID = data['doctorID']
         hostname = "host.docker.internal"
         port = 5672
         connection = pika.BlockingConnection(pika.ConnectionParameters(host=hostname, port=port))
@@ -35,10 +38,19 @@ def make_prescription():
 
         exchangename = "notification_topic"
         channel.exchange_declare(exchange=exchangename, exchange_type="topic")
+
+        r = requests.get(notificationURL).json()
+
+        if len(r['notifications']) == 0:
+            nid = 1
+        else:
+            nid = r['notifications'][-1]['nid'] + 1
+
         notification = {
-            "nid" : data['nid'],
-            "userid": customerID,
-            "message" : "You have a new prescription"
+            "nid" : nid,
+            "sender" : doctorID,
+            "receiver": customerID,
+            "message" : "You have a new prescription",
         }
 
         notification = json.dumps(notification, default=str)

@@ -4,11 +4,14 @@ from flask_cors import CORS, cross_origin
 import json
 from os import environ
 app = Flask(__name__)
-CORS(app, support_credentials=True)
+CORS(app)
+# cors = CORS(app, resources={r"/prescription": {"origins": "*"}}, support_credentials=True)
+# CORS(app, support_credentials=True, resources={r"/prescription": {"origins": "*"}})
 
 app.config['SQLALCHEMY_DATABASE_URI'] = environ.get('dbURL')
 # app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+mysqlconnector://is213@localhost:8889/prescriptions"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 db = SQLAlchemy(app)
 
@@ -18,7 +21,7 @@ class Prescription(db.Model):
     bookingID = db.Column(db.Integer, primary_key=True)
     doctorID = db.Column(db.String(2), nullable=False)
     customerID = db.Column(db.String(2), nullable=False)
-    prescription = db.Column(db.String(500), nullable=False)
+    prescription = db.Column(db.String(500), primary_key=True,nullable=False)
 
     def __init__(self, bookingID, doctorID, customerID, prescription):
         self.bookingID = bookingID
@@ -31,11 +34,13 @@ class Prescription(db.Model):
 
 
 @app.route("/prescription")
+@cross_origin(supports_credentials=True, allow_headers=['Content-Type','Authorization'])
 def get_all():
     return jsonify({"prescriptions": [prescription.json() for prescription in Prescription.query.all()]}), 200
 
 
 @app.route("/prescription/cid=<string:cid>")
+@cross_origin(supports_credentials=True, allow_headers=['Content-Type','Authorization'])
 def get_prescription_by_cid(cid):
     return jsonify({
         "prescriptions": [prescription.json() for prescription in Prescription.query.filter_by(customerID=cid).all()]
@@ -43,26 +48,38 @@ def get_prescription_by_cid(cid):
 
 
 @app.route("/prescription", methods=['POST'])
+@cross_origin(supports_credentials=True, allow_headers=['Content-Type','Authorization'])
 def add_prescription():
     data = request.get_json()
-    prescription = Prescription(data['bookingID'], data['doctorID'], data['customerID'], data['prescription'])
+    print(data)
+    prescriptions = data['prescriptions']
+    for pres in prescriptions:
+        print(pres)
+        prescription = Prescription(data['bookingID'], data['doctorID'], data['customerID'], pres)
+        print(prescription.bookingID)
+        print(prescription.doctorID)
+        print(prescription.customerID)
+        print(prescription.prescription)
 
-    try:
-        db.session.add(prescription)
-        db.session.commit()
-    except:
-        return jsonify({"message": "An error occurred creating the record."}), 500
+        try:
+            db.session.add(prescription)
+            db.session.commit()
+            print("ADDED")
+        except:
+            print('here')
+            return jsonify({"message": "An error occurred creating the prescription."}), 500
 
     return jsonify(prescription.json()), 200
 
 
 @app.route("/prescription", methods=['DELETE'])
-@cross_origin(supports_credentials=True)
+@cross_origin(supports_credentials=True, allow_headers=['Content-Type','Authorization'])
 def delete_prescription():
     data = request.get_json()
     bid = data['bookingID']
+    pres = data['prescription']
     print(bid)
-    prescription = Prescription.query.filter_by(bookingID=bid).first()
+    prescription = Prescription.query.filter_by(bookingID=bid,prescription=pres).first()
 
     try:
         db.session.delete(prescription)
@@ -73,7 +90,7 @@ def delete_prescription():
 
 
 @app.route("/prescription", methods=['PUT'])
-@cross_origin(supports_credentials=True)
+@cross_origin(supports_credentials=True, allow_headers=['Content-Type','Authorization'])
 def update_prescription():
     data = request.get_json()
     # print(data)
