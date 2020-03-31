@@ -5,7 +5,7 @@ create table prescription(
     `doctorID` varchar(2) NOT NULL,
     `customerID` varchar(2) NOT NULL,
     `prescription` varchar(500) not null,
-    PRIMARY KEY (bookingID)
+    PRIMARY KEY (bookingID, prescription)
     );
 
 create schema if not exists doctors;
