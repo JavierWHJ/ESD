@@ -210,8 +210,12 @@
 					<div class="page-header">
 						<div class="row">
 							<div class="col-sm-12">
+								<div class="alert alert-success" role="alert" id="alert">
+							
+								</div>
 								<h3 class="page-title">Promotions</h3>
 							</div>
+							
 						</div>
 					</div>
 					<!-- /Page Header -->
@@ -251,7 +255,11 @@
 		
 		</div>
 		<script>
-			
+		$(document).ready(pageReady());
+			function pageReady(){
+				$("#alert").hide();
+			}
+
 			function showError(message) {
 		
 					$('.card-body')
@@ -265,6 +273,7 @@
 						var message = $("#message").val();
 
 						console.log(message);
+						
 
 						// Change serviceURL to your own
 						var serviceURL = "http://localhost:8000/api/v1/promotion";
@@ -288,6 +297,12 @@
 						
 							}catch (error){
 								showError('Please check your token or network.');
+							}finally{
+								
+								$("#alert").text("Post Successful!");
+								$("#alert").show();
+								$("#message").val("");
+
 							}
 							});
    
