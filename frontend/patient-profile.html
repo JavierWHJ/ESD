@@ -578,16 +578,13 @@
 '																				<a href="doctor-profile.html" class="avatar avatar-sm mr-2">'+
 '																					<img class="avatar-img rounded-circle" src="' + image + '"alt="User Image">'+
 '																				</a>'+
-'																				<a href="doctor-profile.html">'+ doctor.name+' <span>'+ doctor.services +'</span></a>'+
+'																				<a href="doctor-profile.html" class="doctorName">'+ doctor.name+' <span>'+ doctor.services +'</span></a>'+
 '																			</h2>'+
 '																		</td>'+ 
-'																		<td>' + prescription.prescription + '</td>'+
+'																		<td class="prescription_text">' + prescription.prescription + '</td>'+
 '																		<td class="text-right">'+
 '																			<div class="table-action">'+
-'																				<a href="edit-prescription.html" class="btn btn-sm bg-success-light">'+
-'																					<i class="fas fa-edit"></i> Edit'+
-'																				</a>'+
-'																				<a href="#"  id="' + prescription.bookingID +'" onclick="delete_prescription(this.id)" class="btn btn-sm bg-danger-light">'+
+'																				<a href="#"  id="' + prescription.bookingID +'" onclick="delete_prescription(this)" class="btn btn-sm bg-danger-light">'+
 '																					<i class="far fa-trash-alt"></i> Delete'+
 '																				</a>'+
 '																			</div>'+
@@ -616,6 +613,7 @@
 									}
 								});
 
+								
 
 								// $("#delete_pres").click(async (event) => {  
 								// 	var bookingid = $(this).data('id');
@@ -630,34 +628,41 @@
 								// 	// $(".appt_status").html(appointment_status);
 								// 	// $(".appt_paid").html(appointment_price);
 
-
 								// });
-								function delete_prescription(id) {  
+								function delete_prescription(x) {  
 									//Prevents screen from refreshing when submitting  
-									var bookingID = id;
-									console.log(bookingID);
-
-								
+									var bookingID = x.id;
+									var prescription = $(x).parent().parent().parent()[0].getElementsByClassName('prescription_text')[0].textContent
+									var name = $(x).parent().parent().parent()[0].getElementsByClassName('doctorName')[0].textContent.split(' ')[0].trim()
+									console.log(name)
 									// Change serviceURL to your own
 									var serviceURL = "http://127.0.0.1:8000/api/v1/prescription";
-
-							
-									try {
-										response = fetch(
-											serviceURL, {
-											method: "DELETE",
-											headers: { "Content-Type": "application/json"
-										},
-											body: JSON.stringify({bookingID: bookingID})
+									var stateName = sessionStorage.getItem('doctorName')
+									if (stateName == name){
+										$(async()=>{
+											try {
+												response = await fetch(
+													serviceURL, {
+													method: "DELETE",
+													headers: { "Content-Type": "application/json"
+												},
+													body: JSON.stringify({bookingID: bookingID, prescription: prescription})
+													}
+												);
+											} catch (error) {
+												// Errors when calling the service; such as network error, 
+												// service offline, etc
+												showError
+											('There is a problem deleting prescription data, please try again later.<br />'+error);
+											
+											} finally {
+												window.location.reload()
 											}
-										);
-									} catch (error) {
-										// Errors when calling the service; such as network error, 
-										// service offline, etc
-										showError
-									('There is a problem deleting prescription data, please try again later.<br />'+error);
+										})
+									} else{
+										alert("Cannot delete prescription that isn't created by you!")
+									}
 									
-									} 
 								};
 									
 
