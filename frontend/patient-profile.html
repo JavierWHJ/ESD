@@ -46,6 +46,7 @@
 		<div class="main-wrapper">
 		
 			<!-- Header -->
+			<!-- Header -->
 			<header class="navbar navbar-expand-lg header-nav header_sticky">
 				<div class="navbar-header">
 					<a id="mobile_btn" href="javascript:void(0);">
@@ -55,46 +56,23 @@
 							<span></span>
 						</span>
 					</a>
-					<a href="index.html" class="navbar-brand logo">
+					<a href="doctor-dashboard.html" class="navbar-brand logo">
 						<img src="img/logo2.PNG" class="img-fluid" alt="Logo">
 					</a>
 				</div>
 				<div class="main-menu-wrapper">
 					<div class="menu-header">
-						<a href="index.html" class="menu-logo">
+						<a href="doctor-dashboard.html" class="menu-logo">
 							<img src="img/logo2.PNG" class="img-fluid" alt="Logo">
 						</a>
 						<a id="menu_close" class="menu-close" href="javascript:void(0);">
 							<i class="fas fa-times"></i>
 						</a>
 					</div>
-					<ul class="main-nav">
-						<li>
-							<a href="index.html" style="color:black">Home</a>
-						</li>
-						<li>
-							<a href="about.html" style="color:black">About Us</a>
-						</li>	
-						<li>
-							<a href="contacts.html" style="color:black">Contact Us</a>
-						</li>	
-						<li>
-							<a href="map-list.html" style="color:black">Our Doctors</a>
-						</li>
-					</ul>		 
+					<h4 style="margin-top: 10px;">Doctor Dashboard</h4>
 				</div>		 
 				<ul class="nav header-navbar-rht">
-					<li class="nav-item contact-item">
-						<div class="header-contact-img">
-							<i class="far fa-hospital"></i>							
-						</div>
-						<div class="header-contact-detail">
-							<p class="contact-header">Contact</p>
-							<p class="contact-info-header"> +65 1234 5678</p>
-						</div>
-					</li>
-						
-						<!-- User Menu -->
+					<!-- User Menu -->
 					<li class="nav-item dropdown has-arrow logged-item">
 						<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
 							<span class="user-img">
@@ -107,17 +85,17 @@
 									<img alt="User Image" class="avatar-img rounded-circle" id="userimage2">
 								</div>
 								<div class="user-text">
-									<h6 class="username">Darren Elder</h6>
+									<h6 class="username">name</h6>
 									<p class="text-muted mb-0">Doctor</p>
 								</div>
 							</div>
-							<a class="dropdown-item" href="doctor-dashboard.html">Dashboard</a>
+                            <a class="dropdown-item" href="doctor-dashboard.html">Dashboard</a>
+                            <a class="dropdown-item" href="notifications.html">Notifications</a>
 							<a class="dropdown-item" href="doctor-profile-settings.html">Profile Settings</a>
 							<a class="dropdown-item" href="doctor-login.html">Logout</a>
 						</div>
 					</li>
 					<!-- /User Menu -->
-						
 					</ul>
 				</nav>
 			</header>
@@ -202,23 +180,202 @@
 									<div class="user-tabs">
 										<ul class="nav nav-tabs nav-tabs-bottom nav-justified flex-wrap">
 											<li class="nav-item">
-												<a class="nav-link active" href="#pat_appointments" data-toggle="tab">Appointments</a>
+												<a class="nav-link active" href="#pres" data-toggle="tab"><span>Prescription</span></a>
 											</li>
 											<li class="nav-item">
-												<a class="nav-link" href="#pres" data-toggle="tab"><span>Prescription</span></a>
+												<a class="nav-link" href="#pat_appointments" data-toggle="tab">Appointments</a>
 											</li>
-											<li class="nav-item">
-												<a class="nav-link" href="#medical" data-toggle="tab"><span class="med-records">Medical Records</span></a>
-											</li>
-											<li class="nav-item">
-												<a class="nav-link" href="#billing" data-toggle="tab"><span>Billing</span></a>
-											</li> 
 										</ul>
 									</div>
 									<div class="tab-content">
 										
+										<!-- Prescription Tab -->
+										<div class="tab-pane fade show active" id="pres">
+											<div class="text-right">
+												<a href="add-prescription.html" class="add-new-btn">Add Prescription</a>
+											</div>
+											<div class="card card-table mb-0">
+												<div class="card-body">
+													<div class="table-responsive">
+														<table class="table table-hover table-center mb-0" id="view_prescription">
+															
+																<thead>
+																	<tr>
+																		<th>Date </th>
+																		<th>Created By</th>									
+																		<th>Prescription </th>
+																		<th></th>
+																	</tr>     
+																</thead>
+																<tbody>
+																
+																</tbody> 
+														
+															
+																<script>
+																	// var pres_dict = {};
+																	function showError(message) {
+																		$('#view_prescription').hide();
+																		$('#view_prescription')
+																			.append("<label>"+message+"</label>");
+																	}
+
+																	$(async() => {           
+																		// Change serviceURL to your own
+																		var serviceURL = "http://127.0.0.1:8000/api/v1/prescription";
+																
+																		try {
+																			const response =
+																			await fetch(
+																			serviceURL, { method: 'GET'
+																		},
+																			
+																			);
+																			
+																			const data = await response.json();
+																			var prescriptions = data.prescriptions; //the arr is in data.books of the JSON data
+																			//console.log(data);
+																			var image = "assets/img/doctors/doctor-thumb-01.jpg";
+																			if (!prescriptions || !prescriptions.length) {
+																				showError('Prescriptions list empty or undefined.')
+																			} else {
+																				// for loop to setup all table rows with obtained book data
+																				var rows = "";
+																				
+																				for (const prescription of prescriptions) {
+																					var custURL = "http://127.0.0.1:8000/api/v1/customer/";
+																					var docURL = "http://127.0.0.1:8000/api/v1/doctor/";
+																					var bookURL = "http://127.0.0.1:8000/api/v1/booking/";
+																					var customerid = prescription.customerID;
+																					var doctorid = prescription.doctorID;
+																					var bookid =  prescription.bookingID;
+
+																					if (customerid && customerid.length) {
+																						custURL += customerid;
+																						docURL += doctorid;
+																						bookURL += bookid;
+																						
+																						try {
+																							var c_response =
+																							await fetch(
+																								custURL, { method: 'GET' }
+
+																							);
+																							var d_response =
+																							await fetch(
+																								docURL, { method: 'GET' }
+
+																							);
+																							var b_response =
+																							await fetch(
+																								bookURL, { method: 'GET' }
+
+																							);
+
+																							var cust_data = await c_response.json();
+																							var customer = cust_data; 
+																							// console.log(customer);
+
+																							var doc_data = await d_response.json();
+																							var doctor = doc_data; 
+																							// console.log(doctor);
+
+																							var book_data = await b_response.json();
+																							var booking = book_data; 
+																							// console.log(booking);
+
+																							// console.log(booking.customerID == "c1")
+
+																							if (booking.customerID == prescription.customerID && doctor.doctorID == prescription.doctorID) {
+																								// console.log(doctor.doctorID);
+																								date = booking.datestart.split(" ");
+																								date = date.slice(1,4);
+																								bookdate = date.join(" ");
+																								prescriptionlist = 
+																									'<tr>'+
+																										'<td>' + bookdate+'</td>'+
+																										'<td>'+
+																											'<h2 class="table-avatar">'+
+																												'<a href="doctor-profile.html" class="avatar avatar-sm mr-2">'+
+																													'<img class="avatar-img rounded-circle" src="' + image + '"alt="User Image">'+
+																												'</a>'+
+																												'<a href="doctor-profile.html" class="doctorName">'+ doctor.name+' <span>'+ doctor.services +'</span></a>'+
+																											'</h2>'+
+																										'</td>'+ 
+																										'<td class="prescription_text">' + prescription.prescription + '</td>'+
+																										'<td class="text-right">'+
+																											'<div class="table-action">'+
+																												'<a href="#"  id="' + prescription.bookingID +'" onclick="delete_prescription(this)" class="btn btn-sm bg-danger-light">'+
+																													'<i class="far fa-trash-alt"></i> Delete'+
+																												'</a>'+
+																											'</div>'+
+																										'</td>'+
+																									'</tr>';
+									
+																							rows = prescriptionlist;
+																							$('#view_prescription').append(rows);
+																						
+																							}	
+																						} catch (error) {
+																								// Errors when calling the service; such as network error, 
+																								// service offline, etc
+																								showError
+																							('There is a problem retrieving books data, please try again later.<br />'+error);
+																						}			
+																					}
+																				}
+																			} 
+																		}catch (error) {
+																			showError
+																			('There is a problem retrieving booking data, please try again later.<br />'+error);
+																		}
+																	});
+
+																	function delete_prescription(x) {  
+																		//Prevents screen from refreshing when submitting  
+																		var bookingID = x.id;
+																		var prescription = $(x).parent().parent().parent()[0].getElementsByClassName('prescription_text')[0].textContent
+																		var name = $(x).parent().parent().parent()[0].getElementsByClassName('doctorName')[0].textContent.split(' ')[0].trim()
+																		console.log(name)
+																		// Change serviceURL to your own
+																		var serviceURL = "http://127.0.0.1:8000/api/v1/prescription";
+																		var stateName = sessionStorage.getItem('doctorName')
+																		if (stateName == name){
+																			$(async()=>{
+																				try {
+																					response = await fetch(
+																						serviceURL, {
+																						method: "DELETE",
+																						headers: { "Content-Type": "application/json"
+																					},
+																						body: JSON.stringify({bookingID: bookingID, prescription: prescription})
+																						}
+																					);
+																				} catch (error) {
+																					// Errors when calling the service; such as network error, 
+																					// service offline, etc
+																					showError
+																				('There is a problem deleting prescription data, please try again later.<br />'+error);
+																				
+																				} finally {
+																					window.location.reload()
+																				}
+																			})
+																		} else{
+																			alert("Cannot delete prescription that isn't created by you!")
+																		}
+																		
+																	};
+																</script>	
+														</table>
+													</div>
+												</div>
+											</div>
+										</div>
+										<!-- /Prescription Tab -->
+
 										<!-- Appointment Tab -->
-										<div id="pat_appointments" class="tab-pane fade show active">
+										<div id="pat_appointments" class="tab-pane fade">
 											<div class="card card-table mb-0">
 												<div class="card-body">
 													<div class="table-responsive">
@@ -468,228 +625,7 @@
 
 										
 										
-										<!-- Prescription Tab -->
-										<div class="tab-pane fade" id="pres">
-											<div class="text-right">
-												<a href="add-prescription.html" class="add-new-btn">Add Prescription</a>
-											</div>
-											<div class="card card-table mb-0">
-												<div class="card-body">
-													<div class="table-responsive">
-														<table class="table table-hover table-center mb-0" id="view_prescription">
-															
-																<thead>
-																	<tr>
-																		<th>Date </th>
-																		<th>Created By</th>									
-																		<th>Prescription </th>
-																		<th></th>
-																	</tr>     
-																</thead>
-																<tbody>
-																
-																</tbody> 
-														
-															
-									<script>
-									// var pres_dict = {};
-									function showError(message) {
-										$('#view_prescription').hide();
-										$('#view_prescription')
-											.append("<label>"+message+"</label>");
-									}
-
-									$(async() => {           
-										// Change serviceURL to your own
-										var serviceURL = "http://127.0.0.1:8000/api/v1/prescription";
-								
-										try {
-											const response =
-											await fetch(
-											serviceURL, { method: 'GET'
-										},
-											
-											);
-											
-											const data = await response.json();
-											var prescriptions = data.prescriptions; //the arr is in data.books of the JSON data
-											//console.log(data);
-											var image = "assets/img/doctors/doctor-thumb-01.jpg";
-											if (!prescriptions || !prescriptions.length) {
-												showError('Prescriptions list empty or undefined.')
-											} else {
-												// for loop to setup all table rows with obtained book data
-												var rows = "";
-												
-												for (const prescription of prescriptions) {
-													var custURL = "http://127.0.0.1:8000/api/v1/customer/";
-													var docURL = "http://127.0.0.1:8000/api/v1/doctor/";
-													var bookURL = "http://127.0.0.1:8000/api/v1/booking/";
-													var customerid = prescription.customerID;
-													var doctorid = prescription.doctorID;
-													var bookid =  prescription.bookingID;
-
-													if (customerid && customerid.length) {
-														custURL += customerid;
-														docURL += doctorid;
-														bookURL += bookid;
-														
-														try {
-															var c_response =
-															await fetch(
-																custURL, { method: 'GET' }
-
-															);
-															var d_response =
-															await fetch(
-																docURL, { method: 'GET' }
-
-															);
-															var b_response =
-															await fetch(
-																bookURL, { method: 'GET' }
-
-															);
-
-															var cust_data = await c_response.json();
-															var customer = cust_data; 
-															// console.log(customer);
-
-															var doc_data = await d_response.json();
-															var doctor = doc_data; 
-															// console.log(doctor);
-
-															var book_data = await b_response.json();
-															var booking = book_data; 
-															// console.log(booking);
-
-															// console.log(booking.customerID == "c1")
-
-															if (booking.customerID == prescription.customerID && doctor.doctorID == prescription.doctorID) {
-																// console.log(doctor.doctorID);
-																date = booking.datestart.split(" ");
-																date = date.slice(1,4);
-																bookdate = date.join(" ");
-																prescriptionlist = 
-'																	<tr>'+
-'																		<td>' + bookdate+'</td>'+
-'																		<td>'+
-'																			<h2 class="table-avatar">'+
-'																				<a href="doctor-profile.html" class="avatar avatar-sm mr-2">'+
-'																					<img class="avatar-img rounded-circle" src="' + image + '"alt="User Image">'+
-'																				</a>'+
-'																				<a href="doctor-profile.html" class="doctorName">'+ doctor.name+' <span>'+ doctor.services +'</span></a>'+
-'																			</h2>'+
-'																		</td>'+ 
-'																		<td class="prescription_text">' + prescription.prescription + '</td>'+
-'																		<td class="text-right">'+
-'																			<div class="table-action">'+
-'																				<a href="#"  id="' + prescription.bookingID +'" onclick="delete_prescription(this)" class="btn btn-sm bg-danger-light">'+
-'																					<i class="far fa-trash-alt"></i> Delete'+
-'																				</a>'+
-'																			</div>'+
-'																		</td>'+
-'																	</tr>';
-	
-													rows = prescriptionlist;
-													$('#view_prescription').append(rows);
-												
-													}	
-												
-												
-												}catch (error) {
-											// Errors when calling the service; such as network error, 
-											// service offline, etc
-											showError
-										('There is a problem retrieving books data, please try again later.<br />'+error);
 										
-									}			
-												}
-											}
-										} 
-									}catch (error) {
-										showError
-										('There is a problem retrieving booking data, please try again later.<br />'+error);
-									}
-								});
-
-								
-
-								// $("#delete_pres").click(async (event) => {  
-								// 	var bookingid = $(this).data('id');
-								// 	console.log(bookingid)
-								// 	// $(".appt_number").html(bookingid);
-								// 	// var appt_array= appt_dict[bookingid];
-										
-								// 	// var appointment_datestart= appt_array.datestart;
-								// 	// var appointment_status = appt_array.status;
-								// 	// var appointment_price = appt_array.price;
-								// 	// $(".appt_date").html(appointment_datestart);
-								// 	// $(".appt_status").html(appointment_status);
-								// 	// $(".appt_paid").html(appointment_price);
-
-								// });
-								function delete_prescription(x) {  
-									//Prevents screen from refreshing when submitting  
-									var bookingID = x.id;
-									var prescription = $(x).parent().parent().parent()[0].getElementsByClassName('prescription_text')[0].textContent
-									var name = $(x).parent().parent().parent()[0].getElementsByClassName('doctorName')[0].textContent.split(' ')[0].trim()
-									console.log(name)
-									// Change serviceURL to your own
-									var serviceURL = "http://127.0.0.1:8000/api/v1/prescription";
-									var stateName = sessionStorage.getItem('doctorName')
-									if (stateName == name){
-										$(async()=>{
-											try {
-												response = await fetch(
-													serviceURL, {
-													method: "DELETE",
-													headers: { "Content-Type": "application/json"
-												},
-													body: JSON.stringify({bookingID: bookingID, prescription: prescription})
-													}
-												);
-											} catch (error) {
-												// Errors when calling the service; such as network error, 
-												// service offline, etc
-												showError
-											('There is a problem deleting prescription data, please try again later.<br />'+error);
-											
-											} finally {
-												window.location.reload()
-											}
-										})
-									} else{
-										alert("Cannot delete prescription that isn't created by you!")
-									}
-									
-								};
-									
-
-								// $(document).on("click", ".open-Dialog", function () {
-								// 	var bookingid = $(this).data('id');
-								// 	$(".appt_number").html(bookingid);
-								// 	var appt_array= appt_dict[bookingid];
-										
-								// 	var appointment_datestart= appt_array.datestart;
-								// 	var appointment_status = appt_array.status;
-								// 	var appointment_price = appt_array.price;
-								// 	$(".appt_date").html(appointment_datestart);
-								// 	$(".appt_status").html(appointment_status);
-								// 	$(".appt_paid").html(appointment_price);
-	
-								// });
-
-																
-
-															</script>	
-															
-														</table>
-													</div>
-												</div>
-											</div>
-										</div>
-										<!-- /Prescription Tab -->
 
 										<!-- Medical Records Tab -->
 										<div class="tab-pane fade" id="medical">
