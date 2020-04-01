@@ -387,7 +387,6 @@
 									for (const doctor of doctors) {
 										var doctorid = doctor.doctorID;
 										if(sessionStorage.getItem('sessionid') == doctorid){
-											console.log(sessionStorage.getItem('sessionid'));
 											$(".username").text(doctor.name);
 											var imgname = "doctor" + doctorid[1];
 											$("#userimage1").attr("src","assets/img/doctors/"+ imgname + ".jpg");
@@ -496,11 +495,23 @@ if (x==0){
 }
 
 function onReady(){
+	var startedCount = 0
+	var allAppt = document.querySelectorAll('.bg-success-light')
+	for (i=0; i<allAppt.length; i++){
+		if (allAppt[i].innerText.trim() == 'Appointment Ongoing'){
+			startedCount++;
+		}
+	}
     $('.bg-success-light').click(function(){
+		var text = this.innerText.trim()
         console.log('clicked');
         var element = this;
-        var bid = this.parentNode.parentNode.querySelector('h5 span.booking').textContent
-        getLocation();
+		var bid = this.parentNode.parentNode.querySelector('h5 span.booking').textContent
+		if (text == 'Start Appointment' && startedCount == 0){
+			getLocation();
+		}else if (text != 'Completed'){
+			alert("An appointment is already ongoing!")
+		}
         function getLocation() {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(showPosition);
@@ -532,7 +543,7 @@ function onReady(){
                             })
                         })
                 }catch (error){
-                    showError('h');
+                    showError('An error occurred.');
                 }finally{
                     window.location.reload();
                 }
@@ -553,7 +564,6 @@ function onReady(){
 		$('.bg-danger-light').click(function(){
 			var element = this;
 			var bid = this.parentNode.parentNode.querySelector('h5 span.booking').textContent
-			console.log(bid)
 			var serviceURL = 'http://localhost:8000/api/v1/stop_booking';
 			$(async() => {
 				try{
@@ -573,7 +583,6 @@ function onReady(){
 					)
 	
 					const data = await response.json();
-					console.log(data);
 				} catch (e) {
 					showError("error")
 				} finally {
