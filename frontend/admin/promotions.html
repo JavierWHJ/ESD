@@ -234,8 +234,8 @@
 										<form action="" method="POST">
 									
 											<div class="form-group">
-												<label>Post on <a href = "https://www.facebook.com/FastDocSG/"> FastDoc Facebook Page </a></label>
-												<input type="text" id="message" name="message" class="form-control">
+												<label>Post on <a href = "https://www.facebook.com/FastDocSG/" target="_blank"> FastDoc Facebook Page </a></label>
+												<textarea name="message"  id="message" class="form-control" cols="40" rows="5"></textarea>
 											</div>
 
 											<input type = "submit" id="submitFB" value="Submit">
@@ -294,13 +294,13 @@
 							);
 							const data = await response;
 							console.log(data);  
+							$("#alert").text("Post Successful!");
+							$("#alert").show();
 						
 							}catch (error){
-								showError('Please check your token or network.');
+								showError('Your token has expired. Please renew your token and try again.');
 							}finally{
 								
-								$("#alert").text("Post Successful!");
-								$("#alert").show();
 								$("#message").val("");
 
 							}
