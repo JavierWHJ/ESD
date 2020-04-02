@@ -24,12 +24,12 @@ function pageReady(){
                                     <div class="doctor-widget">
                                         <div class="doc-info-left">
                                             <div class="doctor-img">
-                                                <a href="doctor-profile.html">
+                                                <a href="doctor-profile.html?doctorID=${d.doctorID}&docName=${d.name}">
                                                     <img src="assets\\img\\doctors\\${d.name}.jpg" class="img-fluid" alt="User Image">
                                                 </a>
                                             </div>
                                             <div class="doc-info-cont">
-                                                <h4 class="doc-name"><a href="doctor-profile.html"> ${d.name} </h4>
+                                                <h4 class="doc-name"><a href="doctor-profile.html?doctorID=${d.doctorID}&docName=${d.name}"> ${d.name} </h4>
                                                 <p class="doctorID">${d.doctorID}</p>
                                                 <div class="rating">
                                                     <i class="fas fa-star filled"></i>
@@ -55,7 +55,7 @@ function pageReady(){
                                                 </ul>
                                             </div>
                                             <div class="clinic-booking">
-                                                <a class="view-pro-btn" href="doctor-profile.html">View Profile</a>
+                                                <a class="view-pro-btn" href="doctor-profile.html?doctorID=${d.doctorID}&docName=${d.name}">View Profile</a>
                                                 <a class="apt-btn" href="booking.html?doctorID=${d.doctorID}&docName=${d.name}">Book Appointment</a>
                                                 <br>
                                             </div>
@@ -75,12 +75,12 @@ function pageReady(){
                                     <div class="doctor-widget">
                                         <div class="doc-info-left">
                                             <div class="doctor-img">
-                                                <a href="doctor-profile.html">
+                                                <a href="doctor-profile.html?doctorID=${doctor.doctorID}&docName=${doctor.name}">
                                                     <img src="assets\\img\\doctors\\${doctor.name}.jpg" class="img-fluid" alt="User Image">
                                                 </a>
                                             </div>
                                             <div class="doc-info-cont">
-                                                <h4 class="doc-name"><a href="doctor-profile.html"> ${doctor.name} </h4>
+                                                <h4 class="doc-name"><a href="doctor-profile.html?doctorID=${doctor.doctorID}&docName=${doctor.name}"> ${doctor.name} </h4>
                                                 <p class="doctorID">${doctor.doctorID}</p>
                                                 <div class="rating">
                                                     <i class="fas fa-star filled"></i>
@@ -106,7 +106,7 @@ function pageReady(){
                                                 </ul>
                                             </div>
                                             <div class="clinic-booking">
-                                                <a class="view-pro-btn" href="doctor-profile.html">View Profile</a>
+                                                <a class="view-pro-btn" href="doctor-profile.html?doctorID=${doctor.doctorID}&docName=${doctor.name}">View Profile</a>
                                                 <a class="apt-btn" href="booking.html?doctorID=${doctor.doctorID}&docName=${doctor.name}">Book Appointment</a>
                                                 <br>
                                             </div>
@@ -141,12 +141,12 @@ function pageReady(){
                                 <div class="doctor-widget">
                                     <div class="doc-info-left">
                                         <div class="doctor-img">
-                                            <a href="doctor-profile.html">
+                                            <a href="doctor-profile.html?doctorID=${doctor.doctorID}&docName=${doctor.name}">
                                                 <img src="assets\\img\\doctors\\${doctor.name}.jpg" class="img-fluid" alt="User Image">
                                             </a>
                                         </div>
                                         <div class="doc-info-cont">
-                                            <h4 class="doc-name"><a href="doctor-profile.html"> ${doctor.name} </h4>
+                                            <h4 class="doc-name"><a href="doctor-profile.html?doctorID=${doctor.doctorID}&docName=${doctor.name}"> ${doctor.name} </h4>
                                             <p class="doctorID">${doctor.doctorID}</p>
                                             <div class="rating">
                                                 <i class="fas fa-star filled"></i>
@@ -173,7 +173,7 @@ function pageReady(){
                                             </ul>
                                         </div>
                                         <div class="clinic-booking">
-                                            <a class="view-pro-btn" href="doctor-profile.html">View Profile</a>
+                                            <a class="view-pro-btn" href="doctor-profile.html?doctorID=${doctor.doctorID}&docName=${doctor.name}">View Profile</a>
                                             <a class="apt-btn" href="booking.html?doctorID=${doctor.doctorID}&docName=${doctor.name}">Book Appointment</a>
                                             <br>
                                         </div>
