@@ -131,7 +131,7 @@ services:
       - kong-net   
   make_booking:
     build: './make_booking'
-    container_name: making_booking
+    container_name: make_booking
     networks:
       - kong-net   
   make_prescription:
