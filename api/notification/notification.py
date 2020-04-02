@@ -44,8 +44,18 @@ def get_noti():
 @app.route('/notifications', methods=['POST'])
 def add_notif():
     data = request.get_json()
-    notification = Notification(**data)
-
+    # add autoincrement 
+    allnoti = [notification.json() for notification in Notification.query.all()]
+    if len(allnoti) == 0:
+        nid = 1
+    else:
+        # got noti inside
+        lastnoti = allnoti[-1]
+        lastnoti_id = lastnoti['nid']
+        nid = lastnoti_id +1
+    
+    
+    notification = Notification(nid, **data)
     try:
         db.session.add(notification)
         db.session.commit()
@@ -82,5 +92,6 @@ def delete_noti(nid):
 
 
 if __name__ == '__main__':
+    # app.run(host='localhost', port=5000, debug=True)
     app.run(host='0.0.0.0', port=5000, debug=True)
     
