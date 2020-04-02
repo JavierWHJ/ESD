@@ -119,19 +119,17 @@ def stop_booking():
         exchangename="notification_topic"
         channel.exchange_declare(exchange=exchangename, exchange_type='topic')
 
-        r = requests.get(notificationURL).json()
-        nid = r['notifications'][-1]['nid'] + 1
+        # r = requests.get(notificationURL).json()
+        # nid = r['notifications'][-1]['nid'] + 1
 
         # notification to customer
         notificationCustomer= {
-            "nid" : nid,
             "sender": doctorID,
             "receiver" : customerID,
             "message" : "Appointment has ended."
         }
         
         notificationDoctor= {
-            "nid" : nid+1,
             "sender" : doctorID,
             "receiver": doctorID,
             "message" : "Appointment has ended."
