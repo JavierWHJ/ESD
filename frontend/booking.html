@@ -181,7 +181,7 @@
 							<div class="card">
 								<div class="card-body">
 									<div class="booking-doc-info">
-										<a href="doctor-profile.html" class="booking-doc-img">
+										<a href="doctor-profile.html" class="booking-doc-img" id="docProfile">
 										</a>
 										<div class="booking-info">
 											<h4><a href="doctor-profile.html" id='docName'></a></h4>
@@ -469,6 +469,8 @@
 				$('#docName').append("Dr. " + doctorname)
 				$('#doctorID').append(doctorID)
 				$(".booking-doc-img").append('<img src="assets\\img\\doctors\\' + doctorname + '.jpg" alt="User Image">')
+				$('#docName').attr("href", "doctor-profile.html?doctorID=" + doctorID + "&docName=" + doctorname);
+				$('#docProfile').attr("href", "doctor-profile.html?doctorID=" + doctorID + "&docName=" + doctorname);
 				$(async() => {
 					var serviceURL = 'http://localhost:8000/api/v1/booking/did='+doctorID;
 					try{
