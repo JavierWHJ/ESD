@@ -369,40 +369,142 @@
 											<div class="card card-table mb-0">
 												<div class="card-body">
 													<div class="table-responsive">
-														<table class="table table-hover table-center mb-0">
+														<table class="table table-hover table-center mb-0" id="table1">
 															<thead>
 																<tr>
 																	<th>Doctor</th>
 																	<th>Appt Date</th>
-																	<th>Booking Date</th>
+																	<th>Appt Details</th>
 																	<th>Amount</th>
 																	<th>Status</th>
 																	<th></th>
 																</tr>
 															</thead>
 															<tbody>
-																<tr>
-																	<td>
-																		<h2 class="table-avatar">
-																			<a href="doctor-profile.html" class="avatar avatar-sm mr-2">
-																				<img class="avatar-img rounded-circle" src="assets\img\doctors\doctor-thumb-02.jpg" alt="User Image">
-																			</a>
-																			<a href="doctor-profile.html">Dr. Darren Elder <span>Dental</span></a>
-																		</h2>
-																	</td>
-																	<td>14 Nov 2019 <span class="d-block text-info">10.00 AM</span></td>
-																	<td>12 Nov 2019</td>
-																	<td>$160</td>
-																	<td>16 Nov 2019</td>
-																	<td><span class="badge badge-pill bg-success-light">Confirm</span></td>
-																	<td class="text-right">
-																		<div class="table-action">
-																			<a href="javascript:void(0);" class="btn btn-sm bg-success-light">
-																				<i class="far fa-edit"></i> Edit
-																			</a>
-																		</div>
-																	</td>
-																</tr>
+																<script>
+																	var appt_dict = {};
+																	function showError(message) {
+																		$('#table1').hide();
+																		$('#table1')
+																			.append("<label>"+message+"</label>");
+																	}
+																	$(async() => {   
+																		var customerid = cid;
+																		var serviceURL = "http://127.0.0.1:8000/api/v1/booking/";
+																			
+																		if (customerid && customerid.length) {
+																			serviceURL += "cid="+customerid;
+																		}
+																		try {
+																			const response =
+																			await fetch(
+																				serviceURL, { method: 'GET',
+																				
+																				}
+																				
+																			);
+																			const data = await response.json();
+																		
+																			var bookings = data.bookings; 
+																			
+																			if (!bookings || !bookings.length) {
+																				showError('No current booking');
+																			} else {
+																				var rows = "";
+																				for (const booking of bookings) {
+																					var doctorid = booking.doctorID;
+																					var serviceURL = "http://127.0.0.1:8000/api/v1/doctor/";
+																					
+																					if (doctorid && doctorid.length) {
+																						serviceURL += doctorid;
+																						
+																						try {
+																							const response =
+																							await fetch(
+																								serviceURL, { method: 'GET' }
+																							);
+																							const data = await response.json();
+																							//doctor details
+																							var doctor = data;
+																							var doctorname = doctor.name;
+																							var doctorservice = doctor.services;
+																							var doctorid = booking.doctorID;
+																							var doctorimg = "doctor" + doctorid[1];
+																							var image = "assets/img/doctors/" + doctorimg +".jpg";
+
+																							//splitting the datestr into date-time
+																							var bookingdate = booking.datestart;
+																							var res = bookingdate.split(' ');
+																							var date = res[1]+' '+res[2]+' '+res[3];
+																							var time = res[4]+' '+res[5];
+
+																							//booking details
+																							var bookingprice = booking.price;
+																							var bookingstatus = booking.status;
+																							var bookingservice = booking.service;
+																							if(!bookingservice){
+																								bookingservice = "General";
+																							}
+
+																							doctorprofile = 
+																							"<tr>"+
+																								"<td>"+
+																									"<h2 class='table-avatar'>"+
+																										"<a href='#' class='avatar avatar-sm mr-2'>"+
+																											"<img class='avatar-img rounded-circle' src='"+image+"' alt='User Image'>"+
+																										"</a>"+
+																										"<a href='#'>"+doctorname+"<span>"+doctorservice+"</span></a>"+
+																									"</h2>"+
+																								"</td>";
+
+																							bookinginfo = 
+																							"<td>"+date+"<span class='d-block text-info'>"+time+"</span></td>"+
+																							"<td>"+bookingservice+"</td>"+
+																							"<td>$"+bookingprice+"</td>";
+
+																							if((bookingstatus.toLowerCase()=="booked")){
+																								action=
+																									"<td><span class='badge badge-pill bg-success-light'>Confirm</span></td>"+
+																									
+																								"</tr>";
+
+																							}else if(bookingstatus.toLowerCase()=="completed"){
+																								action=
+																									"<td><span class='badge badge-pill bg-info-light'>Completed</span></td>"+
+																									
+																								"</tr>";
+
+																							}else if(bookingstatus.toLowerCase()=="unbooked"){
+																								action=
+																									"<td><span class='badge badge-pill bg-warning-light'>Pending</span></td>"+
+																									
+																								"</tr>";
+																							}else{
+																								action=
+																									"<td><span class='badge badge-pill bg-success-light''>Ongoing Appointment</span></td>"+
+																									
+																								"</tr>";
+																							}
+
+																							rows = doctorprofile + bookinginfo + action;
+																							
+																							$('#table1').append(rows);
+																							
+																							
+																						}catch(error){
+																							showError
+																							('There is a problem retrieving data, please try again later.<br />'+error);
+
+																						}
+																					}
+																				}
+																			} 
+																		}catch (error) {
+																			showError
+																			('There is a problem retrieving  data, please try again later.<br />'+error);
+																		}
+																	});
+                                                                </script>
 															</tbody>
 														</table>
 													</div>
