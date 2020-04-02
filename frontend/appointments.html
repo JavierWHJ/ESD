@@ -280,11 +280,11 @@
 															
 															appointmentlist = "<div class='appointment-list'>" +
 																					"<div class='profile-info-widget'>" +
-																						"<a href='patient-profile.html' class='booking-doc-img'>" +
+																						`<a href='patient-profile.html?cname=${customer.name}&cid=${customer.customerID}' class='booking-doc-img'>` +
 																							"<img src ="+ image +" alt='User Image'>" +
 																						"</a>"+
 																						"<div class='profile-det-info'>"+
-																							"<h3><a href='patient-profile.html'>"+customer.name+"</a></h3>"+
+																							`<h3><a href='patient-profile.html?cname=${customer.name}&cid=${customer.customerID}'>`+customer.name+"</a></h3>"+
 																							"<div class='patient-details'>";
 															profile =
 																"<h5><i class='far fa-clock'></i>" + appointment.datestart + "</h5>" +

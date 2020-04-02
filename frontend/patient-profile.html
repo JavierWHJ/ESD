@@ -114,25 +114,52 @@
 								<div class="card-body">
 									<div class="pro-widget-content">
 										<div class="profile-info-widget">
-											<a href="#" class="booking-doc-img">
-												<img src="assets\img\patients\patient.jpg" alt="User Image">
-											</a>
-											<div class="profile-det-info">
-												<h3>Richard Wilson</h3>
-												
-												<div class="patient-details">
-													<h5><b>Patient ID :</b> PT0016</h5>
-													<h5 class="mb-0"><i class="fas fa-map-marker-alt"></i> Newyork, United States</h5>
-												</div>
-											</div>
+											
 										</div>
 									</div>
+									<script>
+										var params = new URLSearchParams(window.location.search)
+										var cname = params.get('cname')
+										var cid = params.get('cid')
+
+										var html = `
+											<a href="#" class="booking-doc-img">
+												<img src="assets\\img\\patients\\patient${cid[cid.length - 1]}.jpg" alt="User Image">
+											</a>
+											<div class="profile-det-info">
+												<h3>${cname}</h3>
+												
+												<div class="patient-details">
+													<h5><b>Patient ID :</b> ${cid} </h5>
+													<h5 class="mb-0"><i class="fas fa-map-marker-alt"></i> Singapore</h5>
+												</div>
+											</div>
+											`
+										$('.profile-info-widget').append(html)
+									</script>
 									<div class="patient-info">
-										<ul>
-											<li>Phone <span>+1 952 001 8563</span></li>
-											<li>Age <span>38 Years, Male</span></li>
-											<li>Blood Group <span>AB+</span></li>
-										</ul>
+										<script>
+											serviceURL = 'http://localhost:8000/api/v1/customer/'+cid
+											$(async() => {
+												try{
+													const response = await fetch (serviceURL, {method:"GET"})
+													const data = await response.json()
+													console.log(data)
+
+													var html = `<ul>
+														<li>Phone <span>${data.phone}</span></li>
+														<li>Age <span>38 Years, Male</span></li>
+														<li>Blood Group <span>AB+</span></li>
+													</ul>`
+													console.log(html)
+													$('.patient-info').append(html)
+												}catch (e){
+													console.log("Error retrieving customer")
+												}
+
+											})
+											
+										</script>
 									</div>
 								</div>
 							</div>
