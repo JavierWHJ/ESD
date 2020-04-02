@@ -165,11 +165,28 @@
 										</div>
 									</div>
 									<div class="patient-info">
-										<ul>
-											<li>Phone <span>+1 952 001 8563</span></li>
-											<li>Age <span>38 Years, Male</span></li>
-											<li>Blood Group <span>AB+</span></li>
-										</ul>
+										<script>
+											serviceURL = 'http://localhost:8000/api/v1/customer/'+cid
+											$(async() => {
+												try{
+													const response = await fetch (serviceURL, {method:"GET"})
+													const data = await response.json()
+													console.log(data)
+
+													var html = `<ul>
+														<li>Phone <span>${data.phone}</span></li>
+														<li>Age <span>38 Years, Male</span></li>
+														<li>Blood Group <span>AB+</span></li>
+													</ul>`
+													console.log(html)
+													$('.patient-info').append(html)
+												}catch (e){
+													console.log("Error retrieving customer")
+												}
+
+											})
+											
+										</script>
 									</div>
 								</div>
 							</div>
