@@ -39,7 +39,7 @@ def make_prescription():
         exchangename = "notification_topic"
         channel.exchange_declare(exchange=exchangename, exchange_type="topic")
 
-        r = requests.get(notificationURL).json()
+        # r = requests.get(notificationURL).json()
 
         # if len(r['notifications']) == 0:
         #     nid = 1
@@ -49,7 +49,7 @@ def make_prescription():
         notification = {
             "sender" : doctorID,
             "receiver": customerID,
-            "message" : "You have a new prescription",
+            "message" : "You have a new prescription"
         }
 
         notification = json.dumps(notification, default=str)

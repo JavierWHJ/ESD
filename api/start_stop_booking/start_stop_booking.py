@@ -30,6 +30,7 @@ def start_booking():
     else:
         try:
             r = r.json()
+            # return booking
             customerID = r['customerID']
             doctorID = booking['doctorID']
             
@@ -47,7 +48,7 @@ def start_booking():
             }
             # make the get request 
             distanceResponse = requests.get(googleDistMatrixURL,params=params).json()
-
+            # return distanceResponse
             ETA = ""
             try:
                 # extract the the estimated time if exist
@@ -71,11 +72,11 @@ def start_booking():
             exchangename="notification_topic"
             channel.exchange_declare(exchange=exchangename, exchange_type='topic')
 
-            r = requests.get(notificationURL).json()
-            nid = r['notifications'][-1]['nid'] + 1
+            # r = requests.get(notificationURL).json()
+            # nid = r['notifications'][-1]['nid'] + 1
 
             notification = {
-                "nid" : nid,
+                # "nid" : nid,
                 "sender": doctorID,
                 "receiver" : customerID,
                 "message" : message
