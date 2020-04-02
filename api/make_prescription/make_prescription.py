@@ -41,13 +41,12 @@ def make_prescription():
 
         r = requests.get(notificationURL).json()
 
-        if len(r['notifications']) == 0:
-            nid = 1
-        else:
-            nid = r['notifications'][-1]['nid'] + 1
+        # if len(r['notifications']) == 0:
+        #     nid = 1
+        # else:
+        #     nid = r['notifications'][-1]['nid'] + 1
 
         notification = {
-            "nid" : nid,
             "sender" : doctorID,
             "receiver": customerID,
             "message" : "You have a new prescription",

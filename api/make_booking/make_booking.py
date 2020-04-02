@@ -46,13 +46,13 @@ def make_booking():
         exchangename="notification_topic"
         channel.exchange_declare(exchange=exchangename, exchange_type='topic')
 
-        r = requests.get(notificationURL).json()
-        if len(r['notifications']) == 0:
-            nid = 1
-        else:
-            nid = r['notifications'][-1]['nid'] + 1
+        # r = requests.get(notificationURL).json()
+        # if len(r['notifications']) == 0:
+        #     nid = 1
+        # else:
+        #     nid = r['notifications'][-1]['nid'] + 1
         notification = {
-            "nid" : nid,
+            # "nid" : nid,
             "sender" : customerID,
             "receiver": doctorID,
             "message" : "You have a new booking created",
