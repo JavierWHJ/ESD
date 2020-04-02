@@ -495,8 +495,12 @@
 							if (currDate == ''){
 								currDate = date
 							}
-							var starttime = dateStart.toLocaleTimeString('en-US')
-							var endtime = dateEnd.toLocaleTimeString('en-US')
+							var res = row.datestart.split(' ');
+							var starttime = res[4];
+							res = row.dateend.split(' ')
+							var endtime = res[4];
+							// var starttime = dateStart.toLocaleTimeString('en-US')
+							// var endtime = dateEnd.toLocaleTimeString('en-US')
 							if (jQuery.inArray(dateStart,days) == -1 & jQuery.inArray(dateStart.getDay(),found) == -1){
 								days.push(dateStart)
 								found.push(dateStart.getDay());
