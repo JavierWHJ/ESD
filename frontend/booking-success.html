@@ -297,9 +297,12 @@
 						var dateStartObj = new Date(data.datestart)
 						var dateEndObj = new Date(data.dateend)
 						var date = dateStartObj.toLocaleDateString('en-GB')					
-						var starttime = dateStartObj.toLocaleTimeString('en-US')
-						var endtime = dateEndObj.toLocaleTimeString('en-US')
-						
+						// var starttime = dateStartObj.toLocaleTimeString('en-US')
+						// var endtime = dateEndObj.toLocaleTimeString('en-US')
+						var res = data.datestart.split(' ')
+						starttime = res[4]
+						res = data.dateend.split(' ')
+						endtime = res[4]
 						var apptText = `Appointment booked with <strong>Dr. ${name}</strong> <br> on <strong> ${date} ${starttime} to ${endtime}`
 						$("div.success-cont p")[0].innerHTML = apptText
 

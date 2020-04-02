@@ -482,7 +482,9 @@
 						data = await response.json()
 						var dateObj = new Date(data.datestart)
 						var date = dateObj.toLocaleDateString('en-GB')					
-						var time = dateObj.toLocaleTimeString('en-US')
+						// var time = dateObj.toLocaleTimeString('en-US')
+						var res = data.datestart.split(' ')
+						var time = res[4]
 
 						$(".booking-doc-img img")[0].setAttribute('src',`assets\\img\\doctors\\${name}.jpg`)
 						$(".booking-info h4 a")[0].innerText = name
@@ -523,7 +525,6 @@
 									status: "booked",
 									doctorID: doctorID
 								}),
-								mode: 'no-cors'
 							},
 						)
 						
